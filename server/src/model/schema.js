@@ -2,7 +2,7 @@ require('../../config.js');
 const pgp = require('pg-promise')();
 const db = pgp(process.env.DB_URL);
 //server side's running js code called process, get env variable(DB_URL)
-
+// console.log(process.env.DB_URL);
 const schemaSql = `
     -- Extensions
     CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -15,35 +15,48 @@ const schemaSql = `
     --DROP TYPE IF EXISTS mood;
 
     -- Create
-
-    CREATE TABLE Refridge (
+   CREATE TABLE Refrige (
         id              serial PRIMARY KEY NOT NULL,
-        name            mood NOT NULL,
-        category        category NOT NULL,
+        name            text NOT NULL,
+        category        text NOT NULL,
         quiantity       integer NOT NULL DEFAULT 1,
-        unit            unit NOT NULL,
+        unit            text NOT NULL,
         isSetDeadline   boolean NOT NULL DEFAULT false,
-        deadline        date NOT NULL,
+        deadline        text NOT NULL,
         isAlarm   　　　　　boolean NOT NULL DEFAULT false,
-        alarmDate       date NOT NULL,
-        alarmTime       date NOT NULL,
-        text    　　　　　　　text
+        alarmDate       date ,--NOT NULL,
+        alarmTime       date ,--NOT NULL,
+        memo    　　　　　　 text 
     );
     CREATE TABLE Freezer (
         id              serial PRIMARY KEY NOT NULL,
-        name            mood NOT NULL,
-        category        category NOT NULL,
+        name            text NOT NULL,
+        category        text NOT NULL,
         quiantity       integer NOT NULL DEFAULT 1,
-        unit            unit NOT NULL,
+        unit            text NOT NULL,
         isSetDeadline   boolean NOT NULL DEFAULT false,
-        deadline        date NOT NULL,
+        deadline        text NOT NULL,
         isAlarm   　　　　　boolean NOT NULL DEFAULT false,
         alarmDate       date NOT NULL,
         alarmTime       date NOT NULL,
-        text    　　　　　　　text
-    );    
+        memo    　　　　　　 text 
+    ); 
+
+
 
 `;
+  
+    // CREATE TABLE test (
+    //     id              serial PRIMARY KEY NOT NULL,
+    //     name            text NOT NULL,
+    //     category        text NOT NULL,
+    //     quiantity       integer NOT NULL DEFAULT 1,
+    //     unit            text NOT NULL,
+    //     isSetDeadline   boolean NOT NULL DEFAULT false,
+    //     isAlarm   　　　　　boolean NOT NULL DEFAULT false,
+    //     memo    　　　　　　 text 
+    // );
+
     // CREATE TYPE mood AS ENUM (
     //     'Clear',
     //     'Clouds',
@@ -63,7 +76,7 @@ const schemaSql = `
 //         'Clear',
 //         'word' || i || ' word' || (i+1) || ' word' || (i+2),
 //         round(extract(epoch from now()) + (i - 1000000) * 3600.0)
-//     FROM generate_series(1, 1000000) AS s(i);
+//     FROM generate_series(1, 10) AS s(i);
 // `;
 
 db.none(schemaSql).then(() => {

@@ -13,22 +13,22 @@ router.use(accessController); // Allows cross-origin HTTP requests
 // List
 router.get('/posts', function(req, res, next) {
     // const {searchText, start} = req.query;
-    const isRefridge = req.query;
-    postModel.list(isRefridge).then(posts => {
+    const isRefrige = req.query;
+    postModel.list(isRefrige).then(posts => {
         res.json(posts);
     }).catch(next);
 });
 
 // Create
 router.post('/posts', function(req, res, next) {
-    const isRefridge = req.query;
-    const FoodDetail = req.body;
-    if (!FoodDetail || !isRefridge) {
+    const isRefrige = req.query;
+    const foodDetail = req.body;
+    if (!foodDetail || !isRefrige) {
         const err = new Error('Mood and text are required');
         err.status = 400;
         throw err;
     }
-    postModel.create(isRefridge, FoodDetail).then(post => {
+    postModel.create(isRefrige, foodDetail).then(post => {
         res.json(post);
     }).catch(next);
 });
@@ -36,9 +36,9 @@ router.post('/posts', function(req, res, next) {
 //Delete
 router.get('/posts', function(req, res, next) {
     // const {searchText, start} = req.query;
-    const {isRefridge, id} = req.query;
+    const {isRefrige, id} = req.query;
     
-    postModel.delete(isRefridge, id).then(posts => {
+    postModel.delete(isRefrige, id).then(posts => {
         res.json(posts);
     }).catch(next);
 });
