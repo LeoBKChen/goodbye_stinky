@@ -1,0 +1,52 @@
+.freezer {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
+    padding: 3rem ;
+    position: relative;
+
+    /*width: 100%;*/
+    /*max-width: 40rem;*/
+    /*margin: 0rem auto;*/
+    /*width:130%;*/
+    /*height: 40rem;*/
+    width: 130%;
+    max-width: 35rem;
+    margin: 0 auto;
+    transition: all 0.3s;
+    opacity: 1;
+}
+.btn-freezer{
+    margin: 1rem ;
+    margin-left: auto;
+
+}
+.veg {
+    width: 2rem;
+    height: 2rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #0f0;
+    margin-bottom: 0.1rem;
+}
+
+.meat{
+    width: 2rem;
+    height: 2rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #f00;
+    margin-bottom: 0.1rem;    
+}
+
+.seafood {
+    width: 2rem;
+    height: 2rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #00f;
+    margin-bottom: 0.1rem;    
+}
