@@ -53,18 +53,15 @@ export default class Main extends React.Component {
                     <div className='refrige-bg'>
                       <div className="d-flex justify-content-around">
                         <FoodInfo {...this.state} onPost={this.handleCreateFreezerItem}/>
-                      <Row>
-                        <Col>
-                          <Freezer foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo}/>
-                        </Col>
-                        <Col>
-                          <Refrige foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo}/>
-                        </Col>
-                      </Row> 
-                    </div>
-                        <div className='footer'>
-                            Goodbye Stinky.
-                        </div>
+                        <Row>
+                          <Col>
+                            <Freezer foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo}/>
+                          </Col>
+                          <Col>
+                            <Refrige foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo}/>
+                          </Col>
+                        </Row> 
+                      </div>
                     </div>
 
                 </div>

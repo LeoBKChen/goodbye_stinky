@@ -8,10 +8,10 @@ import {
     CardTitle
 } from 'reactstrap';
 
-import PostItem from 'components/PostItem.jsx';
-import {createVote} from 'api/posts.js';
+// import PostItem from 'components/PostItem.jsx';
+// import {createVote} from 'api/posts.js';
 
-import './PostList.css';
+// import './PostList.css';
 
 export default class PostList extends React.Component {
     static propTypes = {

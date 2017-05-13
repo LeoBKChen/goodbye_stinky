@@ -123,10 +123,10 @@ export default class FoodInfo extends React.Component {
                   <Form>
                       {/* name */}
                       <FormGroup row>
-                          <InputGroupAddon>{this.translateCategoryName(this.props.category)}&nbsp;品名：</InputGroupAddon>
+                          <InputGroupAddon>{this.props.category}&nbsp;品名：</InputGroupAddon>
                           <Col sm={5}>
                             {/*}{this.translateFoodname(this.props.name)}*/}
-                             <Input type='text' name='foodname' placeholder={this.translateFoodName(this.props.name)} getRef={el => {this.inputFoodNameEl = el}}
+                             <Input type='text' name='foodname' placeholder={this.props.name} getRef={el => {this.inputFoodNameEl = el}}
                                value={this.state.inputFoodNameEl } onChange={this.handleFoodNameChange}></Input>&nbsp;
                             {/* <Label > 南瓜</Label> */}
                             <Alert color='info' isOpen={this.state.inputFoodNameDanger}>請填寫名稱</Alert>
