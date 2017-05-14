@@ -37,10 +37,11 @@ export default class FreezerItem extends React.Component {
         this.edit = this.edit.bind(this);
         this.checkTime = this.checkTime.bind(this);
     }
-
+    componentDidMount(){
+        var warn = setInterval(this.checkTime,20000);
+    }
     render() {
-        var warn = setInterval(this.checkTime,60000);
-        // const form = this.state.formToggle ? 'form' : '';
+
         return (
           <div>
               <CardBlock onClick={this.edit}>
@@ -67,11 +68,11 @@ export default class FreezerItem extends React.Component {
         this.props.handleEdit(this.props.id, FoodDetail, isRefrige);
     }
     checkTime(){
-        if(this.props.alarmTime===moment()||this.props.deadline===moment()){
+        if(this.props.alarmTime.format('mm') === moment().format('mm') ||this.props.deadline.format('mm')===moment().format('mm')){
             this.props.timeOut(this.props.id,this.props.name);
             if(this.props.deadline===moment()){
                 this.clearInterval(warn);
             }
         }
-    }
+      }
 }

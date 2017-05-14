@@ -21,7 +21,7 @@ function list(isRefrige) {
 
 function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text) {
 
-    console.log(isRefrige);
+    // console.log(isRefrige);
 
     if(isRefrige==='true')
         var where = 'Refrige';
@@ -30,7 +30,7 @@ function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadli
 
 
     const sql = `
-        INSERT INTO ${where} ($<this:name>)
+        INSERT INTO ${where} (name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text)
         VALUES($2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
         RETURNING *
     `;

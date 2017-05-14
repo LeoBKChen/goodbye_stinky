@@ -103,15 +103,15 @@ export default class Main extends React.Component {
 
     handleCreateFoodItem(isRefrige,FoodDetail){
         console.log(FoodDetail.category);
-        // createPost(isRefrige,FoodDetail).then((post) => {
-        //       console.log(post);
-        //       listPosts(isRefrige).then(p => console.log(p));
-        //       this.setState({
-        //           isSetting:false
-        //       });
-        //   }).catch(err => {
-        //       console.error('Error creating posts', err);
-        //   });
+        createPost(isRefrige,FoodDetail).then((post) => {
+              console.log(post);
+              listPosts(isRefrige).then(p => console.log(p));
+              this.setState({
+                  isSetting:false
+              });
+          }).catch(err => {
+              console.error('Error creating posts', err);
+          });
         this.setState({
             isSetting:false
         });

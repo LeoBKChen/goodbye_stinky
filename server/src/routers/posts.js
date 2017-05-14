@@ -34,12 +34,12 @@ router.post('/posts', function(req, res, next) {
     var alarmTime = req.body.alarmTime;
     var text = req.body.text;
 
-    if (!foodDetail) {
+    if (!name) {
         const err = new Error('Food detail is required');
         err.status = 400;
         throw err;
     }
-    postModel.create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, 
+    postModel.create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate,
         alarmTime, text).then(post => {
         res.json(post);
     }).catch(next);
