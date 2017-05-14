@@ -2,33 +2,32 @@
     color: #fff;
     text-align: center;
     text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
-    padding: 3rem ;
+    
     position: relative;
-
-    width: 130%;
+    height: 30rem;
+    width: 100%;
     max-width: 35rem;
     margin: 0 auto;
     transition: all 0.3s;
     opacity: 1;
 }
-.btn-freezer{
-    margin: 1rem ;
-    margin-left: auto;
-
+.第一{
+    width: 100%;
 }
-.veg {
+
+.蔬菜 {
     width: 2.5rem;
     height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
-    border-radius: 99%;
+    border-radius: 80%;
     background-color: #ffa;
     margin-bottom: 0.1rem;
 }
 
-.meat{
-    width: 15rem;
-    height: 15rem;
+.肉類{
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
@@ -36,9 +35,9 @@
     margin-bottom: 0.1rem;    
 }
 
-.seafood {
-    width: 15rem;
-    height: 15rem;
+.海鮮 {
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
@@ -46,9 +45,9 @@
     margin-bottom: 0.1rem;    
 }
 
-.fruit{
-    width: 15rem;
-    height: 15rem;
+.水果{
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
@@ -56,18 +55,18 @@
     margin-bottom: 0.1rem;      
 }
 
-.eggMilk{
-    width: 15rem;
-    height: 15rem;
+.蛋奶{
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #aaf;
     margin-bottom: 0.1rem;   
 }
-.sauce{
-    width: 15rem;
-    height: 15rem;
+.調味料{
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
@@ -75,9 +74,9 @@
     margin-bottom: 0.1rem;   
 }
 
-.leftover{
-    width: 15rem;
-    height: 15rem;
+.熟食{
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;

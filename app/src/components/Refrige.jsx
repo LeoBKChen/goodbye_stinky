@@ -58,10 +58,10 @@ export default class Refrige extends React.Component {
             <div className='refrige'>
                 <Card>
                     <div>
-                        <h1 className='text-center'>Refrige</h1>
+                        <h1 className='text-center' >Refrige</h1>
                         <RefrigeList />
                         <h1>forcsssssssss</h1>
-                        <h1>forcsssssssss</h1>
+                        <h1 >forcsssssssss</h1>
                         <h1>forcsssssssss</h1>
                         <div className='vote-plus'>
                             <i id='addItem' className='fa fa-plus' ></i>
