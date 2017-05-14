@@ -163,7 +163,8 @@ export default class FoodInfo extends React.Component {
                                   </Label>
                               </FormGroup>
                               <FormGroup>
-                                  <Label>
+                                <InputGroup>
+                                  <Label check>
                                     <Input type="radio" name="radio1" onChange={this.handleSetDeadlineOn}  />{' '}
                                     開
                                   </Label>
@@ -190,6 +191,7 @@ export default class FoodInfo extends React.Component {
                                       }
                                       <img src={getinfoIcon("月曆")}/>
                                   </div>
+                                </InputGroup>
                               </FormGroup>
                           </InputGroup>
                       </FormGroup>
@@ -268,12 +270,16 @@ export default class FoodInfo extends React.Component {
                       </FormGroup>
                       {/* submit or delete*/}
                       <FormGroup check row>
-                        <Col sm={{ size: 10, offset: 9 }}>
-                          <div>{this.props.isEdit?
+
+                        <Col className='d-flex justify-content-around' sm={{ size: 10, offset: 1 }}>
+                          {!this.props.isEdit?
                               <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
-                          </div>
-                          <Button onClick={this.handleFoodInfoSubmit} color="#841584" >完成</Button>
+
+                        {/* </Col>
+                        <Col sm={{ size: 10, offset: 9 }}> */}
+                          <Button onClick={this.handleFoodInfoSubmit} color="success" >完成</Button>
                         </Col>
+
                       </FormGroup>
                   </Form>
               </Card>
@@ -283,7 +289,7 @@ export default class FoodInfo extends React.Component {
 
     handleFoodNameChange(e){
         const texts = e.target.value
-        console.log('i am ddsf');
+        // console.log('i am ddsf');
         this.setState({
           name: texts,
           inputFoodNameDanger: false
@@ -376,13 +382,11 @@ export default class FoodInfo extends React.Component {
             this.setState({inputFoodNameDanger: true});
             return;
         }
-        console.log('pass name');
 
         if(this.state.quantity<=0){
             this.setState({inputQuantityDanger: true});
             return;
         }
-        console.log('pass quantity');
         if(this.state.unit === 'na'){
           this.setState({
               inputUnitDanger: true,
@@ -390,7 +394,6 @@ export default class FoodInfo extends React.Component {
           });
           return;
         }
-        console.log('pass unit');
         var FoodDetail={
             name:this.state.name,
             category:this.props.category,

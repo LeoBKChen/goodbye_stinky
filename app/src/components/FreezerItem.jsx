@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     Button,
+    Card,
+    CardBlock,
+    CardTitle
 } from 'reactstrap';
 import moment from 'moment';
 
@@ -35,36 +38,33 @@ export default class FreezerItem extends React.Component {
         this.checkTime = this.checkTime.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-        });
-
-    }
-
     render() {
-      var warn setInterval(this.checkTime,60000);
+        var warn = setInterval(this.checkTime,60000);
         // const form = this.state.formToggle ? 'form' : '';
         return (
+          <div>
               <CardBlock onClick={this.edit}>
                   <img src={getFoodIcon(p.name)}></img>
               </CardBlock>
               <CardTitle >{p.name}</CardTitle>
+          </div>
         );
     }
-    edit(this.props.id){
-        var FoodDetail={
-            name:this.state.name,
-            category:this.props.category,
-            quantity:this.state.quantity,
-            unit:this.state.unit,
-            isSetDeadline:this.state.isSetDeadline,
-            deadline:this.state.deadline,
-            isAlarm:this.state.isAlarm,
-            alarmDate:this.state.alarmDate,
-            alarmTime:this.state.alarmTime,
-            text:this.state.text
-        }
-        this.props.handleEdit(this.props.id,FoodDetail,isRefrige);
+
+    edit(){
+      var FoodDetail={
+           name:this.props.name,
+           category:this.props.category,
+           quantity:this.props.quantity,
+           unit:this.props.unit,
+           isSetDeadline:this.props.isSetDeadline,
+           deadline:this.props.deadline,
+           isAlarm:this.props.isAlarm,
+           alarmDate:this.props.alarmDate,
+           alarmTime:this.props.alarmTime,
+           text:this.props.text
+       }
+        this.props.handleEdit(this.props.id, FoodDetail, isRefrige);
     }
     checkTime(){
         if(this.props.alarmTime===moment()||this.props.deadline===moment()){

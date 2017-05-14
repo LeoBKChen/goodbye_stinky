@@ -8,11 +8,13 @@ import {
     CardTitle
 } from 'reactstrap';
 
-import {createVote} from 'api/posts.js';
-import {getFoodIcon} from 'utilities/food.js';
-import {onEdit,timeOut} from 'components/Freezer.jsx';
 
-export default class PostList extends React.Component {
+import {getFoodIcon} from 'utilities/food.js';
+import FreezerItem from 'components/FreezerItem.jsx';
+import {onEdit,timeOut} from 'components/Freezer.jsx';
+import './FreezerList.css';
+
+export default class FreezerList extends React.Component {
     static propTypes = {
         posts: PropTypes.array,
         filter: PropTypes.string,
@@ -27,7 +29,7 @@ export default class PostList extends React.Component {
         };
 
         this.handleEdit = this.handleEdit.bind(this);
-        
+
     }
 
     render() {
@@ -36,9 +38,9 @@ export default class PostList extends React.Component {
         let children = (
           <Card>
               <CardBlock>
-                  <i className="fa fa-question-circle"></i>
+                  <i className="fa fa-question-circle fa-4x"></i>
               </CardBlock>
-              <CardTitle>Go Get Food</CardTitle>
+              <CardTitle>快新增吧</CardTitle>
           </Card>
             // <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
             //     <div className='empty-text'>No food here.<br />Go add some foods!</div>
@@ -47,7 +49,7 @@ export default class PostList extends React.Component {
         if (this.props.freezerPosts.length) {
             children = this.props.freezerPosts.map(p => (
               <Card key={p.id} action onClick={this.handleEdit}>
-                  <FreezerItem  {...p} Edit={this.handleEdit} timeOut={this.timeOut}/>
+                  <FreezerItem  {...p} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
               </Card>
                 // <ListGroupItem key={p.id} action>
                 //     <PostItem {...p} onVote={this.handleVote} />

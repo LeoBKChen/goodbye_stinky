@@ -1,9 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
+import {
+    Alert,
+    Form,
+    FormGroup,
+    FormText,
+    Label,
+    Legend,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    Button,
+    Row,
+    Col,
+    Card,
+    CardBlock,
+    ButtonDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
+} from 'reactstrap';
 // import './TimeOut.css';
 
-export default class FoodInfo extends React.Component {
+export default class Timeout extends React.Component {
     static propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
@@ -16,26 +37,29 @@ export default class FoodInfo extends React.Component {
         super(props);
 
         this.state = {
-
-            // text: props.name
+            change: false
         };
 
-        this.handleFoodInfoSubmit = this.handleFoodInfoSubmit.bind(this);
+        this.ToggleImage = this.ToggleImage.bind(this);
+        setInterval(this.ToggleImage,300);
     }
 
     render() {
-
         return (
               <Card>
                   <CardBlock>
-                    <img src="images/快過期拉_orange.png"></img>
-                    setInterval(() => {
-                        <img src="images/快過期拉_red.png"></img>
-                    }, 600);
+                    { this.state.change   ?
+                        <img src="images/快過期啦_orange.png"></img>
+                        :
+                        <img src="images/快過期啦_red.png"></img>
+                    }
                   </CardBlock>
               </Card>
         );
     }
-
-
-  }
+    ToggleImage() {
+        this.setState((prevState, props) => ({
+            change: !prevState.change
+        }));
+    }
+}

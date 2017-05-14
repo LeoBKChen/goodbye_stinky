@@ -13,7 +13,7 @@ router.use(accessController); // Allows cross-origin HTTP requests
 // List
 router.get('/posts', function(req, res, next) {
     // const {searchText, start} = req.query;
-    var isRefrige = req.query;
+    var isRefrige = req.query.isRefrige;
     postModel.list(isRefrige = false).then(posts => {
         res.json(posts);
     }).catch(next);
@@ -21,39 +21,69 @@ router.get('/posts', function(req, res, next) {
 
 // Create
 router.post('/posts', function(req, res, next) {
-    var isRefrige = req.query;
-    const foodDetail = req.body;
+    var isRefrige = req.query.isRefrige;
 
-    if (!foodDetail || !isRefrige) {
-        const err = new Error('Mood and text are required');
+    var name = req.body.name;
+    var category = req.body.category;
+    var quantity = req.body.quantity;
+    var unit = req.body.unit;
+    var isSetDeadline = req.body.isSetDeadline;
+    var deadline = req.body.deadline;
+    var isAlarm = req.body.isAlarm;
+    var alarmDate = req.body.alarmDate;
+    var alarmTime = req.body.alarmTime;
+    var text = req.body.text;
+
+    if (!foodDetail) {
+        const err = new Error('Food detail is required');
         err.status = 400;
         throw err;
     }
-    postModel.create(isRefrige = false, foodDetail).then(post => {
+    postModel.create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, 
+        alarmTime, text).then(post => {
         res.json(post);
     }).catch(next);
 });
 
 //Update
 router.post('/posts', function(req, res, next) {
-    var isRefrige = req.query;
-    const foodDetail = req.body;
-    if (!foodDetail || !isRefrige) {
-        const err = new Error('Mood and text are required');
+    var isRefrige = req.query.isRefrige;
+    // const foodDetail = req.body;
+    var id = req.body.id;
+    var name = req.body.name;
+    var category = req.body.category;
+    var quantity = req.body.quantity;
+    var unit = req.body.unit;
+    var isSetDeadline = req.body.isSetDeadline;
+    var deadline = req.body.deadline;
+    var isAlarm = req.body.isAlarm;
+    var alarmDate = req.body.alarmDate;
+    var alarmTime = req.body.alarmTime;
+    var text = req.body.text;
+
+    if (!foodDetail) {
+        const err = new Error('Food detail is required');
         err.status = 400;
         throw err;
     }
-    postModel.update(isRefrige = false, foodDetail).then(post => {
+    postModel.update(isRefrige, id, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate,
+        alarmTime, text).then(post => {
         res.json(post);
     }).catch(next);
 });
 
 //Delete
-router.get('/posts', function(req, res, next) {
-    var isRefrige = req.query;
-    const id = req.query;
+router.get('/posts/:id', function(req, res, next) {
+    var isRefrige = req.query.isRefrige;
 
-    postModel.delete(isRefrige = false, id).then(posts => {
+    const id = req.params;
+    if(!id){
+        const err = new Error('ID are required');
+        err.status = 400;
+        throw err;
+    }
+
+    postModel.remove(isRefrige, id).then(posts => {
         res.json(posts);
     }).catch(next);
 });

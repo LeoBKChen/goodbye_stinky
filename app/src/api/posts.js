@@ -14,6 +14,8 @@ export function listPosts(isRefrige) {
 
     if(isRefrige)
         url += '?isRefrige=true';
+    else
+        url += '?isRefrige=false';
 
     console.log(`Making GET request to: ${url}`);
 
@@ -25,15 +27,17 @@ export function listPosts(isRefrige) {
     });
 }
 
-export function createPost(isRefrige = false, foodDetail) {
+export function createPost(isRefrige, foodDetail) {
     let url = `${postBaseUrl}/posts`;
     if(isRefrige)
         url += '?isRefrige=true';
+    else
+        url += '?isRefrige=false';
 
     console.log(`Making POST request to: ${url}`);
 
     return axios.post(url, {
-        foodDetail
+        ...foodDetail
     }).then(function(res) {
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);
@@ -41,15 +45,17 @@ export function createPost(isRefrige = false, foodDetail) {
         return res.data;
     });
 }
-export function updatePost(isRefrige = false, foodDetail) {
+export function updatePost(isRefrige, foodDetail) {
     let url = `${postBaseUrl}/posts`;
-    if(isRefridge)
+    if(isRefrige)
         url += '?isRefrige=true';
+    else
+        url += '?isRefrige=false';
 
     console.log(`Making POST request to: ${url}`);
 
     return axios.post(url, {
-        foodDetail
+        ...foodDetail
     }).then(function(res) {
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);
@@ -57,16 +63,17 @@ export function updatePost(isRefrige = false, foodDetail) {
         return res.data;
     });
 }
-export function deletePost(isRefrige = false, id) {
-    let url = `${postBaseUrl}/posts`;
+export function deletePost(isRefrige, id) {
+    let url = `${postBaseUrl}/posts/${id}`;
     if(isRefrige)
         url += '?isRefrige=true';
+    else
+        url += '?isRefrige=false';
+
 
     console.log(`Making GET request to: ${url}`);
 
-    return axios.get(url, {
-        id
-    }).then(function(res) {
+    return axios.get(url).then(function(res) {
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);
 
