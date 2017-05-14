@@ -5,9 +5,6 @@
     padding: 3rem 8rem;
     position: relative;
 
-    /*width:130%;*/
-    /*max-width:40rem;*/
-    /*margin: 0rem auto;*/
     width: 130%;
     max-width: 35rem;
     margin: 0 auto;
@@ -18,4 +15,77 @@
     margin: 1rem ;
     margin-left: auto;
 
+}
+
+.第一{
+    width: 100%;
+}
+
+.蔬菜 {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 80%;
+    background-color: #ffa;
+    margin-bottom: 0.1rem;
+}
+
+.肉類{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #FFBB77;
+    margin-bottom: 0.1rem;
+}
+
+.海鮮 {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #8df;
+    margin-bottom: 0.1rem;
+}
+
+.水果{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #A6FFA6;
+    margin-bottom: 0.1rem;
+}
+
+.蛋奶{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #aaf;
+    margin-bottom: 0.1rem;
+}
+.調味料{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #fcf;
+    margin-bottom: 0.1rem;
+}
+
+.熟食{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #faf;
+    margin-bottom: 0.1rem;
 }

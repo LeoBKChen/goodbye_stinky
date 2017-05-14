@@ -13,32 +13,47 @@ router.use(accessController); // Allows cross-origin HTTP requests
 // List
 router.get('/posts', function(req, res, next) {
     // const {searchText, start} = req.query;
-    const isRefridge = req.query;
-    postModel.list(isRefridge).then(posts => {
+    var isRefrige = req.query;
+    postModel.list(isRefrige = false).then(posts => {
         res.json(posts);
     }).catch(next);
 });
 
 // Create
 router.post('/posts', function(req, res, next) {
-    const isRefridge = req.query;
-    const FoodDetail = req.body;
-    if (!FoodDetail || !isRefridge) {
+    var isRefrige = req.query;
+    const foodDetail = req.body;
+
+    if (!foodDetail || !isRefrige) {
         const err = new Error('Mood and text are required');
         err.status = 400;
         throw err;
     }
-    postModel.create(isRefridge, FoodDetail).then(post => {
+    postModel.create(isRefrige = false, foodDetail).then(post => {
+        res.json(post);
+    }).catch(next);
+});
+
+//Update
+router.post('/posts', function(req, res, next) {
+    var isRefrige = req.query;
+    const foodDetail = req.body;
+    if (!foodDetail || !isRefrige) {
+        const err = new Error('Mood and text are required');
+        err.status = 400;
+        throw err;
+    }
+    postModel.update(isRefrige = false, foodDetail).then(post => {
         res.json(post);
     }).catch(next);
 });
 
 //Delete
 router.get('/posts', function(req, res, next) {
-    // const {searchText, start} = req.query;
-    const {isRefridge, id} = req.query;
-    
-    postModel.delete(isRefridge, id).then(posts => {
+    var isRefrige = req.query;
+    const id = req.query;
+
+    postModel.delete(isRefrige = false, id).then(posts => {
         res.json(posts);
     }).catch(next);
 });

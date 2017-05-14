@@ -32,7 +32,7 @@ const now = moment().hour(0).minute(0);
 
 export default class FoodInfo extends React.Component {
     static propTypes = {
-        id: PropTypes.string,
+        id: PropTypes.number,
         name: PropTypes.string,
         category: PropTypes.string,
         isRefrige: PropTypes.bool,
@@ -404,10 +404,10 @@ export default class FoodInfo extends React.Component {
             text:this.state.text
         }
         if(!this.props.isEdit){
-            this.props.onPost(FoodDetail,this.props.isRefrige);
+            this.props.onPost(this.props.isRefrige,FoodDetail);
         }
         else{
-            this.props.edit(this.props.id,FoodDetail,this.props.isRefrige)
+            this.props.edit(this.props.isRefrige,this.props.id,FoodDetail)
         }
         // for(var i=0;i<FoodDetail.length;i++){
         //     console.log(i+'  '+FoodDetail[i]);

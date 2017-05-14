@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // import './TimeOut.css';
 
 export default class FoodInfo extends React.Component {
     static propTypes = {
-        id: PropTypes.string,
+        id: PropTypes.number,
         name: PropTypes.string,
         isTimeOut: PropTypes.bool,
         isRefrige: PropTypes.bool

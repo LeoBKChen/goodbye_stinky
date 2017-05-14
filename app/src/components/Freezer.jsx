@@ -20,7 +20,8 @@ import './Freezer.css';
 
 export default class Freezer extends React.Component {
     static propTypes = {
-        editFoodInfo: PropTypes.func
+        editFoodInfo: PropTypes.func,
+        freezerPosts: PropTypes.array
 
     };
 
@@ -98,72 +99,73 @@ export default class Freezer extends React.Component {
                     <div>
                         <h1 className='text-center'>Freezer</h1>
 
-                        <FreezerList TimeOut={this.timeOut}/>
+                        <FreezerList TimeOut={this.timeOut} freezerPosts={this.props.freezerPosts}/>
                         <div className='vote-plus'>
                             <i id='addItem' className='fa fa-plus'></i>
                         </div>
                         <div className='第一' >
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen} autohide={false} target='addItem' toggle={this.handleTooltipToggle}>
-                            <img id='vegTooltip'    src={getfoodIcon("蔬菜")}      className='蔬菜'      onClick={this.handleTooltipToggleVeg}/>&nbsp;
-                            <img id='meatTooltip'   src={getfoodIcon("肉類")}      className='肉類'     onClick={this.handleTooltipToggleMeat}/>&nbsp;
-                            <img id='seafoodTootip' src={getfoodIcon("海鮮")}      className='海鮮'  onClick={this.handleTooltipToggleSea}/>
-                            <img id='fruitTootip'   src={getfoodIcon("水果")}      className='水果'    onClick={this.handleTooltipToggleFruit}/>&nbsp;
-                            <img id='eggMilkTootip' src={getfoodIcon("蛋/乳製品")} className='蛋奶'  onClick={this.handleTooltipToggleEgg}/>&nbsp;
-                            <img id='sauceTootip'   src={getfoodIcon("調味料")}    className='調味料'    onClick={this.handleTooltipToggleSau}/>
-                            <img id='熟食Tooltip'   src={getfoodIcon("熟食")}  className='熟食' onClick={() => this.handleCreate("熟食","熟食")}/>
-                        </Tooltip>
+    <Tooltip   placement='top' isOpen={this.state.tooltipOpen} autohide={false} target='addItem' toggle={this.handleTooltipToggle}>
+        <img id='vegTooltip'    src={getfoodIcon("蔬菜")}      className='蔬菜'      onClick={this.handleTooltipToggleVeg}/>&nbsp;
+        <img id='meatTooltip'   src={getfoodIcon("肉類")}      className='肉類'     onClick={this.handleTooltipToggleMeat}/>
+        <img id='seafoodTooltip' src={getfoodIcon("海鮮")}      className='海鮮'  onClick={this.handleTooltipToggleSea}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img id='fruitTooltip'   src={getfoodIcon("水果")}      className='水果'    onClick={this.handleTooltipToggleFruit}/>
+        <img id='eggMilkTooltip' src={getfoodIcon("蛋/乳製品")} className='蛋奶'  onClick={this.handleTooltipToggleEgg}/>&nbsp;&nbsp;
+        <img id='sauceTooltip'   src={getfoodIcon("調味料")}    className='調味料'    onClick={this.handleTooltipToggleSau}/>
+        <img id='熟食Tooltip'   src={getfoodIcon("熟食")}  className='熟食' onClick={() => this.handleCreate("熟食","熟食")}/>
+        <div className='d-flex flex-column' >
+            <Tooltip placement='top right' isOpen={this.state.tooltipOpen2} autohide={false} target='vegTooltip' toggle={this.handleTooltipToggleVeg}>
+                <img className='蔬菜' src={getfoodIcon("高麗菜")} onClick={() => this.handleCreate("蔬菜","高麗菜")} />&nbsp;
+                <img className='蔬菜' src={getfoodIcon("紅蘿蔔")} onClick={() => this.handleCreate("蔬菜","紅蘿蔔")}   />
+                <img className='蔬菜' src={getfoodIcon("花椰菜")} onClick={() => this.handleCreate("蔬菜","花椰菜")} />
+                <img className='蔬菜' src={getfoodIcon("茄子")}   onClick={() => this.handleCreate("蔬菜","茄子")} />&nbsp;
+                <img className='蔬菜' src={getfoodIcon("辣椒")}   onClick={() => this.handleCreate("蔬菜","辣椒")} />
+                <img className='蔬菜' src={getfoodIcon("玉米")}   onClick={() => this.handleCreate("蔬菜","玉米")} />
+            </Tooltip>
+        </div>
+        <div className='d-flex flex-column' >
+            <Tooltip placement='top left' isOpen={this.state.tooltipOpen3} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleMeat}>
+                <img className='肉類' src={getfoodIcon("雞肉")} onClick={() => this.handleCreate("肉類","雞肉")} />&nbsp;
+                <img className='肉類' src={getfoodIcon("培根")} onClick={() => this.handleCreate("肉類","培根")}   />
+                <img className='肉類' src={getfoodIcon("牛肉")} onClick={() => this.handleCreate("肉類","牛肉")} />
+            </Tooltip>
+        </div>
+        <div className='d-flex flex-column'>
+            <Tooltip placement='left' isOpen={this.state.tooltipOpen4} autohide={false} target='seafoodTooltip' toggle={this.handleTooltipToggleSea}>
+                <img className='海鮮' src={getfoodIcon("螃蟹")} onClick={() => this.handleCreate("海鮮","螃蟹")} />&nbsp;
+                <img className='海鮮' src={getfoodIcon("龍蝦")} onClick={() => this.handleCreate("海鮮","龍蝦")}   />&nbsp;
+                <img className='海鮮' src={getfoodIcon("蝦子")} onClick={() => this.handleCreate("海鮮","蝦子")} />
+                <img className='海鮮' src={getfoodIcon("魚")}   onClick={() => this.handleCreate("海鮮","魚")} />&nbsp;
+                <img className='海鮮' src={getfoodIcon("章魚")} onClick={() => this.handleCreate("海鮮","章魚")} />&nbsp;
+                <img className='海鮮' src={getfoodIcon("蛤蜊")} onClick={() => this.handleCreate("海鮮","蛤蜊")} />
+            </Tooltip>
+        </div>
+        <div className='d-flex flex-column'>
+            <Tooltip placement='right' isOpen={this.state.tooltipOpen5} autohide={false} target='fruitTooltip' toggle={this.handleTooltipToggleFruit}>
+                <img className='水果' src={getfoodIcon("草莓")} onClick={() => this.handleCreate("水果","草莓")} />&nbsp;
+                <img className='水果' src={getfoodIcon("橘子")} onClick={() => this.handleCreate("水果","橘子")}/>&nbsp;
+                <img className='水果' src={getfoodIcon("蘋果")} onClick={() => this.handleCreate("水果","蘋果")}/>
+                <img className='水果' src={getfoodIcon("葡萄")} onClick={() => this.handleCreate("水果","葡萄")}/>&nbsp;
+                <img className='水果' src={getfoodIcon("西瓜")} onClick={() => this.handleCreate("水果","西瓜")}/>&nbsp;
+                <img className='水果' src={getfoodIcon("香蕉")} onClick={() => this.handleCreate("水果","香蕉")}/>
+            </Tooltip>
+        </div>
+        <div className='d-flex flex-column'>
+            <Tooltip placement='left bottom' isOpen={this.state.tooltipOpen6} autohide={false} target='eggMilkTooltip'  toggle={this.handleTooltipToggleEgg}>
+                <img className='蛋奶' src={getfoodIcon("蛋")}   onClick={() => this.handleCreate("蛋/乳製品","蛋")} />&nbsp;
+                <img className='蛋奶' src={getfoodIcon("牛奶")} onClick={() => this.handleCreate("蛋/乳製品","牛奶")}   />&nbsp;
+                <img className='蛋奶' src={getfoodIcon("起司")} onClick={() => this.handleCreate("蛋/乳製品","起司")} />
+            </Tooltip>
+        </div>
+        <div className='d-flex flex-column'>
+            <Tooltip placement='right bottom' isOpen={this.state.tooltipOpen7} autohide={false} target='sauceTooltip' toggle={this.handleTooltipToggleSau}>
+                <img className='調味料' src={getfoodIcon("番茄醬")} onClick={() => this.handleCreate("調味料","番茄醬")} />&nbsp;
+                <img className='調味料' src={getfoodIcon("果醬")}   onClick={() => this.handleCreate("調味料","果醬")}   />&nbsp;
+                <img className='調味料' src={getfoodIcon("辣椒醬")} onClick={() => this.handleCreate("調味料","辣椒醬")} />
+            </Tooltip>
+        </div>
+    </Tooltip>
                     </div>
-                    <div className='d-flex flex-column' >
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen2} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleVeg}>
-                            <img className='veg' src={getfoodIcon("高麗菜")} onClick={() => this.handleCreate("蔬菜","高麗菜")} />&nbsp;
-                            <img className='veg' src={getfoodIcon("紅蘿蔔")} onClick={() => this.handleCreate("蔬菜","紅蘿蔔")}   />&nbsp;
-                            <img className='veg' src={getfoodIcon("花椰菜")} onClick={() => this.handleCreate("蔬菜","花椰菜")} />
-                            <img className='veg' src={getfoodIcon("茄子")}   onClick={() => this.handleCreate("蔬菜","茄子")} />&nbsp;
-                            <img className='veg' src={getfoodIcon("辣椒")}   onClick={() => this.handleCreate("蔬菜","辣椒")} />&nbsp;
-                            <img className='veg' src={getfoodIcon("玉米")}   onClick={() => this.handleCreate("蔬菜","玉米")} />
-                        </Tooltip>
-                    </div>
-                    <div className='d-flex flex-column' >
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen3} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleMeat}>
-                            <img className='meat' src={getfoodIcon("雞肉")} onClick={() => this.handleCreate("肉類","雞肉")} />&nbsp;
-                            <img className='meat' src={getfoodIcon("培根")} onClick={() => this.handleCreate("肉類","培根")}   />&nbsp;
-                            <img className='meat' src={getfoodIcon("牛肉")} onClick={() => this.handleCreate("肉類","牛肉")} />
-                        </Tooltip>
-                    </div>
-                    <div className='d-flex flex-column'>
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen4} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleSea}>
-                            <img className='seafood' src={getfoodIcon("螃蟹")} onClick={() => this.handleCreate("海鮮","螃蟹")} />&nbsp;
-                            <img className='seafood' src={getfoodIcon("龍蝦")} onClick={() => this.handleCreate("海鮮","龍蝦")}   />&nbsp;
-                            <img className='seafood' src={getfoodIcon("蝦子")} onClick={() => this.handleCreate("海鮮","蝦子")} />
-                            <img className='seafood' src={getfoodIcon("魚")}   onClick={() => this.handleCreate("海鮮","魚")} />&nbsp;
-                            <img className='seafood' src={getfoodIcon("章魚")} onClick={() => this.handleCreate("海鮮","章魚")} />&nbsp;
-                            <img className='seafood' src={getfoodIcon("蛤蜊")} onClick={() => this.handleCreate("海鮮","蛤蜊")} />
-                        </Tooltip>
-                    </div>
-                    <div className='d-flex flex-column'>
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen5} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleFruit}>
-                            <img className='fruit' src={getfoodIcon("草莓")} onClick={() => this.handleCreate("水果","草莓")} />&nbsp;
-                            <img className='fruit' src={getfoodIcon("橘子")} onClick={() => this.handleCreate("水果","橘子")}/>&nbsp;
-                            <img className='fruit' src={getfoodIcon("蘋果")} onClick={() => this.handleCreate("水果","蘋果")}/>
-                            <img className='fruit' src={getfoodIcon("葡萄")} onClick={() => this.handleCreate("水果","葡萄")}/>&nbsp;
-                            <img className='fruit' src={getfoodIcon("西瓜")} onClick={() => this.handleCreate("水果","西瓜")}/>&nbsp;
-                            <img className='fruit' src={getfoodIcon("香蕉")} onClick={() => this.handleCreate("水果","香蕉")}/>
-                        </Tooltip>
-                    </div>
-                    <div className='d-flex flex-column'>
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen6} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleEgg}>
-                            <img className='eggMilk' src={getfoodIcon("蛋")}   onClick={() => this.handleCreate("蛋/乳製品","蛋")} />&nbsp;
-                            <img className='eggMilk' src={getfoodIcon("牛奶")} onClick={() => this.handleCreate("蛋/乳製品","牛奶")}   />&nbsp;
-                            <img className='eggMilk' src={getfoodIcon("起司")} onClick={() => this.handleCreate("蛋/乳製品","起司")} />
-                        </Tooltip>
-                    </div>
-                    <div className='d-flex flex-column'>
-                        <Tooltip placement='top' isOpen={this.state.tooltipOpen7} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleSau}>
-                            <img className='sauce' src={getfoodIcon("番茄醬")} onClick={() => this.handleCreate("調味料","番茄醬")} />&nbsp;
-                            <img className='sauce' src={getfoodIcon("果醬")}   onClick={() => this.handleCreate("調味料","果醬")}   />&nbsp;
-                            <img className='sauce' src={getfoodIcon("辣椒醬")} onClick={() => this.handleCreate("調味料","辣椒醬")} />
-                        </Tooltip>
-                    </div>
+
                         </div>
                 </Card>
             </div>
@@ -173,9 +175,12 @@ export default class Freezer extends React.Component {
 
     handleTooltipToggle() {
         console.log("toggle All");
-        this.setState((prevState, props) => ({
-            tooltipOpen: !prevState.tooltipOpen
-        }));
+        if(!(this.state.tooltipOpen2  || this.state.tooltipOpen3 || this.state.tooltipOpen4 ||
+            this.state.tooltipOpen5 || this.state.tooltipOpen6 || this.state.tooltipOpen7)){
+            this.setState((prevState, props) => ({
+                tooltipOpen: !prevState.tooltipOpen
+            }));
+        }
     }
 
     handleTooltipToggleVeg() {

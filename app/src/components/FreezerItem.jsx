@@ -10,7 +10,7 @@ import {handleEdit,timeOut} from 'components/FreezerList.jsx';
 
 export default class FreezerItem extends React.Component {
     static propTypes = {
-        
+
         isRefrige: PropTypes.bool,
         name: PropTypes.string,
         unit: PropTypes.unit,
@@ -22,11 +22,12 @@ export default class FreezerItem extends React.Component {
         alarmTime: PropTypes.date,
         text: PropTypes.string,
         timeOut: PropTypes.func
+
     };
 
     constructor(props) {
         super(props);
-
+        console.log(props);
         this.state = {
         };
 

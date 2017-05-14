@@ -16,7 +16,8 @@ export default class PostList extends React.Component {
     static propTypes = {
         posts: PropTypes.array,
         filter: PropTypes.string,
-        onEdit: PropTypes.func
+        onEdit: PropTypes.func,
+        freezerPosts: PropTypes.array
     };
 
     constructor(props) {
@@ -26,7 +27,7 @@ export default class PostList extends React.Component {
         };
 
         this.handleEdit = this.handleEdit.bind(this);
-        this.getIcon = this.getIcon.bind(this);
+        
     }
 
     render() {
@@ -43,8 +44,8 @@ export default class PostList extends React.Component {
             //     <div className='empty-text'>No food here.<br />Go add some foods!</div>
             // </ListGroupItem>
         );
-        if (posts.length) {
-            children = posts.map(p => (
+        if (this.props.freezerPosts.length) {
+            children = this.props.freezerPosts.map(p => (
               <Card key={p.id} action onClick={this.handleEdit}>
                   <FreezerItem  {...p} Edit={this.handleEdit} timeOut={this.timeOut}/>
               </Card>

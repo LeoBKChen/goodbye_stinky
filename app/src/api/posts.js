@@ -13,7 +13,7 @@ export function listPosts(isRefrige) {
     let url = `${postBaseUrl}/posts`;
 
     if(isRefrige)
-        url += 'isRefrige=true';
+        url += '?isRefrige=true';
 
     console.log(`Making GET request to: ${url}`);
 
@@ -28,7 +28,7 @@ export function listPosts(isRefrige) {
 export function createPost(isRefrige = false, foodDetail) {
     let url = `${postBaseUrl}/posts`;
     if(isRefrige)
-        url += 'isRefrige=true';
+        url += '?isRefrige=true';
 
     console.log(`Making POST request to: ${url}`);
 
@@ -41,11 +41,26 @@ export function createPost(isRefrige = false, foodDetail) {
         return res.data;
     });
 }
+export function updatePost(isRefrige = false, foodDetail) {
+    let url = `${postBaseUrl}/posts`;
+    if(isRefridge)
+        url += '?isRefrige=true';
 
+    console.log(`Making POST request to: ${url}`);
+
+    return axios.post(url, {
+        foodDetail
+    }).then(function(res) {
+        if (res.status !== 200)
+            throw new Error(`Unexpected response code: ${res.status}`);
+
+        return res.data;
+    });
+}
 export function deletePost(isRefrige = false, id) {
     let url = `${postBaseUrl}/posts`;
     if(isRefrige)
-        url += 'isRefrige=true';
+        url += '?isRefrige=true';
 
     console.log(`Making GET request to: ${url}`);
 
