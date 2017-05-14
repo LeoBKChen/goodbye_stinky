@@ -9,7 +9,7 @@ function list(isRefrige = false) {
     //     where.push(`text ILIKE '%$1:value%'`);
     // if (start)
     //     where.push('id < $2');
-    const where = isRefrige ? 'Refrige' : 'Freezer';
+    const where = $1 ? 'Refrige' : 'Freezer';
     const sql = `
         SELECT *
         FROM ${where}
@@ -23,7 +23,7 @@ function list(isRefrige = false) {
 function create(isRefrige = false, foodDetail) {
     const f = $2;
     
-    const where = isRefrige ? 'Refrige' : 'Freezer';
+    const where = $1 ? 'Refrige' : 'Freezer';
     const sql = `
         INSERT INTO ${where} ($<this:name>)
         VALUES ($<f.name>, $<f.category>, $<f.quiantity>, $<f.unit>, $<f.isSetDeadline>, 
@@ -33,7 +33,7 @@ function create(isRefrige = false, foodDetail) {
     return db.one(sql, [isRefrige, foodDetail]);
 }
 function update(isRefrige, id, foodDetail){
-    const where = isRefrige ? 'Refrige' : 'Freezer';
+    const where = $1 ? 'Refrige' : 'Freezer';
     const f = $3;
 
     const sql = `
@@ -42,10 +42,12 @@ function update(isRefrige, id, foodDetail){
         isSetDeadline = $<f.isSetDeadline>, deadline = $<f.deadline>, isAlarm = $<f.isAlarm>, 
         alarmDate = $<f.alarmDate>, alarmTime = $<f.alarmTime>, text = $<f.text>
         WHERE id = $2
+        RETURNING *
     `;
+    return db.one(sql, [isRefrige, id, foodDetail]);
 }
 function remove(isRefrige = false, id){
-    const where = isRefrige ? 'Refrige' : 'Freezer';
+    const where = $1 ? 'Refrige' : 'Freezer';
     const sql = `
         DELETE FROM ${where} 
         WHERE id = $2
@@ -56,5 +58,6 @@ function remove(isRefrige = false, id){
 module.exports = {
     list,
     create,
+    update,
     remove
 };

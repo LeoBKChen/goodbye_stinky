@@ -33,6 +33,20 @@ router.post('/posts', function(req, res, next) {
     }).catch(next);
 });
 
+//Update
+router.post('/posts', function(req, res, next) {
+    const isRefrige = req.query;
+    const foodDetail = req.body;
+    if (!foodDetail || !isRefrige) {
+        const err = new Error('Mood and text are required');
+        err.status = 400;
+        throw err;
+    }
+    postModel.update(isRefrige, foodDetail).then(post => {
+        res.json(post);
+    }).catch(next);
+});
+
 //Delete
 router.get('/posts', function(req, res, next) {
     // const {searchText, start} = req.query;

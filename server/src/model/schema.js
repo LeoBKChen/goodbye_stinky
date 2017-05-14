@@ -10,62 +10,91 @@ const schemaSql = `
     -- Drop (droppable only when no dependency)
     --DROP INDEX IF EXISTS posts_idx_text;
     --DROP INDEX IF EXISTS posts_idx_ts;
-    DROP TABLE IF EXISTS Refridge;
+    DROP TABLE IF EXISTS Refrige;
     DROP TABLE IF EXISTS Freezer;
-    --DROP TYPE IF EXISTS mood;
+    DROP TYPE IF EXISTS category CASCADE;
+    DROP TYPE IF EXISTS unit CASCADE;
 
     -- Create
-   CREATE TABLE Refrige (
+    CREATE TYPE category AS ENUM (
+        '蔬菜',
+        '肉類',
+        '海鮮',
+        '水果',
+        '蛋/乳製品',
+        '調味料',
+        '熟食'
+    );
+    CREATE TYPE unit AS ENUM (
+        '個',
+        '人份',
+        '克',
+        '公斤',
+        '台斤',
+        '毫升',
+        '公升'
+    );
+    CREATE TABLE Refrige (
         id              serial PRIMARY KEY NOT NULL,
         name            text NOT NULL,
-        category        text NOT NULL,
-        quiantity       integer NOT NULL DEFAULT 1,
-        unit            text NOT NULL,
+        category        category NOT NULL,
+        quantity        integer NOT NULL DEFAULT 1,
+        unit            unit NOT NULL,
         isSetDeadline   boolean NOT NULL DEFAULT false,
-        deadline        text NOT NULL,
-        isAlarm   　　　　　boolean NOT NULL DEFAULT false,
-        alarmDate       date ,--NOT NULL,
-        alarmTime       date ,--NOT NULL,
-        memo    　　　　　　 text 
+        deadline        date NOT NULL,
+        isAlarm         boolean NOT NULL DEFAULT false,       
+        alarmDate       date NOT NULL,
+        alarmTime       date NOT NULL,
+        text            text
     );
     CREATE TABLE Freezer (
         id              serial PRIMARY KEY NOT NULL,
         name            text NOT NULL,
-        category        text NOT NULL,
-        quiantity       integer NOT NULL DEFAULT 1,
-        unit            text NOT NULL,
+        category        category NOT NULL,
+        quantity        integer NOT NULL DEFAULT 1,
+        unit            unit NOT NULL,
         isSetDeadline   boolean NOT NULL DEFAULT false,
-        deadline        text NOT NULL,
-        isAlarm   　　　　　boolean NOT NULL DEFAULT false,
+        deadline        date NOT NULL,
+        isAlarm         boolean NOT NULL DEFAULT false,       
         alarmDate       date NOT NULL,
         alarmTime       date NOT NULL,
-        memo    　　　　　　 text 
-    ); 
+        text            text
+    );        
 
 
 
 `;
-  
-    // CREATE TABLE test (
+/*
+
+    CREATE TABLE posts (
+        id              serial PRIMARY KEY NOT NULL,
+        mood            text NOT NULL,
+        unit            unit NOT NULL,
+        text            text NOT NULL,
+        "clearVotes"    integer NOT NULL DEFAULT 0,
+        "cloudsVotes"   integer NOT NULL DEFAULT 0,
+        "drizzleVotes"  integer NOT NULL DEFAULT 0,
+        "rainVotes"     integer NOT NULL DEFAULT 0,
+        "thunderVotes"  integer NOT NULL DEFAULT 0,
+        "snowVotes"     integer NOT NULL DEFAULT 0,
+        "windyVotes"    integer NOT NULL DEFAULT 0
+    );
+*/
+    // CREATE TABLE Freezer (
     //     id              serial PRIMARY KEY NOT NULL,
     //     name            text NOT NULL,
     //     category        text NOT NULL,
     //     quiantity       integer NOT NULL DEFAULT 1,
     //     unit            text NOT NULL,
     //     isSetDeadline   boolean NOT NULL DEFAULT false,
+    //     deadline        text NOT NULL,
     //     isAlarm   　　　　　boolean NOT NULL DEFAULT false,
+    //     alarmDate       date NOT NULL,
+    //     alarmTime       date NOT NULL,
     //     memo    　　　　　　 text 
-    // );
+    // ); 
 
-    // CREATE TYPE mood AS ENUM (
-    //     'Clear',
-    //     'Clouds',
-    //     'Drizzle',
-    //     'Rain',
-    //     'Thunder',
-    //     'Snow',
-    //     'Windy'
-    // );
+
     // CREATE INDEX posts_idx_ts ON posts USING btree(ts);
     // CREATE INDEX posts_idx_text ON posts USING gin(text gin_trgm_ops);
 
