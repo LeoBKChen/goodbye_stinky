@@ -2,51 +2,84 @@
     color: #fff;
     text-align: center;
     text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
-    padding: 3rem ;
-    position: relative;
 
-    /*width: 100%;*/
-    /*max-width: 40rem;*/
-    /*margin: 0rem auto;*/
-    /*width:130%;*/
-    /*height: 40rem;*/
-    width: 130%;
+    position: relative;
+    height: 30rem;
+    width: 100%;
     max-width: 35rem;
     margin: 0 auto;
     transition: all 0.3s;
     opacity: 1;
 }
-.btn-freezer{
-    margin: 1rem ;
-    margin-left: auto;
-
+.第一{
+    width: 100%;
 }
-.veg {
-    width: 2rem;
-    height: 2rem;
+
+.蔬菜 {
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
-    border-radius: 99%;
-    background-color: #0f0;
+    border-radius: 80%;
+    background-color: #ffa;
     margin-bottom: 0.1rem;
 }
 
-.meat{
-    width: 2rem;
-    height: 2rem;
+.肉類{
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #f00;
-    margin-bottom: 0.1rem;    
+    background-color: #FFBB77;
+    margin-bottom: 0.1rem;
 }
 
-.seafood {
-    width: 2rem;
-    height: 2rem;
+.海鮮 {
+    width: 2.5rem;
+    height: 2.5rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #00f;
-    margin-bottom: 0.1rem;    
+    background-color: #8df;
+    margin-bottom: 0.1rem;
+}
+
+.水果{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #A6FFA6;
+    margin-bottom: 0.1rem;
+}
+
+.蛋奶{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #aaf;
+    margin-bottom: 0.1rem;
+}
+.調味料{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #fcf;
+    margin-bottom: 0.1rem;
+}
+
+.熟食{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 0.05rem;
+    border-radius: 99%;
+    background-color: #faf;
+    margin-bottom: 0.1rem;
 }

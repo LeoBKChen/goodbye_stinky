@@ -1,55 +1,67 @@
 if (!global.db) {
     const pgp = require('pg-promise')();
-    db = pgp(process.env.DB_URL); 
+    db = pgp(process.env.DB_URL);
 }
 
-function list(isRefrige = false) {
-    // const where = [];
-    // if (searchText)
-    //     where.push(`text ILIKE '%$1:value%'`);
-    // if (start)
-    //     where.push('id < $2');
-    const where = $1 ? 'Refrige' : 'Freezer';
+function list(isRefrige) {
+
+    if(isRefrige === 'true')
+        var where = 'Refrige';
+    else
+        var where = 'Freezer';
+
     const sql = `
         SELECT *
         FROM ${where}
-        -- ${where.length ? 'WHERE ' + where.join(' AND ') : ''}
         ORDER BY category DESC
         -- LIMIT 10
     `;
     return db.any(sql, isRefrige);
 }
 
-function create(isRefrige = false, foodDetail) {
-    const f = $2;
-    
-    const where = $1 ? 'Refrige' : 'Freezer';
-    const sql = `
-        INSERT INTO ${where} ($<this:name>)
-        VALUES ($<f.name>, $<f.category>, $<f.quiantity>, $<f.unit>, $<f.isSetDeadline>, 
-        $<f.deadline>, $<f.isAlarm>, $<f.alarmDate>, $<f.alarmTime>, $<f.text>)
-        RETURNING *
-    `;
-    return db.one(sql, [isRefrige, foodDetail]);
-}
-function update(isRefrige, id, foodDetail){
-    const where = $1 ? 'Refrige' : 'Freezer';
-    const f = $3;
+function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text) {
+
+    console.log(isRefrige);
+
+    if(isRefrige==='true')
+        var where = 'Refrige';
+    else
+        var where = 'Freezer';
+
 
     const sql = `
-        UPDATE FROM ${where} 
-        SET name = $<f.name>, category = $<f.category>, quiantity = $<f.quiantity>, unit = $<f.unit>, 
-        isSetDeadline = $<f.isSetDeadline>, deadline = $<f.deadline>, isAlarm = $<f.isAlarm>, 
-        alarmDate = $<f.alarmDate>, alarmTime = $<f.alarmTime>, text = $<f.text>
+        INSERT INTO ${where} ($<this:name>)
+        VALUES($2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        RETURNING *
+    `;
+    return db.one(sql, [isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text]);
+}
+
+function update(isRefrige, id, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text){
+    if(isRefrige==='true')
+        var where = 'Refrige';
+    else
+        var where = 'Freezer';
+
+
+    const sql = `
+        UPDATE FROM ${where}
+        SET name = $3, category = $4, quiantity = $5, unit = $6,
+        isSetDeadline = $7, deadline = $8, isAlarm = $9,
+        alarmDate = $10, alarmTime = $11, text = $12
         WHERE id = $2
         RETURNING *
     `;
-    return db.one(sql, [isRefrige, id, foodDetail]);
+    return db.one(sql, [isRefrige, id, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text]);
 }
-function remove(isRefrige = false, id){
-    const where = $1 ? 'Refrige' : 'Freezer';
+function remove(isRefrige, id){
+    if(isRefrige==='true')
+        var where = 'Refrige';
+    else
+        var where = 'Freezer';
+
     const sql = `
-        DELETE FROM ${where} 
+        DELETE FROM ${where}
         WHERE id = $2
     `;
     return db.any(sql, [isRefrige, id]);
