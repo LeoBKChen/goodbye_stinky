@@ -12,7 +12,6 @@ import {
     Tooltip
 } from 'reactstrap';
 import moment from 'moment';
-import {editFoodInfo,timeOut} from 'components/Main.jsx';
 import {getfoodIcon} from 'utilities/food.js';
 import FreezerList from 'components/FreezerList.jsx';
 
@@ -20,6 +19,7 @@ import './Freezer.css';
 
 export default class Freezer extends React.Component {
     static propTypes = {
+        timeOut: PropTypes.func,
         editFoodInfo: PropTypes.func,
         freezerPosts: PropTypes.array
 
@@ -48,8 +48,7 @@ export default class Freezer extends React.Component {
       this.handleTooltipToggleSau = this.handleTooltipToggleSau.bind(this);
 
       this.handleCreate = this.handleCreate.bind(this);
-
-        this.foodInfoEdit = this.foodInfoEdit.bind(this);
+      this.foodInfoEdit = this.foodInfoEdit.bind(this);
 
     }
     componentDidMount() {
@@ -84,9 +83,9 @@ export default class Freezer extends React.Component {
                 <Card>
                     <div>
                         <h1 className='text-center'>Freezer</h1>
-                        <FreezerList TimeOut={this.timeOut} freezerPosts={this.props.freezerPosts}/>
+                        <FreezerList TimeOut={this.timeOut} freezerPosts={this.props.freezerPosts} isRefrige={false} handleEdit={this.foodInfoEdit}/>
                         <div className='vote-plus'>
-                            <Button id='addItem' className='fa fa-plus' color="success"></Button>
+                            <Button id='addItem' color="success"><i className="fa fa-plus"></i></Button>
                         </div>
                         <div className='第一' >
                             <Tooltip   placement='top' isOpen={this.state.tooltipOpen} autohide={false} target='addItem' toggle={this.handleTooltipToggleFreezer}>
@@ -166,7 +165,6 @@ export default class Freezer extends React.Component {
             }));
         }
     }
-
     handleTooltipToggleVeg() {
         this.setState((prevState, props) => ({
             tooltipOpen2: !prevState.tooltipOpen2,
@@ -177,7 +175,6 @@ export default class Freezer extends React.Component {
             tooltipOpen7: false
         }));
     }
-
     handleTooltipToggleMeat() {
         this.setState((prevState, props) => ({
             tooltipOpen2: false,
@@ -188,7 +185,6 @@ export default class Freezer extends React.Component {
             tooltipOpen7: false
         }));
     }
-
     handleTooltipToggleSea() {
         this.setState((prevState, props) => ({
             tooltipOpen2: false,
@@ -247,12 +243,12 @@ export default class Freezer extends React.Component {
         });
         this.props.goFoodInfo(category, name);
     }
-
-
-    foodInfoEdit(id,FoodDetail){
-        this.props.editFoodInfo(id,FoodDetail,isRefrige);
+    foodInfoEdit(isRefrige,id,FoodDetail){
+       console.log("through freezer");
+        console.log(FoodDetail);
+        this.props.editFoodInfo(isRefrige,id,FoodDetail);
     }
-    timeOut(idn,name){
+    timeOut(id,name){
         this.props.timeOut(id,name);
     }
 }

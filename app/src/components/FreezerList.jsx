@@ -9,16 +9,17 @@ import {
 } from 'reactstrap';
 
 
-import {getFoodIcon} from 'utilities/food.js';
+import {getfoodIcon} from 'utilities/food.js';
 import FreezerItem from 'components/FreezerItem.jsx';
 import {onEdit,timeOut} from 'components/Freezer.jsx';
 import './FreezerList.css';
 
 export default class FreezerList extends React.Component {
     static propTypes = {
+        isRefrige: PropTypes.bool,
         posts: PropTypes.array,
         filter: PropTypes.string,
-        onEdit: PropTypes.func,
+        handleEdit: PropTypes.func,
         freezerPosts: PropTypes.array
     };
 
@@ -46,10 +47,14 @@ export default class FreezerList extends React.Component {
             //     <div className='empty-text'>No food here.<br />Go add some foods!</div>
             // </ListGroupItem>
         );
+        console.log("yquedhwedwed");
+        console.log(this.props.freezerPosts);
         if (this.props.freezerPosts.length) {
+
             children = this.props.freezerPosts.map(p => (
-              <Card key={p.id} action onClick={this.handleEdit}>
-                  <FreezerItem  {...p} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
+
+              <Card key={p.id} action>
+                  <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
               </Card>
                 // <ListGroupItem key={p.id} action>
                 //     <PostItem {...p} onVote={this.handleVote} />
@@ -67,8 +72,10 @@ export default class FreezerList extends React.Component {
     // handleVote(id, mood) {
     //     this.props.onVote(id, mood);
     // }
-    handleEdit(id,FoodDetail,isRefrige){
-        this.props.onEdit(id,FoodDetail,isRefrige);
+    handleEdit(isRefrige,id,FoodDetail){
+        console.log("經過list");
+        console.log(FoodDetail);
+        this.props.handleEdit(isRefrige,id,FoodDetail);
     }
     timeOut(id,name){
         this.props.timeOut(id,name);

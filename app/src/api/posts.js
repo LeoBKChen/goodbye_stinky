@@ -46,7 +46,7 @@ export function createPost(isRefrige, foodDetail) {
     });
 }
 export function updatePost(isRefrige, foodDetail) {
-    let url = `${postBaseUrl}/posts`;
+    let url = `${postBaseUrl}/update`;
     if(isRefrige)
         url += '?isRefrige=true';
     else

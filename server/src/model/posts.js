@@ -13,7 +13,7 @@ function list(isRefrige) {
     const sql = `
         SELECT *
         FROM ${where}
-        ORDER BY category DESC
+        ORDER BY id ASC
         -- LIMIT 10
     `;
     return db.any(sql, isRefrige);
@@ -28,9 +28,11 @@ function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadli
     else
         var where = 'Freezer';
 
-
+    console.log(deadline);
+    console.log(alarmDate);
+    console.log(alarmTime);
     const sql = `
-        INSERT INTO ${where} (name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text)
+        INSERT INTO ${where} (name, category, quantity, unit, "isSetDeadline", deadline, "isAlarm", "alarmDate", "alarmTime", text)
         VALUES($2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
         RETURNING *
     `;
@@ -43,12 +45,12 @@ function update(isRefrige, id, name, category, quantity, unit, isSetDeadline, de
     else
         var where = 'Freezer';
 
-
+    // console.log(isSetDeadline+"    QQ");
     const sql = `
-        UPDATE FROM ${where}
-        SET name = $3, category = $4, quiantity = $5, unit = $6,
-        isSetDeadline = $7, deadline = $8, isAlarm = $9,
-        alarmDate = $10, alarmTime = $11, text = $12
+        UPDATE  ${where}
+        SET name = $3, category = $4, quantity = $5, unit = $6,
+        "isSetDeadline" = $7, deadline = $8, "isAlarm" = $9,
+        "alarmDate" = $10, "alarmTime" = $11, text = $12
         WHERE id = $2
         RETURNING *
     `;

@@ -55,7 +55,8 @@ export default class FoodInfo extends React.Component {
             inputUnitDanger: false
             // text: props.name
         };
-
+        console.log("info state");
+        console.log(this.state);
         this.handleFoodNameChange = this.handleFoodNameChange.bind(this);
 
         this.handleSetQuantity = this.handleSetQuantity.bind(this);
@@ -85,14 +86,15 @@ export default class FoodInfo extends React.Component {
     static getInitFoodInfoState(props) {
         console.log("in initial");
         console.log(props);
+        var tryasdsda = moment(props.alarmTime);
         return {
             unit: props.unit,
             quantity: props.quantity,
             isSetDeadline: props.isSetDeadline,
-            deadline: props.deadline,
+            deadline: tryasdsda,
             isAlarm: props.isAlarm,
-            alarmDate: props.alarmDate,
-            alarmTime: props.alarmTime,
+            alarmDate: tryasdsda,
+            alarmTime: tryasdsda,
             text: props.text
         };
     }
@@ -272,7 +274,7 @@ export default class FoodInfo extends React.Component {
                       <FormGroup check row>
 
                         <Col className='d-flex justify-content-around' sm={{ size: 10, offset: 1 }}>
-                          {!this.props.isEdit?
+                          {this.props.isEdit?
                               <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
 
                         {/* </Col>
@@ -357,6 +359,7 @@ export default class FoodInfo extends React.Component {
         });
     }
     handleAlarmDateChange(date){
+      console.log();
         this.setState({
             alarmDate: date
         });
@@ -394,7 +397,10 @@ export default class FoodInfo extends React.Component {
           });
           return;
         }
-        var FoodDetail={
+        // console.log("this.state =");
+        // console.log(this.state);
+        const FoodDetail={
+            id: this.props.id,
             name:this.state.name,
             category:this.props.category,
             quantity:this.state.quantity,
@@ -406,11 +412,16 @@ export default class FoodInfo extends React.Component {
             alarmTime:this.state.alarmTime,
             text:this.state.text
         }
+
+        console.log(this.props.isEdit);
+        console.log(FoodDetail);
         if(!this.props.isEdit){
+            console.log("QQQQQ");
             this.props.onPost(this.props.isRefrige,FoodDetail);
         }
         else{
-            this.props.edit(this.props.isRefrige,this.props.id,FoodDetail)
+            console.log("TTTTTT");
+            this.props.editfunc(this.props.isRefrige,FoodDetail);
         }
         // for(var i=0;i<FoodDetail.length;i++){
         //     console.log(i+'  '+FoodDetail[i]);

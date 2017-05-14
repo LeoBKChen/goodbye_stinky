@@ -76,8 +76,7 @@ export default class Refrige extends React.Component {
                         <h1 className='text-center' >Refrige</h1>
                         <RefrigeList TimeOut={this.timeOut} refrigePosts={this.props.refrigePosts}/>
                         <div className='vote-plus'>
-                            <Button id='addItemRef' className='fa fa-plus' color="success" onClick={() => this.handleTooltipToggle}></Button>
-                            {/* <Button id='addItem' className='fa fa-plus' color="success" onClick={() => this.handleTooltipToggle}></Button> */}
+                          <Button id='addItemRef' color="success"><i className="fa fa-plus"></i></Button>
                         </div>
                         <div className='第一' >
                             <Tooltip placement='top' isOpen={this.state.tooltipOpenRefrige} autohide={false} target='addItemRef' toggle={this.handleTooltipToggle}>
@@ -243,10 +242,10 @@ export default class Refrige extends React.Component {
         this.props.goFoodInfo(category, name);
     }
 
-    foodInfoEdit(id,FoodDetail){
-        this.props.editFoodInfo(id,FoodDetail,isRefrige);
+    foodInfoEdit(isRefrige,id,FoodDetail){
+        this.props.editFoodInfo(isRefrige,id,FoodDetail);
     }
-    timeOut(idn,name){
+    timeOut(id,name){
         this.props.timeOut(id,name);
     }
 }

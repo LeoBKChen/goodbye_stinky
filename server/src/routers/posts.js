@@ -39,16 +39,17 @@ router.post('/posts', function(req, res, next) {
         err.status = 400;
         throw err;
     }
-    postModel.create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate,
+    postModel.create(isRefrige, name, category, quantity, unit, "isSetDeadline", deadline, isAlarm, alarmDate,
         alarmTime, text).then(post => {
         res.json(post);
     }).catch(next);
 });
 
 //Update
-router.post('/posts', function(req, res, next) {
+router.post('/update', function(req, res, next) {
     var isRefrige = req.query.isRefrige;
     // const foodDetail = req.body;
+
     var id = req.body.id;
     var name = req.body.name;
     var category = req.body.category;
@@ -61,7 +62,10 @@ router.post('/posts', function(req, res, next) {
     var alarmTime = req.body.alarmTime;
     var text = req.body.text;
 
-    if (!foodDetail) {
+    // console.log(req.body.isSetDeadline);
+    // console.log(isSetDeadline);
+
+    if (!id) {
         const err = new Error('Food detail is required');
         err.status = 400;
         throw err;

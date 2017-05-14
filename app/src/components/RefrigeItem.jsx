@@ -10,10 +10,11 @@ import moment from 'moment';
 
 import './RefrigeItem.css';
 import {handleEdit,timeOut} from 'components/RefrigeList.jsx';
+import {getFoodIcon} from 'utilities/food.js';
 
 export default class RefrigeItem extends React.Component {
     static propTypes = {
-
+        id: PropTypes.number,
         isRefrige: PropTypes.bool,
         name: PropTypes.string,
         unit: PropTypes.unit,
@@ -42,7 +43,7 @@ export default class RefrigeItem extends React.Component {
     }
 
     render() {
-        
+
         return (
           <div>
               <CardBlock onClick={this.edit}>
@@ -66,7 +67,7 @@ export default class RefrigeItem extends React.Component {
            alarmTime:this.props.alarmTime,
            text:this.props.text
        }
-        this.props.handleEdit(this.props.id, FoodDetail, isRefrige);
+        this.props.handleEdit(this.props.isRefrige, this.props.id, FoodDetail );
     }
     checkTime(){
         if(this.props.alarmTime.format('mm') === moment().format('mm') ||this.props.deadline.format('mm')===moment().format('mm')){

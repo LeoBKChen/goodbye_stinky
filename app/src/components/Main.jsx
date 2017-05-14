@@ -31,10 +31,10 @@ export default class Main extends React.Component {
         super(props);
 
         this.state = {
-             category: '',
              isSetting:false,
              isEdit: false,
              id: NaN,
+             category: '',
              name: '',
              quantity: 1,
              unit: 'na',
@@ -59,7 +59,21 @@ export default class Main extends React.Component {
         this.FreezerTimeOut = this.FreezerTimeOut.bind(this);
 
     }
-
+    componentDidMount() {
+      // listPosts(this.state.isRefrige).then(p =>{
+      //   // console.log(p);
+      //   this.setState({
+      //       refrigePosts: p
+      //   });
+      // });
+      listPosts(!this.state.isRefrige).then(p =>{
+        console.log("p=");
+        console.log(p);
+        this.setState({
+            freezerPosts: p
+        });
+      });
+    }
     render() {
         const {name,id,isRefrige,freezerPosts,refrigePosts}= this.state;
         return (
@@ -71,7 +85,7 @@ export default class Main extends React.Component {
                 <div>
                    <div>{this.state.isSetting ?
                        <div>
-                           <FoodInfo {...this.state} edit={this.handlefinishEdit} onPost={this.handleCreateFoodItem} delFoodItem={this.deleteFoodItem}/>
+                           <FoodInfo {...this.state} editfunc={this.handleFinishEdit} onPost={this.handleCreateFoodItem} delFoodItem={this.deleteFoodItem}/>
                        </div>
                      :
                        <div className='main'>
@@ -79,10 +93,10 @@ export default class Main extends React.Component {
                                  <div className="d-flex justify-content-around">
                                    <Row>
                                      <Col>
-                                       <Freezer  freezerPosts={freezerPosts}  foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.FreezerTimeOut}/>
+                                       <Freezer  freezerPosts={freezerPosts}  editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.FreezerTimeOut}/>
                                      </Col>
                                      <Col>
-                                       <Refrige  refrigePosts={refrigePosts} foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.RefrigetimeOut}/>
+                                       {/* <Refrige  refrigePosts={refrigePosts} editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.RefrigetimeOut}/> */}
                                      </Col>
                                    </Row>
                                  </div>
@@ -105,18 +119,25 @@ export default class Main extends React.Component {
         console.log(FoodDetail.category);
         createPost(isRefrige,FoodDetail).then((post) => {
               console.log(post);
-              listPosts(isRefrige).then(p => console.log(p));
-              this.setState({
-                  isSetting:false
+              listPosts(isRefrige).then(p =>{
+                console.log(p);
+                this.setState({
+                    isSetting:false,
+                    freezerPosts: p
+                });
               });
+
           }).catch(err => {
               console.error('Error creating posts', err);
           });
-        this.setState({
-            isSetting:false
-        });
+        // this.setState({
+        //     isSetting:false
+        // });
     }
     handleFoodInfoEdit(isRefrige,id,FoodDetail){
+        console.log(isRefrige);
+        console.log("through main");
+        console.log(FoodDetail);
         this.setState({
             isEdit: true,
             isSetting: true,
@@ -134,11 +155,11 @@ export default class Main extends React.Component {
             text:FoodDetail.text
         });
     }
-    handleFinishEdit(isRefrige,id,FoodDetail){
-        updatePost(isRefrige,id,FoodDetail).then( p =>{
+    handleFinishEdit(isRefrige,FoodDetail){
+        updatePost(isRefrige, FoodDetail).then( p =>{
             console.log('update'+FoodDetail.name);
             listPosts(p.isRefrige).then(posts =>{
-                if(p.isRefrige){
+                if(!p.isRefrige){
                     this.setState({
                         freezerPosts: posts
                     });

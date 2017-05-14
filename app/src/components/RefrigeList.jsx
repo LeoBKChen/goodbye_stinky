@@ -49,7 +49,7 @@ export default class RefrigeList extends React.Component {
         if (this.props.refrigePosts.length) {
             children = this.props.refrigePosts.map(p => (
               <Card key={p.id} action onClick={this.handleEdit}>
-                  <RefrigeItem  {...p} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
+                  <RefrigeItem  {...p}  isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
               </Card>
             ));
         }
@@ -64,8 +64,8 @@ export default class RefrigeList extends React.Component {
     // handleVote(id, mood) {
     //     this.props.onVote(id, mood);
     // }
-    handleEdit(id,FoodDetail,isRefrige){
-        this.props.onEdit(id,FoodDetail,isRefrige);
+    handleEdit(isRefrige,id,FoodDetail){
+        this.props.onEdit(isRefrige, id, FoodDetail);
     }
     timeOut(id,name){
         this.props.timeOut(id,name);
