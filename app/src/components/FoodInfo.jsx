@@ -1,6 +1,4 @@
 import React from 'react';
-
-import uuid from 'uuid/v4';
 import DatePicker from 'react-datepicker';
 import TimePicker from 'rc-time-picker';
 import moment from 'moment';
@@ -13,6 +11,7 @@ import {
     Label,
     Legend,
     Input,
+    InputGroup,
     InputGroupAddon,
     Button,
     Row,
@@ -27,22 +26,23 @@ import {
 import './FoodInfo.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'rc-time-picker/assets/index.css';
-
+import {getinfoIcon} from 'utilities/info.js';
 
 const now = moment().hour(0).minute(0);
 
 export default class FoodInfo extends React.Component {
     static propTypes = {
-        // city: PropTypes.string,
+        id: PropTypes.string,
         name: PropTypes.string,
         category: PropTypes.string,
-        isRefrige: PropTypes.bool
+        isRefrige: PropTypes.bool,
+        delFoodItem: PropTypes.func
     };
 
     constructor(props) {
         super(props);
-        console.log("in construct");
-        console.log(props);
+        // console.log("in construct");
+        // console.log(props);
         this.inputFoodNameEl = this.props.name;
         this.inputQuantityEL = null;
         this.inputNoteEl = null;
@@ -55,8 +55,7 @@ export default class FoodInfo extends React.Component {
             inputUnitDanger: false
             // text: props.name
         };
-        this.translateCategoryName = this.translateCategoryName.bind(this);
-        this.translateFoodName = this.translateFoodName.bind(this);
+
         this.handleFoodNameChange = this.handleFoodNameChange.bind(this);
 
         this.handleSetQuantity = this.handleSetQuantity.bind(this);
@@ -80,18 +79,15 @@ export default class FoodInfo extends React.Component {
     }
 
     static getUnitString(unit) {
-        return unit === 'na' ? '單位' :
-                (unit === 'count') ? '個': '台斤';
-                // (unit === 'Taiwanese_kg') ?
+        return unit === 'na' ? '單位' : unit;
 
     }
     static getInitFoodInfoState(props) {
         console.log("in initial");
         console.log(props);
         return {
-            
             unit: props.unit,
-            quantity: props.quantity,            
+            quantity: props.quantity,
             isSetDeadline: props.isSetDeadline,
             deadline: props.deadline,
             isAlarm: props.isAlarm,
@@ -115,27 +111,26 @@ export default class FoodInfo extends React.Component {
     }
 
     render() {
-        // const form = this.state.formToggle ? 'form' : '';
 
         return (
           <div className='container'>
               <Card>
                   <Form>
                       {/* name */}
-                      <FormGroup row>
-                          <InputGroupAddon>{this.props.category}&nbsp;品名：</InputGroupAddon>
-                          <Col sm={5}>
+                      <FormGroup>
+                          <Label className="name">{this.props.category}&nbsp;品名：</Label>
+                          <InputGroup>
                             {/*}{this.translateFoodname(this.props.name)}*/}
                              <Input type='text' name='foodname' placeholder={this.props.name} getRef={el => {this.inputFoodNameEl = el}}
                                value={this.state.inputFoodNameEl } onChange={this.handleFoodNameChange}></Input>&nbsp;
                             {/* <Label > 南瓜</Label> */}
                             <Alert color='info' isOpen={this.state.inputFoodNameDanger}>請填寫名稱</Alert>
-                          </Col>
+                          </InputGroup>
                       </FormGroup>
                       {/*quantity*/}
-                      <FormGroup row>
-                          <InputGroupAddon>數量：</InputGroupAddon>
-                          <Col sm={5}>
+                      <FormGroup>
+                          <Label className="name">數量：</Label>
+                          <InputGroup>
                               <Input placeholder="請輸入數字" type="number" step="1" className='input' onChange={this.handleSetQuantity}
                                 getRef={el => {this.inputQuantityEl = el}} value={this.state.quantity}></Input>
 
@@ -144,20 +139,25 @@ export default class FoodInfo extends React.Component {
                                     {FoodInfo.getUnitString(this.state.unit)}
                                   </DropdownToggle>
                                   <DropdownMenu>
-                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('count')}}>個</DropdownItem>
-                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('Taiwanese_kg')}}>台斤</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('個')}}>個</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('人份')}}>人份</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('克')}}>克</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('公斤')}}>公斤</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('台斤')}}>台斤</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('毫升')}}>毫升</DropdownItem>
+                                      <DropdownItem type='button' onClick={()=>{this.handleUnit('公升')}}>公升</DropdownItem>
                                   </DropdownMenu>
                               </ButtonDropdown>&nbsp;
-                          </Col>
+                          </InputGroup>
                           <Alert color='info' isOpen={this.state.inputQuantityDanger}>請填寫正確數量</Alert>
                           <Alert color='info' isOpen={this.state.inputUnitDanger}>請填寫單位</Alert>
                       </FormGroup>
                       {/* deadline */}
-                      <FormGroup row>
-                          <InputGroupAddon>有效期限：</InputGroupAddon>
-                          <Col sm={10}>
+                      <FormGroup>
+                          <Label className="name">有效期限：</Label>
+                          <InputGroup>
                               <FormGroup>
-                                  <Label>
+                                  <Label check>
                                     <Input type="radio" name="radio1" defaultChecked onChange={this.handleSetDeadlineOff} />{' '}
                                     關
                                   </Label>
@@ -188,26 +188,29 @@ export default class FoodInfo extends React.Component {
                                           disabled
                                       />
                                       }
+                                      <img src={getinfoIcon("月曆")}/>
                                   </div>
                               </FormGroup>
-                          </Col>
+                          </InputGroup>
                       </FormGroup>
                       {/* setAlarm */}
-                      <FormGroup row>
-                          <InputGroupAddon>提醒：</InputGroupAddon>
-                          <Col sm={10}>
+                      <FormGroup>
+                          <Label className="name">提醒：</Label>
+                          <InputGroup>
                               <FormGroup>
-                                  <Label>
+                                  <Label check>
                                       <Input type="radio" name="radio2" defaultChecked onChange={this.handleSetAlarmOff}  />{' '}
                                       關
                                   </Label>
                               </FormGroup>
                               <FormGroup >
-                                  <Label>
+                                <InputGroup>
+                                  <Label check>
                                     <Input type="radio" name="radio2" onChange={this.handleSetAlarmOn}  />{' '}
                                     開
                                   </Label>
-                                  <div>{this.state.isAlarm ?
+                                  <div>
+                                      <InputGroup>{this.state.isAlarm ?
                                         <div>
                                             <DatePicker
                                                 dateFormat="YYYY/MM/DD"
@@ -220,14 +223,15 @@ export default class FoodInfo extends React.Component {
                                                 showYearDropdown
                                                 dateFormatCalendar="YYYY/MM"
                                             />
+                                            <img src={getinfoIcon("月曆")}/>
                                             <TimePicker
                                               showSecond={false}
                                               defaultValue={moment()}
                                               use12Hours
                                               onChange={this.handleAlarmTimeChange}
                                               format = 'h:mm a'
-
                                             />
+                                            <img src={getinfoIcon("時鐘")}/>
                                         </div>
                                       :
                                         <div>
@@ -238,6 +242,7 @@ export default class FoodInfo extends React.Component {
                                               onChange={this.handleAlarmDateChange}
                                               disabled
                                             />
+                                            <img src={getinfoIcon("月曆")}/>
                                             <TimePicker
                                               showSecond={false}
                                               selected={this.state.alarmDate}
@@ -245,25 +250,29 @@ export default class FoodInfo extends React.Component {
                                               // use24Hours
                                               disabled
                                             />
+                                            <img src={getinfoIcon("時鐘")}/>
                                         </div>
                                       }
+                                    </InputGroup>
                                   </div>
-                              </FormGroup>
-                          </Col>
-                      </FormGroup>
+                              </InputGroup>
+                          </FormGroup>
+                      </InputGroup>
+                    </FormGroup>
                       {/* note */}
-                      <FormGroup row>
-                          <InputGroupAddon>備註：</InputGroupAddon>
-                          <Col sm={10}>
-                              <Input className='input' type='textarea' getRef={el => {this.inputNoteEl = el}}
-                                 value={this.state.text} onChange={this.handleInputNoteChange}
-                                 placeholder="備註..."></Input>
-                          </Col>
+                      <FormGroup>
+                          <Label className="name">備註：</Label>
+                            <Input className='input' type='textarea' getRef={el => {this.inputNoteEl = el}}
+                               value={this.state.text} onChange={this.handleInputNoteChange}
+                               placeholder="備註..."></Input>
                       </FormGroup>
-                      {/* submit */}
+                      {/* submit or delete*/}
                       <FormGroup check row>
-                        <Col sm={{ size: 10, offset: 2 }}>
-                          <Button onClick={this.handleFoodInfoSubmit} >Submit</Button>
+                        <Col sm={{ size: 10, offset: 9 }}>
+                          <div>{this.props.isEdit?
+                              <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
+                          </div>
+                          <Button onClick={this.handleFoodInfoSubmit} color="#841584" >完成</Button>
                         </Col>
                       </FormGroup>
                   </Form>
@@ -272,23 +281,6 @@ export default class FoodInfo extends React.Component {
         );
     }
 
-    translateCategoryName(e){
-
-      console.log(this.props.category);
-        switch(this.props.category){
-            case 'vegetable' : return '蔬菜類';
-            case 'meat' : return '肉類';
-            case 'seafood' : return '海鮮類';
-            default: return this.props.category;
-        }
-    }
-
-    translateFoodName(foodname){
-        switch(foodname){
-            case 'pumpkin': return '南瓜';
-            default: return foodname;
-        }
-    }
     handleFoodNameChange(e){
         const texts = e.target.value
         console.log('i am ddsf');
@@ -298,7 +290,6 @@ export default class FoodInfo extends React.Component {
         });
 
     }
-
 
     handleSetQuantity(e){
         const numbers = e.target.value;
@@ -383,19 +374,12 @@ export default class FoodInfo extends React.Component {
         console.log('submit');
         if (!this.props.name) {
             this.setState({inputFoodNameDanger: true});
-      //       <Alert color="success">
-      //   <strong>Well done!</strong> You successfully read this important alert message.
-      // </Alert>
-      //       {/* <Alert color='warning' className='loading'>請輸入品名</Alert> */}
-
-            console.log('請輸入');
             return;
         }
         console.log('pass name');
 
         if(this.state.quantity<=0){
             this.setState({inputQuantityDanger: true});
-            // <Alert color='warning' className='loading'>請輸入正確數量</Alert>
             return;
         }
         console.log('pass quantity');
@@ -404,7 +388,6 @@ export default class FoodInfo extends React.Component {
               inputUnitDanger: true,
               unitToggle: true
           });
-          // <Alert color='warning' className='loading'>請輸入單位</Alert>
           return;
         }
         console.log('pass unit');
@@ -420,10 +403,18 @@ export default class FoodInfo extends React.Component {
             alarmTime:this.state.alarmTime,
             text:this.state.text
         }
+        if(!this.props.isEdit){
+            this.props.onPost(FoodDetail,this.props.isRefrige);
+        }
+        else{
+            this.props.edit(this.props.id,FoodDetail,this.props.isRefrige)
+        }
         // for(var i=0;i<FoodDetail.length;i++){
         //     console.log(i+'  '+FoodDetail[i]);
         // }
-
-        this.props.onPost(this.props.isRefrige,FoodDetail);
+    }
+    handleFoodInfodelete(){
+      // 可以加alert
+        this.props.delFoodItem(this.props.id);
     }
 }

@@ -2,7 +2,7 @@
     color: #fff;
     text-align: center;
     text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
-    
+
     position: relative;
     height: 30rem;
     width: 100%;
@@ -32,7 +32,7 @@
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #FFBB77;
-    margin-bottom: 0.1rem;    
+    margin-bottom: 0.1rem;
 }
 
 .海鮮 {
@@ -42,7 +42,7 @@
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #8df;
-    margin-bottom: 0.1rem;    
+    margin-bottom: 0.1rem;
 }
 
 .水果{
@@ -52,7 +52,7 @@
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #A6FFA6;
-    margin-bottom: 0.1rem;      
+    margin-bottom: 0.1rem;
 }
 
 .蛋奶{
@@ -62,7 +62,7 @@
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #aaf;
-    margin-bottom: 0.1rem;   
+    margin-bottom: 0.1rem;
 }
 .調味料{
     width: 2.5rem;
@@ -71,7 +71,7 @@
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #fcf;
-    margin-bottom: 0.1rem;   
+    margin-bottom: 0.1rem;
 }
 
 .熟食{
@@ -81,5 +81,5 @@
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #faf;
-    margin-bottom: 0.1rem;   
+    margin-bottom: 0.1rem;
 }

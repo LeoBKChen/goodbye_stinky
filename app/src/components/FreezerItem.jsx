@@ -3,105 +3,74 @@ import PropTypes from 'prop-types';
 import {
     Button,
 } from 'reactstrap';
+import moment from 'moment';
 
 import './FreezerItem.css';
+import {handleEdit,timeOut} from 'components/FreezerList.jsx';
 
 export default class FreezerItem extends React.Component {
     static propTypes = {
-        // city: PropTypes.string,
-        // unit: PropTypes.string,
-        // onQuery: PropTypes.func
+        
+        isRefrige: PropTypes.bool,
+        name: PropTypes.string,
+        unit: PropTypes.unit,
+        quantity: PropTypes.number,
+        isSetDeadline: PropTypes.bool,
+        deadline: PropTypes.date,
+        isAlarm: PropTypes.bool,
+        alarmDate: PropTypes.date,
+        alarmTime: PropTypes.date,
+        text: PropTypes.string,
+        timeOut: PropTypes.func
     };
-
-    // static getUnitString(unit) {
-    //     return unit === 'metric' ? 'C' : 'F';
-    // }
 
     constructor(props) {
         super(props);
 
-        // this.inputEl = null;
-        // this.state = {
-        //     inputValue: props.city,
-        //     formToggle: false,
-        //     tempToggle: false,
-        //     unit: props.unit
-        // };
+        this.state = {
+        };
 
-        // this.handleFormToggle = this.handleFormToggle.bind(this);
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleMetricUnit = this.handleMetricUnit.bind(this);
-        // this.handleImperialUnit = this.handleImperialUnit.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleTempToggle = this.handleTempToggle.bind(this);
+        this.edit = this.edit.bind(this);
+        this.checkTime = this.checkTime.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        // this.setState({
-        //     inputValue: nextProps.city,
-        //     unit: nextProps.unit
-        // });
+        this.setState({
+        });
+
     }
 
     render() {
+      var warn setInterval(this.checkTime,60000);
         // const form = this.state.formToggle ? 'form' : '';
-
         return (
-          <h3 className='text-center'>FreezerItem</h3>
-
-            // <div className={`weather-form ${form}`}>{this.state.formToggle ?
-            //     <Form className='form-inline justify-content-center' onSubmit={this.handleSubmit}>
-            //         <Input type='text' name='city' getRef={el => {this.inputEl = el}} value={this.state.inputValue} onChange={this.handleInputChange}></Input>&nbsp;
-            //         <ButtonDropdown type='buttom' isOpen={this.state.tempToggle} toggle={this.handleTempToggle}>
-            //             <DropdownToggle type='button' caret color="secondary">
-            //                 &ordm; {WeatherForm.getUnitString(this.state.unit)}
-            //             </DropdownToggle>
-            //             <DropdownMenu>
-            //                 <DropdownItem type='button' onClick={this.handleMetricUnit}>&ordm; C</DropdownItem>
-            //                 <DropdownItem type='button' onClick={this.handleImperialUnit}>&ordm; F</DropdownItem>
-            //             </DropdownMenu>
-            //         </ButtonDropdown>&nbsp;
-            //         <Button color="info">Check</Button>
-            //     </Form>
-            //     :
-            //     <Button className='btn-form' outline color="secondary" onClick={this.handleFormToggle}><i className='fa fa-map-marker' aria-hidden="true"></i>&nbsp;&nbsp;{this.props.city}</Button>
-            // }</div>
+              <CardBlock onClick={this.edit}>
+                  <img src={getFoodIcon(p.name)}></img>
+              </CardBlock>
+              <CardTitle >{p.name}</CardTitle>
         );
     }
-
-    // handleFormToggle() {
-    //     this.setState((prevState, props) => ({
-    //         formToggle: !prevState.formToggle
-    //     }));
-    // }
-    //
-    // handleInputChange(e) {
-    //     this.setState({inputValue: e.target.value});
-    // }
-    //
-    // handleMetricUnit(e) {
-    //     this.setState({unit: 'metric'});
-    // }
-    //
-    // handleImperialUnit(e) {
-    //     this.setState({unit: 'imperial'});
-    // }
-    //
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //
-    //     this.inputEl.blur();
-    //     if (this.state.inputValue && this.state.inputValue.trim()) {
-    //         this.props.onQuery(this.state.inputValue, this.state.unit);
-    //         this.handleFormToggle();
-    //     } else {
-    //         this.state.inputEl = this.props.city;
-    //     }
-    // }
-    //
-    // handleTempToggle(e) {
-    //     this.setState((prevState, props) => ({
-    //         tempToggle: !prevState.tempToggle
-    //     }));
-    // }
+    edit(this.props.id){
+        var FoodDetail={
+            name:this.state.name,
+            category:this.props.category,
+            quantity:this.state.quantity,
+            unit:this.state.unit,
+            isSetDeadline:this.state.isSetDeadline,
+            deadline:this.state.deadline,
+            isAlarm:this.state.isAlarm,
+            alarmDate:this.state.alarmDate,
+            alarmTime:this.state.alarmTime,
+            text:this.state.text
+        }
+        this.props.handleEdit(this.props.id,FoodDetail,isRefrige);
+    }
+    checkTime(){
+        if(this.props.alarmTime===moment()||this.props.deadline===moment()){
+            this.props.timeOut(this.props.id,this.props.name);
+            if(this.props.deadline===moment()){
+                this.clearInterval(warn);
+            }
+        }
+    }
 }

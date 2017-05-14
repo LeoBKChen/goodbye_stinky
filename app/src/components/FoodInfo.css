@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+    webkit-justify-content: center;
+   }
+.name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card {
+  width: 580px;
+}
+
+Form {
+  margin: 30px;
+}
+
+img {
+  width: 30px;
+  height: 30px;
+}
