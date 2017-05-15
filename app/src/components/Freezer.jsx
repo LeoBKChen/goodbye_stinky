@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Alert} from 'reactstrap';
 import {
     Card,
-    CardImg,
     CardText,
     CardBlock,
     CardTitle,
@@ -21,8 +20,8 @@ export default class Freezer extends React.Component {
     static propTypes = {
         timeOut: PropTypes.func,
         editFoodInfo: PropTypes.func,
-        freezerPosts: PropTypes.array
-
+        freezerPosts: PropTypes.array,
+        isRefrige: PropTypes.bool
     };
 
 
@@ -70,7 +69,6 @@ export default class Freezer extends React.Component {
         if(tooltip6){tooltip6.addEventListener('mouseover',this.onMouseOverTooltip);}
         if(tooltip7){tooltip7.addEventListener('mouseover',this.onMouseOverTooltip);}
 
-
     }
     render() {
         // const {unit} = this.props;
@@ -85,7 +83,7 @@ export default class Freezer extends React.Component {
                 <Card className="freezerSize">
                     <div>
                         <h1 className='text-center'>Freezer</h1>
-                        <FreezerList timeOut={this.timeOut} freezerPosts={this.props.freezerPosts}/>
+                        <FreezerList timeOut={this.timeOut} freezerPosts={this.props.freezerPosts} isRefrige={this.props.isRefrige} onEdit={this.foodInfoEdit}/>
                         <div className='第一'>
                             <Button id='addItem' color="success" onClick={() => this.handleTooltipToggle}><i className='fa fa-plus' ></i></Button>
                         </div>
@@ -109,14 +107,14 @@ export default class Freezer extends React.Component {
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column' >
-                                    <Tooltip placement='top left' isOpen={this.state.tooltipOpen3} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleMeat}>
+                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen3} autohide={false} target='meatTooltip' toggle={this.handleTooltipToggleMeat}>
                                         <img className='meat' src={getfoodIcon("雞肉")} onClick={() => this.handleCreate("肉類","雞肉")} />&nbsp;
                                         <img className='meat' src={getfoodIcon("培根")} onClick={() => this.handleCreate("肉類","培根")}   />
                                         <img className='meat' src={getfoodIcon("牛肉")} onClick={() => this.handleCreate("肉類","牛肉")} />
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='left' isOpen={this.state.tooltipOpen4} autohide={false} target='seafoodTooltip' toggle={this.handleTooltipToggleSea}>
+                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen4} autohide={false} target='seafoodTooltip' toggle={this.handleTooltipToggleSea}>
                                         <img className='seafood' src={getfoodIcon("螃蟹")} onClick={() => this.handleCreate("海鮮","螃蟹")} />&nbsp;
                                         <img className='seafood' src={getfoodIcon("龍蝦")} onClick={() => this.handleCreate("海鮮","龍蝦")}   />&nbsp;
                                         <img className='seafood' src={getfoodIcon("蝦子")} onClick={() => this.handleCreate("海鮮","蝦子")} />
@@ -126,7 +124,7 @@ export default class Freezer extends React.Component {
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='right' isOpen={this.state.tooltipOpen5} autohide={false} target='fruitTooltip' toggle={this.handleTooltipToggleFruit}>
+                                    <Tooltip placement='left' isOpen={this.state.tooltipOpen5} autohide={false} target='fruitTooltip' toggle={this.handleTooltipToggleFruit}>
                                         <img className='fruit' src={getfoodIcon("草莓")} onClick={() => this.handleCreate("水果","草莓")} />&nbsp;
                                         <img className='fruit' src={getfoodIcon("橘子")} onClick={() => this.handleCreate("水果","橘子")}/>&nbsp;
                                         <img className='fruit' src={getfoodIcon("蘋果")} onClick={() => this.handleCreate("水果","蘋果")}/>
@@ -246,10 +244,9 @@ export default class Freezer extends React.Component {
         this.props.goFoodInfo(category, name);
     }
     foodInfoEdit(isRefrige,id,FoodDetail){
-
         this.props.editFoodInfo(isRefrige,id,FoodDetail);
     }
-    timeOut(id,name){
-        this.props.timeOut(id,name);
+    timeOut(FoodDetail){
+        this.props.timeOut(FoodDetail);
     }
 }

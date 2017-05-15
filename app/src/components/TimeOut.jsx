@@ -70,8 +70,20 @@ export default class Timeout extends React.Component {
         }));
     }
     backToRef(){
-
         clearInterval(t);
-        this.props.knewTimeUp();
-    }    
+        var FoodDetail={
+             id:this.props.id,
+             name:this.props.name,
+             category:this.props.category,
+             quantity:this.props.quantity,
+             unit:this.props.unit,
+             isSetDeadline:this.props.isSetDeadline,
+             deadline:this.props.deadline,
+             isAlarm:this.props.isAlarm,
+             alarmDate:this.props.alarmDate,
+             alarmTime:this.props.alarmTime,
+             text:this.props.text
+         }
+        this.props.knewTimeUp(this.props.isRefrige,FoodDetail);
+    }
 }

@@ -1,5 +1,6 @@
 .inlineRef {
-  display: inline-block;
+    display: inline-block;
+    float: left;
 }
 
 .childRef {

@@ -19,7 +19,7 @@ export default class FreezerList extends React.Component {
         isRefrige: PropTypes.bool,
         posts: PropTypes.array,
         filter: PropTypes.string,
-        handleEdit: PropTypes.func,
+        onEdit: PropTypes.func,
         freezerPosts: PropTypes.array
     };
 
@@ -53,14 +53,14 @@ export default class FreezerList extends React.Component {
         );
 
         if (this.props.freezerPosts.length) {
-
+            console.log("in freezer list");
+            console.log(this.props.freezerPosts);
             children = this.props.freezerPosts.map(p => (
                 <div className="inline" key={p.id}>
                     <Card  action className="內部">
                         <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
                     </Card>
                 </div>
-
             ));
         }
 
@@ -73,14 +73,10 @@ export default class FreezerList extends React.Component {
         );
     }
 
-    // handleVote(id, mood) {
-    //     this.props.onVote(id, mood);
-    // }
     handleEdit(isRefrige,id,FoodDetail){
-
-        this.props.handleEdit(isRefrige,id,FoodDetail);
+        this.props.onEdit(isRefrige,id,FoodDetail);
     }
-    timeOut(id,name){
-        this.props.timeOut(id,name);
+    timeOut(FoodDetail){
+        this.props.timeOut(FoodDetail);
     }
 }

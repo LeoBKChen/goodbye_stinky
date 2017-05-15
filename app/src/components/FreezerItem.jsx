@@ -11,6 +11,7 @@ import moment from 'moment';
 import './FreezerItem.css';
 import {handleEdit,timeOut} from 'components/FreezerList.jsx';
 import {getfoodIcon} from 'utilities/food.js';
+
 var warn;
 export default class FreezerItem extends React.Component {
 
@@ -36,22 +37,22 @@ export default class FreezerItem extends React.Component {
         // console.log(typeof(props.deadline));
 
         this.state = {
+            isAlarm: props.isAlarm,
+            isSetDeadline: props.isSetDeadline
         };
 
         this.edit = this.edit.bind(this);
         this.checkTime = this.checkTime.bind(this);
-        if(this.props.alarmTime){
-          warn = setInterval(this.checkTime,10000);
+        if((this.state.isAlarm && props.alarmTime) || (this.state.isSetDeadline && props.deadline)){
+          warn = setInterval(this.checkTime,8000);
         }
     }
-    componentDidMount(){
 
-    }
     render() {
 
         return (
-          <div >
-              <CardBlock onClick={this.edit}>
+          <div onClick={this.edit}>
+              <CardBlock >
                 <div>
                   <img src={(getfoodIcon(this.props.name)!="none")?getfoodIcon(this.props.name):getfoodIcon(this.props.category)}></img>
                 </div>
@@ -74,17 +75,73 @@ export default class FreezerItem extends React.Component {
            alarmTime:this.props.alarmTime,
            text:this.props.text
        }
-        this.props.handleEdit(this.props.isRefrige, this.props.id, this.props);
+        this.props.handleEdit(false, this.props.id, FoodDetail);
     }
 
     checkTime(){
-      if(this.props.alarmDate || this.props.alarmTime){          
-          if((this.props.alarmDate === moment().format("MM-DD") && this.props.alarmTime===moment().format("hh:mm a"))
-              || (this.props.deadline===moment().format("MM-DD") && moment().format("hh:mm a") === "05:28 pm"))
-          {
-              this.props.timeOut(this.props.id,this.props.name);
-              clearInterval(warn);
-          }
-      }
+        // console.log("checking");
+        // console.log(this.props.isAlarm);
+        // console.log(this.props.alarmTime + this.props.name);
+        // console.log(moment().format("hh:mm a"));
+
+        if(this.state.isAlarm){
+
+            console.log("checking");
+            console.log(this.state.isAlarm);
+            console.log(this.state.isSetDeadline);
+            console.log(this.props.alarmTime + this.props.name);
+            console.log(this.props.deadline);
+            console.log(moment().format("hh:mm a"));
+
+            if((this.props.alarmDate === moment().format("MM-DD") &&
+                this.props.alarmTime===moment().format("hh:mm a")))
+              {
+                  clearInterval(warn);
+                  console.log("dingding fre alarm");
+                  var FoodDetail={
+                       id:this.props.id,
+                       name:this.props.name,
+                       category:this.props.category,
+                       quantity:this.props.quantity,
+                       unit:this.props.unit,
+                       isSetDeadline:this.props.isSetDeadline,
+                       deadline:this.props.deadline,
+                       isAlarm:false,
+                       alarmDate:this.props.alarmDate,
+                       alarmTime:this.props.alarmTime,
+                       text:this.props.text
+                   }
+                   this.setState({
+                       isAlarm:false,
+                       isSetDeadline:false
+                   });
+                   this.props.timeOut(FoodDetail);
+
+              }
+        }
+        else if(this.state.isSetDeadline){
+            if((this.props.deadline===moment().format("MM-DD") && moment().format("hh:mm a") === "04:20 am")){
+            clearInterval(warn);
+            console.log("dingding fre dead");
+            var FoodDetail={
+                 id:this.props.id,
+                 name:this.props.name,
+                 category:this.props.category,
+                 quantity:this.props.quantity,
+                 unit:this.props.unit,
+                 isSetDeadline:false,
+                 deadline:this.props.deadline,
+                 isAlarm:this.state.isAlarm,
+                 alarmDate:this.props.alarmDate,
+                 alarmTime:this.props.alarmTime,
+                 text:this.props.text
+             }
+             this.setState({
+                 isAlarm:false,
+                 isSetDeadline:false
+             });
+             this.props.timeOut(FoodDetail);
+            }
+        }
     }
 }

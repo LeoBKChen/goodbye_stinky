@@ -118,10 +118,8 @@ export default class FoodInfo extends React.Component {
 
         return (
           <div className='container'>
-              <CardImg width="100%" src="images/FoodInfo-bg.png" alt="Card image cap" />
-              <CardImgOverlay>
               <Card className="infoCard">
-                  <Form>
+                  <Form className="infoForm">
                       {/* name */}
                       <FormGroup>
                           <Label className="name">{this.props.category}&nbsp;品名：</Label>
@@ -159,19 +157,29 @@ export default class FoodInfo extends React.Component {
                           <Alert color='info' isOpen={this.state.inputUnitDanger}>請填寫單位</Alert>
                       </FormGroup>
                       {/* deadline */}
-                      <FormGroup>
-                          <Label className="name">有效期限：</Label>
-                              <FormGroup className="off">
+                      <div className="row">
+                          <Label className="name off col-xs-9 deadline">有效期限：</Label>
+                              <FormGroup className="col-xs-6 col-sm-2">
                                   <Label check>
-                                    <Input type="radio" name="radio1" defaultChecked onChange={this.handleSetDeadlineOff} />{' '}
-                                    關
+                                      {this.state.isSetDeadline
+                                        ?
+                                      <Input type="radio" name="radio1"  onChange={this.handleSetDeadlineOff} />
+                                        :
+                                      <Input type="radio" name="radio1" defaultChecked onChange={this.handleSetDeadlineOff} />
+                                      }
+                                      關
                                   </Label>
                               </FormGroup>
-                              <FormGroup>
+                              <FormGroup className="col-xs-6 col-sm-10">
                                 <InputGroup>
                                   <Label check>
-                                    <Input type="radio" name="radio1" onChange={this.handleSetDeadlineOn}  />{' '}
-                                    開
+                                      {this.state.isSetDeadline
+                                        ?
+                                        <Input type="radio" name="radio1"  defaultChecked  onChange={this.handleSetDeadlineOn}  />
+                                        :
+                                        <Input type="radio" name="radio1"   onChange={this.handleSetDeadlineOn}  />
+                                      }
+                                     開
                                   </Label>
                                   <div className="on">{this.state.isSetDeadline ?
                                       <DatePicker
@@ -199,21 +207,31 @@ export default class FoodInfo extends React.Component {
                                   </div>
                                 </InputGroup>
                               </FormGroup>
-                      </FormGroup>
+                      </div>
                       {/* setAlarm */}
-                      <FormGroup>
-                          <Label className="name">提醒：</Label>
-                              <FormGroup className="off">
+                      <div className="row">
+                          <Label className="off name col-xs9 alarm">提醒：</Label>
+                              <FormGroup className="col-xs-6 col-sm-2">
                                   <Label check>
-                                      <Input type="radio" name="radio2" defaultChecked onChange={this.handleSetAlarmOff}  />{' '}
+                                      { this.state.isAlarm
+                                        ?
+                                          <Input type="radio" name="radio2" onChange={this.handleSetAlarmOff}  />
+                                        :
+                                          <Input type="radio" name="radio2" defaultChecked onChange={this.handleSetAlarmOff}  />
+                                      }
                                       關
                                   </Label>
                               </FormGroup>
                               <FormGroup >
                                 <InputGroup>
                                   <Label check>
-                                    <Input type="radio" name="radio2" onChange={this.handleSetAlarmOn}  />{' '}
-                                    開
+                                      { this.state.isAlarm
+                                        ?
+                                          <Input type="radio" name="radio2" defaultChecked onChange={this.handleSetAlarmOn}  />
+                                        :
+                                          <Input type="radio" name="radio2" onChange={this.handleSetAlarmOn}  />
+                                      }
+                                      開
                                   </Label>
                                   <div>{this.state.isAlarm ?
                                         <div  className="on">
@@ -234,7 +252,7 @@ export default class FoodInfo extends React.Component {
                                             </div>
                                             <TimePicker
                                               showSecond={false}
-                                              defaultValue={moment()}
+                                              defaultValue={this.state}
                                               use12Hours
                                               onChange={this.handleAlarmTimeChange}
                                               format = 'h:mm a'
@@ -270,7 +288,7 @@ export default class FoodInfo extends React.Component {
                                   </div>
                               </InputGroup>
                           </FormGroup>
-                    </FormGroup>
+                    </div>
                       {/* note */}
                       <FormGroup>
                           <Label className="name">備註：</Label>
@@ -280,20 +298,14 @@ export default class FoodInfo extends React.Component {
                       </FormGroup>
                       {/* submit or delete*/}
                       <FormGroup check row>
-
                         <Col className='d-flex justify-content-around' sm={{ size: 10, offset: 1 }}>
                           {this.props.isEdit?
                               <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
-
-                        {/* </Col>
-                        <Col sm={{ size: 10, offset: 9 }}> */}
                           <Button onClick={this.handleFoodInfoSubmit} color="success" >完成</Button>
                         </Col>
-
                       </FormGroup>
                   </Form>
               </Card>
-            </CardImgOverlay>
           </div>
         );
     }
@@ -389,7 +401,6 @@ export default class FoodInfo extends React.Component {
 
     }
     handleFoodInfoSubmit(){
-        console.log('submit');
         if (!this.props.name) {
             this.setState({inputFoodNameDanger: true});
             return;
@@ -422,16 +433,10 @@ export default class FoodInfo extends React.Component {
             text:this.state.text
         }
 
-        console.log("sending foodDetail");
-        console.log(FoodDetail);
-        console.log("alarm Time =");
-        console.log(this.state.alarmTime);
         if(!this.props.isEdit){
-            console.log("QQQQQ");
             this.props.onPost(this.props.isRefrige,FoodDetail);
         }
         else{
-            console.log("TTTTTT");
             this.props.editfunc(this.props.isRefrige,FoodDetail);
         }
         // for(var i=0;i<FoodDetail.length;i++){
@@ -440,6 +445,6 @@ export default class FoodInfo extends React.Component {
     }
     handleFoodInfodelete(){
       // 可以加alert
-        this.props.delFoodItem(this.props.id,this.props.isRefrige);
+        this.props.delFoodItem(this.props.id, this.props.isRefrige);
     }
 }

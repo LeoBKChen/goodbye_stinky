@@ -9,17 +9,18 @@ import {
 } from 'reactstrap';
 
 
-import {getFoodIcon} from 'utilities/food.js';
+import {getfoodIcon} from 'utilities/food.js';
 import RefrigeItem from 'components/RefrigeItem.jsx';
 import {onEdit,timeOut} from 'components/Refrige.jsx';
 import './RefrigeList.css';
 
 export default class RefrigeList extends React.Component {
     static propTypes = {
+        isRefrige: PropTypes.bool,
         posts: PropTypes.array,
         filter: PropTypes.string,
         onEdit: PropTypes.func,
-        freezerPosts: PropTypes.array
+        refrigePosts: PropTypes.array
     };
 
     constructor(props) {
@@ -29,7 +30,7 @@ export default class RefrigeList extends React.Component {
         };
 
         this.handleEdit = this.handleEdit.bind(this);
-
+        this.timeOut = this.timeOut.bind(this);
     }
 
     render() {
@@ -50,9 +51,11 @@ export default class RefrigeList extends React.Component {
           </div>
         );
         if (this.props.refrigePosts.length) {
+            console.log("show ref items");
+            console.log(this.props.refrigePosts);
             children = this.props.refrigePosts.map(p => (
-              <div className="inline">
-                  <Card key={p.id} action onClick={this.handleEdit} className="內部Ref">
+              <div className="inline"  key={p.id}>
+                  <Card action className="內部Ref">
                       <RefrigeItem  {...p}  isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
                   </Card>
             </div>
@@ -61,18 +64,17 @@ export default class RefrigeList extends React.Component {
 
         return (
             <div className='refrigelist'>
-                <div  className="inlineRef">{children}</div>
+                <div className="container-fluid child">
+                    <div  className="inlineRef">{children}</div>
+                </div>
             </div>
         );
     }
 
-    // handleVote(id, mood) {
-    //     this.props.onVote(id, mood);
-    // }
     handleEdit(isRefrige,id,FoodDetail){
         this.props.onEdit(isRefrige, id, FoodDetail);
     }
-    timeOut(id,name){
-        this.props.timeOut(id,name);
+    timeOut(FoodDetail){
+        this.props.timeOut(FoodDetail);
     }
 }

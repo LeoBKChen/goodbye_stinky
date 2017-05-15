@@ -30,21 +30,21 @@ export default class Main extends React.Component {
         super(props);
 
         this.state = {
+             isRefrige: true,
+             isTimeOut: false,
              isSetting:false,
              isEdit: false,
-             id: NaN,
              category: '',
              name: '',
+             id: NaN,
              quantity: 1,
              unit: 'na',
              isSetDeadline: false,
-             deadline: moment(),
              isAlarm: false,
+             deadline: moment(),
              alarmDate: moment(),
              alarmTime: moment(),
              text: '',
-             isRefrige: true,
-             isTimeOut: false,
              freezerPosts: [],
              refrigePosts: []
         };
@@ -63,13 +63,12 @@ export default class Main extends React.Component {
         this.knewTimeUp = this.knewTimeUp.bind(this);
     }
     componentDidMount() {
-      // listPosts(this.state.isRefrige).then(p =>{
-      //   // console.log(p);
-      //   this.setState({
-      //       refrigePosts: p
-      //   });
-      // });
-      listPosts(!this.state.isRefrige).then(p =>{
+      listPosts(true).then(p =>{
+        this.setState({
+            refrigePosts: p
+        });
+      });
+      listPosts(false).then(p =>{
         this.setState({
             freezerPosts: p
         });
@@ -78,12 +77,11 @@ export default class Main extends React.Component {
     render() {
         const {name,id,isRefrige,freezerPosts,refrigePosts}= this.state;
         return (
-            <div>{this.state.isTimeOut ?
+            <div className='main'>{this.state.isTimeOut ?
                 <div>
-                    <TimeOut isTimeOut={this.isTimeOut} id={id} name={name} isRefrige={isRefrige} knewTimeUp={this.knewTimeUp} />
+                    <TimeOut {...this.state} knewTimeUp={this.knewTimeUp} />
                 </div>
                :
-                <div>
                    <div>{this.state.isSetting ?
                        <div>
                            <FoodInfo {...this.state} editfunc={this.handleFinishEdit} onPost={this.handleCreateFoodItem} delFoodItem={this.deleteFoodItem}/>
@@ -94,10 +92,11 @@ export default class Main extends React.Component {
                                  <div className="d-flex justify-content-around">
                                    <Row>
                                      <Col>
-                                       <Freezer  freezerPosts={freezerPosts}  editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.freezerTimeOut}/>
+                                       <Freezer  isRefrige={isRefrige} freezerPosts={freezerPosts}  editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.freezerTimeOut}/>
+
                                      </Col>
                                      <Col>
-                                       <Refrige  refrigePosts={refrigePosts} editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.refrigeTimeOut}/>
+                                       <Refrige  isRefrige={isRefrige} refrigePosts={refrigePosts} editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.refrigeTimeOut}/>
                                      </Col>
                                    </Row>
                                  </div>
@@ -108,7 +107,6 @@ export default class Main extends React.Component {
                        </div>
                      }
                    </div>
-                </div>
               }
             </div>
 
@@ -117,22 +115,41 @@ export default class Main extends React.Component {
 
 
     handleCreateFoodItem(isRefrige,FoodDetail){
-
         createPost(isRefrige,FoodDetail).then((post) => {
               listPosts(isRefrige).then(p =>{
-                this.setState({
-                    isSetting:false,
-                    freezerPosts: p
-                });
+                  if(!isRefrige){
+                    this.setState({
+                        freezerPosts: p
+                    });
+                  }
+                  else{
+                    this.setState({
+                        refrigePosts: p
+                    });
+                  }
               });
-
           }).catch(err => {
               console.error('Error creating posts', err);
           });
-        // this.setState({
-        //     isSetting:false
-        // });
+        if(!isRefrige){
+          listPosts(true).then(p =>{
+            this.setState({
+                refrigePosts: p,
+                isSetting: false
+            });
+          });
+        }
+        else{
+          listPosts(false).then(p =>{
+            this.setState({
+                freezerPosts: p,
+                isSetting: false
+            });
+          });
+        }
+
     }
+
     handleFoodInfoEdit(isRefrige,id,FoodDetail){
         this.setState({
             isEdit: true,
@@ -153,21 +170,25 @@ export default class Main extends React.Component {
     }
     handleFinishEdit(isRefrige,FoodDetail){
         updatePost(isRefrige, FoodDetail).then( p =>{
-            listPosts(p.isRefrige).then(posts =>{
-                if(!p.isRefrige){
+            // console.log("isAlarm");
+            // console.log(p.isAlarm);
+            listPosts(isRefrige).then(posts =>{
+                if(!isRefrige){
                     this.setState({
+                      isEdit:false,
+                      isSetting: false,
                         freezerPosts: posts
                     });
                 }
                 else{
                     this.setState({
+                        isEdit:false,
+                        isSetting: false,
                         refrigePosts: posts
                     });
                 }
             });
             this.setState({
-              isEdit:false,
-              isSetting: false
             });
         });
     }
@@ -177,47 +198,137 @@ export default class Main extends React.Component {
             name: name,
             category: category,
             isRefrige: false,
-            isSetting:true
-        })
+            isSetting:true,
+            isEdit: false,
+            id: NaN,
+            quantity: 1,
+            unit: 'na',
+            isSetDeadline: false,
+            isAlarm: false,
+            deadline: moment(),
+            alarmDate: moment(),
+            alarmTime: moment(),
+            text: '',
+            freezerPosts: [],
+            refrigePosts: []
+        });
     }
     refrigeToFoodInfo(category, name){
         this.setState({
             name: name,
             category: category,
             isRefrige: true,
-            isSetting:true
-        })
+            isSetting:true,
+            isEdit: false,
+            id: NaN,
+            quantity: 1,
+            unit: 'na',
+            isSetDeadline: false,
+            isAlarm: false,
+            deadline: moment(),
+            alarmDate: moment(),
+            alarmTime: moment(),
+            text: '',
+            freezerPosts: [],
+            refrigePosts: []
+        });
     }
     deleteFoodItem(id,isRefrige){
         deletePost(isRefrige, id).then(() => {
-              listPosts(isRefrige);
-              this.setState({
-                  isEdit:false,
-                  isSetting:false
-              });
+          listPosts(isRefrige).then(posts =>{
+              console.log("inlist");
+              if(!isRefrige){
+                  this.setState({
+                      freezerPosts: posts
+                  });
+              }
+              else{
+                  console.log('刪文');
+                  this.setState({
+                      refrigePosts: posts
+                  });
+              }
+            });
           }).catch(err => {
               console.error('Error delete posts', err);
           });
+
+        if(!isRefrige){
+          listPosts(true).then(p =>{
+            this.setState({
+                refrigePosts: p,
+                isSetting: false
+            });
+          });
+        }
+        else{
+          listPosts(false).then(p =>{
+            this.setState({
+                freezerPosts: p,
+                isSetting: false
+            });
+          });
+        }
     }
-    freezerTimeOut(id,name){
+
+    freezerTimeOut(FoodDetail){
+
         this.setState({
               isTimeOut: true,
               isRefrige: false,
+              id: FoodDetail.id,
+              name: FoodDetail.name,
+              category:FoodDetail.category,
+              quantity:FoodDetail.quantity,
+              unit:FoodDetail.unit,
+              isSetDeadline:FoodDetail.isSetDeadline,
+              deadline:FoodDetail.deadline,
+              isAlarm:FoodDetail.isAlarm,
+              alarmDate:FoodDetail.alarmDate,
+              alarmTime:FoodDetail.alarmTime,
+              text:FoodDetail.text
         });
     }
-    refrigeTimeOut(id,name){
+    refrigeTimeOut(FoodDetail){
         this.setState({
               isTimeOut: true,
               isRefrige: true,
-              id: id,
-              name: name
+              id: FoodDetail.id,
+              name: FoodDetail.name,
+              category:FoodDetail.category,
+              quantity:FoodDetail.quantity,
+              unit:FoodDetail.unit,
+              isSetDeadline:FoodDetail.isSetDeadline,
+              deadline:FoodDetail.deadline,
+              isAlarm:FoodDetail.isAlarm,
+              alarmDate:FoodDetail.alarmDate,
+              alarmTime:FoodDetail.alarmTime,
+              text:FoodDetail.text
         });
     }
 
-    knewTimeUp(){
-      this.setState({
-
-        isTimeOut:false
-      });
-    }    
+    knewTimeUp(isRefrige,FoodDetail){
+        console.log("timeOut FoodDetail");
+        console.log(FoodDetail);
+        updatePost(isRefrige, FoodDetail).then( p =>{
+            listPosts(isRefrige).then(posts =>{
+                if(!isRefrige){
+                    this.setState({
+                        freezerPosts: posts,
+                        isEdit:false,
+                        isSetting: false,
+                        isTimeOut:false
+                    });
+                }
+                else{
+                    this.setState({
+                        refrigePosts: posts,
+                        isEdit:false,
+                        isSetting: false,
+                        isTimeOut:false
+                    });
+                }
+            });
+        });
+    }
 }
