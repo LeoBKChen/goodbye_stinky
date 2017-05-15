@@ -37,15 +37,20 @@ export default class FreezerList extends React.Component {
         const {posts} = this.props;
 
         let children = (
-          <Card>
-              <CardBlock>
-                  <i className="fa fa-question-circle fa-4x"></i>
-              </CardBlock>
-              <CardTitle>快新增吧</CardTitle>
-          </Card>
-            // <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
-            //     <div className='empty-text'>No food here.<br />Go add some foods!</div>
-            // </ListGroupItem>
+          <div className="container-fluid child">
+            <div className="inline">
+              <Card className="內部">
+                <div>
+                  <CardBlock>
+                    <div>
+                      <i className="fa fa-question-circle fa-3x"></i>
+                    </div>
+                  </CardBlock>
+                      <CardTitle className="fontSize">快新增吧</CardTitle>
+                </div>
+              </Card>
+            </div>
+          </div>
         );
         console.log("yquedhwedwed");
         console.log(this.props.freezerPosts);
@@ -53,7 +58,7 @@ export default class FreezerList extends React.Component {
 
             children = this.props.freezerPosts.map(p => (
 
-              <Card key={p.id} action>
+              <Card key={p.id} action className="內部">
                   <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
               </Card>
                 // <ListGroupItem key={p.id} action>
@@ -64,7 +69,7 @@ export default class FreezerList extends React.Component {
 
         return (
             <div className='freezerlist'>
-                <div>{children}</div>
+                <div className="inline">{children}</div>
             </div>
         );
     }

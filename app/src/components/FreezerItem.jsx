@@ -42,7 +42,7 @@ export default class FreezerItem extends React.Component {
     }
     componentDidMount(){
       if(this.props.alarmTime){
-        console.log('ji3ji3ji3jij33ji3j3ij3iji3ji3jij3iji');
+        console.log('ji3ji3ji3ji');
         var warn = setInterval(this.checkTime,20000);
       }
     }
@@ -53,7 +53,7 @@ export default class FreezerItem extends React.Component {
               <CardBlock onClick={this.edit}>
                   <img src={getfoodIcon(this.props.name)}></img>
               </CardBlock>
-              <CardTitle >{this.props.name}</CardTitle>
+              <CardTitle  className="fontSize" >{this.props.name}</CardTitle>
           </div>
         );
     }

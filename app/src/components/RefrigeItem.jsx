@@ -49,7 +49,7 @@ export default class RefrigeItem extends React.Component {
               <CardBlock onClick={this.edit}>
                   <img src={getFoodIcon(p.name)}></img>
               </CardBlock>
-              <CardTitle >{p.name}</CardTitle>
+              <CardTitle  className="fontSizeRef">{p.name}</CardTitle>
           </div>
         );
     }

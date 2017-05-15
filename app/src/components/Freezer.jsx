@@ -80,7 +80,7 @@ export default class Freezer extends React.Component {
         // <FreezerList onEdit={()=>{this.foodInfoEdit(id)}}/>
         return (
             <div className='freezer'>
-                <Card>
+                <Card className="freezerSize">
                     <div>
                         <h1 className='text-center'>Freezer</h1>
                         <FreezerList TimeOut={this.timeOut} freezerPosts={this.props.freezerPosts} isRefrige={false} handleEdit={this.foodInfoEdit}/>

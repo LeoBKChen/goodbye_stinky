@@ -96,7 +96,7 @@ export default class Main extends React.Component {
                                        <Freezer  freezerPosts={freezerPosts}  editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.FreezerTimeOut}/>
                                      </Col>
                                      <Col>
-                                       {/* <Refrige  refrigePosts={refrigePosts} editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.RefrigetimeOut}/> */}
+                                       <Refrige  refrigePosts={refrigePosts} editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.RefrigetimeOut}/>
                                      </Col>
                                    </Row>
                                  </div>

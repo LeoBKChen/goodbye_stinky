@@ -2,15 +2,19 @@
     color: #fff;
     text-align: center;
     text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
-    padding: 3rem 8rem;
-    position: relative;
-
-    width: 130%;
-    max-width: 35rem;
-    margin: 0 auto;
     transition: all 0.3s;
     opacity: 1;
+    justify-content: center;
 }
+.refrigeSize {
+  width: 20rem;
+  height: 30rem;
+}
+
+#addItemRef {
+  margin-left: 10rem;
+}
+
 .btn-refrige{
     margin: 1rem ;
     margin-left: auto;

@@ -2,15 +2,19 @@
     color: #fff;
     text-align: center;
     text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
-
-    position: relative;
-    height: 30rem;
-    width: 100%;
-    max-width: 35rem;
-    margin: 0 auto;
     transition: all 0.3s;
     opacity: 1;
+    justify-content: center;
 }
+.freezerSize {
+    width: 20rem;
+    height: 30rem;
+}
+
+#addItem {
+  margin-left: 10rem;
+}
+
 .第一{
     width: 100%;
 }

@@ -28,9 +28,9 @@ function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadli
     else
         var where = 'Freezer';
 
-    console.log(deadline);
-    console.log(alarmDate);
-    console.log(alarmTime);
+    console.log(isSetDeadline);
+    // console.log(alarmDate);
+    // console.log(alarmTime);
     const sql = `
         INSERT INTO ${where} (name, category, quantity, unit, "isSetDeadline", deadline, "isAlarm", "alarmDate", "alarmTime", text)
         VALUES($2, $3, $4, $5, $6, $7, $8, $9, $10, $11)

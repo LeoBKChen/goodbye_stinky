@@ -71,7 +71,7 @@ export default class Refrige extends React.Component {
 
         return (
             <div className='refrige'>
-                <Card>
+                <Card className="refrigeSize">
                     <div>
                         <h1 className='text-center' >Refrige</h1>
                         <RefrigeList TimeOut={this.timeOut} refrigePosts={this.props.refrigePosts}/>
