@@ -8,15 +8,18 @@ import {
     CardTitle
 } from 'reactstrap';
 
-import {createVote} from 'api/posts.js';
-import {getFoodIcon} from 'utilities/food.js';
-import {onEdit,timeOut} from 'components/Freezer.jsx';
 
-export default class PostList extends React.Component {
+import {getfoodIcon} from 'utilities/food.js';
+import FreezerItem from 'components/FreezerItem.jsx';
+import {onEdit,timeOut} from 'components/Freezer.jsx';
+import './FreezerList.css';
+
+export default class FreezerList extends React.Component {
     static propTypes = {
+        isRefrige: PropTypes.bool,
         posts: PropTypes.array,
         filter: PropTypes.string,
-        onEdit: PropTypes.func,
+        handleEdit: PropTypes.func,
         freezerPosts: PropTypes.array
     };
 
@@ -27,46 +30,55 @@ export default class PostList extends React.Component {
         };
 
         this.handleEdit = this.handleEdit.bind(this);
-        
+        this.timeOut = this.timeOut.bind(this);
+
     }
 
     render() {
         const {posts} = this.props;
 
         let children = (
-          <Card>
-              <CardBlock>
-                  <i className="fa fa-question-circle"></i>
-              </CardBlock>
-              <CardTitle>Go Get Food</CardTitle>
-          </Card>
-            // <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
-            //     <div className='empty-text'>No food here.<br />Go add some foods!</div>
-            // </ListGroupItem>
+            <div className="inline">
+                <Card className="內部">
+                    <div>
+                        <CardBlock>
+                            <div>
+                                <i className="fa fa-question-circle fa-3x"></i>
+                            </div>
+                        </CardBlock>
+                        <CardTitle className="fontSize">快新增吧</CardTitle>
+                    </div>
+                </Card>
+            </div>
         );
+
         if (this.props.freezerPosts.length) {
+
             children = this.props.freezerPosts.map(p => (
-              <Card key={p.id} action onClick={this.handleEdit}>
-                  <FreezerItem  {...p} Edit={this.handleEdit} timeOut={this.timeOut}/>
-              </Card>
-                // <ListGroupItem key={p.id} action>
-                //     <PostItem {...p} onVote={this.handleVote} />
-                // </ListGroupItem>
+                <div className="inline" key={p.id}>
+                    <Card  action className="內部">
+                        <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
+                    </Card>
+                </div>
+
             ));
         }
 
         return (
             <div className='freezerlist'>
-                <div>{children}</div>
+              <div className="container-fluid child">
+                <div className="inline">{children}</div>
             </div>
+          </div>
         );
     }
 
     // handleVote(id, mood) {
     //     this.props.onVote(id, mood);
     // }
-    handleEdit(id,FoodDetail,isRefrige){
-        this.props.onEdit(id,FoodDetail,isRefrige);
+    handleEdit(isRefrige,id,FoodDetail){
+
+        this.props.handleEdit(isRefrige,id,FoodDetail);
     }
     timeOut(id,name){
         this.props.timeOut(id,name);

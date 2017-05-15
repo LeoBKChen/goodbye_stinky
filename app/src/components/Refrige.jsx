@@ -27,7 +27,7 @@ export default class Refrige extends React.Component {
         super(props);
 
         this.state = {
-            tooltipOpen: false,
+            tooltipOpenRefrige: false,
             tooltipOpen2: false,
             tooltipOpen3: false,
             tooltipOpen4: false,
@@ -47,27 +47,39 @@ export default class Refrige extends React.Component {
         // this.handleTooltipToggle8 = this.handleTooltipToggle8.bind(this);
 
         this.handleCreate = this.handleCreate.bind(this);
-
         this.foodInfoEdit = this.foodInfoEdit.bind(this);
 
     }
+    componentDidMount() {
+        var tooltip1 = document.getElementById('addItem');
+        var tooltip2 = document.getElementById('vegTooltip');
+        var tooltip3 = document.getElementById('meatTooltip');
+        var tooltip4 = document.getElementById('seafoodTootip');
+        var tooltip5 = document.getElementById('fruitTootip');
+        var tooltip6 = document.getElementById('eggMilkTootip');
+        var tooltip7 = document.getElementById('sauceTootip');
 
+        if(tooltip1){tooltip1.addEventListener('mouseover',this.handleTooltipToggle);}
+        if(tooltip2){tooltip2.addEventListener('mouseover',this.onMouseOverTooltip);}
+        if(tooltip3){tooltip3.addEventListener('mouseover',this.onMouseOverTooltip);}
+        if(tooltip4){tooltip4.addEventListener('mouseover',this.onMouseOverTooltip);}
+        if(tooltip5){tooltip5.addEventListener('mouseover',this.onMouseOverTooltip);}
+        if(tooltip6){tooltip6.addEventListener('mouseover',this.onMouseOverTooltip);}
+        if(tooltip7){tooltip7.addEventListener('mouseover',this.onMouseOverTooltip);}
+      }
     render() {
 
         return (
             <div className='refrige'>
-                <Card>
+                <Card className="refrigeSize">
                     <div>
                         <h1 className='text-center' >Refrige</h1>
-                        <RefrigeList />
-                        <h1>forcsssssssss</h1>
-                        <h1 >forcsssssssss</h1>
-                        <h1>forcsssssssss</h1>
-                        <div className='第一'>
-                            <i id='addItemRef' className='fa fa-plus'  onClick={() => this.handleTooltipToggle}></i>
+                        <RefrigeList TimeOut={this.timeOut} refrigePosts={this.props.refrigePosts}/>
+                        <div className='vote-plus'>
+                          <Button id='addItemRef' color="success"><i className="fa fa-plus"></i></Button>
                         </div>
                         <div className='第一' >
-                            <Tooltip placement='top' isOpen={this.state.tooltipOpen} autohide={false} target='addItemRef' toggle={this.handleTooltipToggle}>
+                            <Tooltip placement='top' isOpen={this.state.tooltipOpenRefrige} autohide={false} target='addItemRef' toggle={this.handleTooltipToggle}>
                                 <img id='vegTooltip'    src={getfoodIcon("蔬菜")}      className='蔬菜'      onClick={this.handleTooltipToggleVeg}/>&nbsp;
                                 <img id='meatTooltip'   src={getfoodIcon("肉類")}      className='肉類'     onClick={this.handleTooltipToggleMeat}/>&nbsp;
                                 <img id='seafoodTootip' src={getfoodIcon("海鮮")}      className='海鮮'  onClick={this.handleTooltipToggleSea}/>
@@ -136,11 +148,11 @@ export default class Refrige extends React.Component {
 
 
      handleTooltipToggle() {
-        console.log("toggle All");
+        // console.log("toggle All");
         if(!(this.state.tooltipOpen2  || this.state.tooltipOpen3 || this.state.tooltipOpen4 ||
             this.state.tooltipOpen5 || this.state.tooltipOpen6 || this.state.tooltipOpen7)){
             this.setState((prevState, props) => ({
-                tooltipOpen: !prevState.tooltipOpen
+                tooltipOpenRefrige: !prevState.tooltipOpenRefrige
             }));
         }
     }
@@ -218,7 +230,7 @@ export default class Refrige extends React.Component {
     handleCreate(category, name){
         console.log("creating");
         this.setState({
-            tooltipOpen : false,
+            tooltipOpenRefrige : false,
             tooltipOpen2: false,
             tooltipOpen3: false,
             tooltipOpen4: false,
@@ -230,7 +242,10 @@ export default class Refrige extends React.Component {
         this.props.goFoodInfo(category, name);
     }
 
-    foodInfoEdit(id,FoodDetail){
-        this.props.editFoodInfo(id,FoodDetail,isRefrige);
+    foodInfoEdit(isRefrige,id,FoodDetail){
+        this.props.editFoodInfo(isRefrige,id,FoodDetail);
+    }
+    timeOut(id,name){
+        this.props.timeOut(id,name);
     }
 }

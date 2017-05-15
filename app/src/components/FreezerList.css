@@ -1,29 +1,21 @@
-.freezerlist{
-    padding: 1rem;
+.inline {
+  display: inline-block;
+  float: left;
+  margin-left: 0.4rem;
 }
 
-/*.today {
-    padding: 1rem;
+.child {
+  width: 20rem;
+  height: 22rem;
+  overflow: auto;
 }
 
-.today .weather {
-    width: 100%;
-    max-width: 24rem;
-    margin: 0 auto;
+.內部 {
+  width: 5rem;
+  height: 7rem;
+  display: inline-block;
 }
 
-.today .posts {
-    width: 100%;
-    max-width: 34rem;
-    margin: 0 auto;
+.fontSize {
+  font-size: 1rem;
 }
-
-.today .posts .loading {
-    position: fixed;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0 auto;
-    text-align: center;
-    z-index: 999;
-}*/

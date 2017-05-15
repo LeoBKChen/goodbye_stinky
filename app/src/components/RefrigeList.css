@@ -1,7 +1,22 @@
-.refrigelist{
-    padding: 1rem;
+.inlineRef {
+  display: inline-block;
 }
 
+.childRef {
+  width: 20rem;
+  height: 22rem;
+  overflow: auto;
+}
+
+.內部Ref {
+  width: 5rem;
+  height: 7rem;
+  display: inline-block;
+}
+
+.fontSizeRef {
+  font-size: 1rem;
+}
 /*.today {
     padding: 1rem;
 }

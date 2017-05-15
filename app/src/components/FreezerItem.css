@@ -13,3 +13,6 @@
 .weather-form input, .weather-form button {
     margin-top: 0.25rem;
 }
+.fontSize {
+  font-size: 1rem;
+}

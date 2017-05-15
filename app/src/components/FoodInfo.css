@@ -1,15 +1,18 @@
 .container {
+
   display: flex;
   justify-content: center;
-    webkit-justify-content: center;
-   }
+  webkit-justify-content: center;
+}
+
 .name {
     font-weight: bold;
     font-size: 20px;
 }
 
-.card {
+.infoCard {
   width: 580px;
+
 }
 
 Form {
@@ -19,4 +22,20 @@ Form {
 img {
   width: 30px;
   height: 30px;
+}
+.submitBtn{
+    margin-left: auto;
+}
+.off {
+  width: 100%;
+}
+
+.on {
+  width: 100%;
+}
+
+@media (max-width: 650px) {
+    .日期 {
+        width: 100%;
+    }
 }

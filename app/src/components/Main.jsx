@@ -23,7 +23,6 @@ import TimeOut from 'components/TimeOut.jsx';
 import FoodInfo from 'components/FoodInfo.jsx';
 import {createPost, listPosts, deletePost, updatePost} from 'api/posts.js'
 
-
 import './Main.css';
 
 export default class Main extends React.Component {
@@ -31,10 +30,10 @@ export default class Main extends React.Component {
         super(props);
 
         this.state = {
-             category: '',
              isSetting:false,
              isEdit: false,
              id: NaN,
+             category: '',
              name: '',
              quantity: 1,
              unit: 'na',
@@ -56,22 +55,38 @@ export default class Main extends React.Component {
         this.handleCreateFoodItem = this.handleCreateFoodItem.bind(this);
         this.handleFinishEdit = this.handleFinishEdit.bind(this);
 
-        this.FreezerTimeOut = this.FreezerTimeOut.bind(this);
+        this.freezerTimeOut = this.freezerTimeOut.bind(this);
+        this.refrigeTimeOut = this.refrigeTimeOut.bind(this);
 
+        this.deleteFoodItem = this.deleteFoodItem.bind(this);
+
+        this.knewTimeUp = this.knewTimeUp.bind(this);
     }
-
+    componentDidMount() {
+      // listPosts(this.state.isRefrige).then(p =>{
+      //   // console.log(p);
+      //   this.setState({
+      //       refrigePosts: p
+      //   });
+      // });
+      listPosts(!this.state.isRefrige).then(p =>{
+        this.setState({
+            freezerPosts: p
+        });
+      });
+    }
     render() {
         const {name,id,isRefrige,freezerPosts,refrigePosts}= this.state;
         return (
             <div>{this.state.isTimeOut ?
                 <div>
-                    <TimeOut isTimeOut={this.isTimeOut} id={id} name={name} isRefrige={isRefrige}/>
+                    <TimeOut isTimeOut={this.isTimeOut} id={id} name={name} isRefrige={isRefrige} knewTimeUp={this.knewTimeUp} />
                 </div>
                :
                 <div>
                    <div>{this.state.isSetting ?
                        <div>
-                           <FoodInfo {...this.state} edit={this.handlefinishEdit} onPost={this.handleCreateFoodItem} delFoodItem={this.deleteFoodItem}/>
+                           <FoodInfo {...this.state} editfunc={this.handleFinishEdit} onPost={this.handleCreateFoodItem} delFoodItem={this.deleteFoodItem}/>
                        </div>
                      :
                        <div className='main'>
@@ -79,10 +94,10 @@ export default class Main extends React.Component {
                                  <div className="d-flex justify-content-around">
                                    <Row>
                                      <Col>
-                                       <Freezer  freezerPosts={freezerPosts}  foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.FreezerTimeOut}/>
+                                       <Freezer  freezerPosts={freezerPosts}  editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.freezerToFoodInfo} timeOut={this.freezerTimeOut}/>
                                      </Col>
                                      <Col>
-                                       <Refrige  refrigePosts={refrigePosts} foodInfoEdit={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.RefrigetimeOut}/>
+                                       <Refrige  refrigePosts={refrigePosts} editFoodInfo={this.handleFoodInfoEdit} goFoodInfo={this.refrigeToFoodInfo} timeOut={this.refrigeTimeOut}/>
                                      </Col>
                                    </Row>
                                  </div>
@@ -102,16 +117,21 @@ export default class Main extends React.Component {
 
 
     handleCreateFoodItem(isRefrige,FoodDetail){
-        console.log(FoodDetail);
+
         createPost(isRefrige,FoodDetail).then((post) => {
-              console.log(post);
-              listPosts(isRefrige).then(p => console.log(p));
-              this.setState({
-                  isSetting:false
+              listPosts(isRefrige).then(p =>{
+                this.setState({
+                    isSetting:false,
+                    freezerPosts: p
+                });
               });
+
           }).catch(err => {
               console.error('Error creating posts', err);
           });
+        // this.setState({
+        //     isSetting:false
+        // });
     }
     handleFoodInfoEdit(isRefrige,id,FoodDetail){
         this.setState({
@@ -120,22 +140,21 @@ export default class Main extends React.Component {
             isRefrige: isRefrige,
             id: id,
             name: FoodDetail.name,
-            category:FoodDetail.category,
-            quantity:FoodDetail.quantity,
-            unit:FoodDetail.unit,
-            isSetDeadline:FoodDetail.isSetDeadline,
-            deadline:FoodDetail.deadline,
-            isAlarm:FoodDetail.isAlarm,
-            alarmDate:FoodDetail.alarmDate,
-            alarmTime:FoodDetail.alarmTime,
-            text:FoodDetail.text
+            category: FoodDetail.category,
+            quantity: FoodDetail.quantity,
+            unit: FoodDetail.unit,
+            isSetDeadline: FoodDetail.isSetDeadline,
+            deadline: moment(FoodDetail.deadline,"MM-DD"),
+            isAlarm: FoodDetail.isAlarm,
+            alarmDate: moment(FoodDetail.alarmDate,"MM-DD"),
+            alarmTime: moment(FoodDetail.alarmTime,"hh:mm a"),
+            text: FoodDetail.text
         });
     }
-    handleFinishEdit(isRefrige,id,FoodDetail){
-        updatePost(isRefrige,id,FoodDetail).then( p =>{
-            console.log('update'+FoodDetail.name);
+    handleFinishEdit(isRefrige,FoodDetail){
+        updatePost(isRefrige, FoodDetail).then( p =>{
             listPosts(p.isRefrige).then(posts =>{
-                if(p.isRefrige){
+                if(!p.isRefrige){
                     this.setState({
                         freezerPosts: posts
                     });
@@ -169,20 +188,24 @@ export default class Main extends React.Component {
             isSetting:true
         })
     }
-    deleteFoodItem(id){
-        deletePost(id).then(() => {
+    deleteFoodItem(id,isRefrige){
+        deletePost(isRefrige, id).then(() => {
               listPosts(isRefrige);
+              this.setState({
+                  isEdit:false,
+                  isSetting:false
+              });
           }).catch(err => {
               console.error('Error delete posts', err);
           });
     }
-    FreezerTimeOut(id,name){
+    freezerTimeOut(id,name){
         this.setState({
               isTimeOut: true,
               isRefrige: false,
         });
     }
-    RefrigeTimeOut(id,name){
+    refrigeTimeOut(id,name){
         this.setState({
               isTimeOut: true,
               isRefrige: true,
@@ -190,4 +213,11 @@ export default class Main extends React.Component {
               name: name
         });
     }
+
+    knewTimeUp(){
+      this.setState({
+
+        isTimeOut:false
+      });
+    }    
 }

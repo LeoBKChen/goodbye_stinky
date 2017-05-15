@@ -1,150 +1,80 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Alert} from 'reactstrap';
+import {
+    Button,
+    Card,
+    CardBlock,
+    CardTitle
+} from 'reactstrap';
+import moment from 'moment';
 
-// import WeatherDisplay from 'components/WeatherDisplay.jsx';
-// import WeatherForm from 'components/WeatherForm.jsx';
-// import PostForm from 'components/PostForm.jsx';
-// import PostList from 'components/PostList.jsx';
-// import {getWeather, cancelWeather} from 'api/open-weather-map.js';
-// import {listPosts, createPost, createVote} from 'api/posts.js';
-import RefrigeList from 'components/RefrigeList.jsx';
-import FoodInfo from 'components/FoodInfo.jsx';
 import './RefrigeItem.css';
+import {handleEdit,timeOut} from 'components/RefrigeList.jsx';
+import {getfoodIcon} from 'utilities/food.js';
 
 export default class RefrigeItem extends React.Component {
     static propTypes = {
-        // unit: PropTypes.string,
-        // searchText: PropTypes.string,
-        // onUnitChange: PropTypes.func
-    };
+        id: PropTypes.number,
+        isRefrige: PropTypes.bool,
+        name: PropTypes.string,
+        unit: PropTypes.unit,
+        quantity: PropTypes.number,
+        isSetDeadline: PropTypes.bool,
+        deadline: PropTypes.date,
+        isAlarm: PropTypes.bool,
+        alarmDate: PropTypes.date,
+        alarmTime: PropTypes.date,
+        text: PropTypes.string,
+        timeOut: PropTypes.func
 
-    // static getInitWeatherState() {
-    //     return {
-    //         city: 'na',
-    //         code: -1,
-    //         group: 'na',
-    //         description: 'N/A',
-    //         temp: NaN
-    //     };
-    // }
+    };
 
     constructor(props) {
         super(props);
-
+        console.log(props);
         this.state = {
-            // ...Today.getInitWeatherState(),
-            // weatherLoading: false,
-            // masking: false,
-            // postLoading: false,
-            // posts: []
         };
 
-        // this.handleWeatherQuery = this.handleWeatherQuery.bind(this);
-        // this.handleCreatePost = this.handleCreatePost.bind(this);
-        // this.handleCreateVote = this.handleCreateVote.bind(this);
+        this.edit = this.edit.bind(this);
+        this.checkTime = this.checkTime.bind(this);
+    }
+    componentDidMount(){
+        var warn = setInterval(this.checkTime,20000);
     }
 
-    // componentDidMount() {
-    //     this.getWeather('Hsinchu', this.props.unit);
-    //     this.listPosts(this.props.searchText);
-    // }
-    //
-    // componentWillUnmount() {
-    //     if (this.state.weatherLoading) {
-    //         cancelWeather();
-    //     }
-    // }
-    //
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.searchText !== this.props.searchText) {
-    //         this.listPosts(nextProps.searchText);
-    //     }
-    // }
-
     render() {
-        // const {unit} = this.props;
-        // const {group, city, masking, posts, postLoading} = this.state;
-        //
-        // document.body.className = `weather-bg ${group}`;
-        // document.querySelector('.weather-bg .mask').className = `mask ${masking ? 'masking' : ''}`;
 
         return (
-            <h3 className='text-center'>RefrigeItem</h3>
+          <div>
+              <CardBlock onClick={this.edit}>
+                  <img src={getfoodIcon(p.name)}></img>
+              </CardBlock>
+              <CardTitle  className="fontSizeRef">{p.name}</CardTitle>
+          </div>
         );
     }
 
-    // getWeather(city, unit) {
-    //     this.setState({
-    //         weatherLoading: true,
-    //         masking: true,
-    //         city: city // set city state immediately to prevent input text (in WeatherForm) from blinking;
-    //     }, () => { // called back after setState completes
-    //         getWeather(city, unit).then(weather => {
-    //             this.setState({
-    //                 ...weather,
-    //                 weatherLoading: false
-    //             }, () => this.notifyUnitChange(unit));
-    //         }).catch(err => {
-    //             console.error('Error getting weather', err);
-    //
-    //             this.setState({
-    //                 ...Today.getInitWeatherState(unit),
-    //                 weatherLoading: false
-    //             }, () => this.notifyUnitChange(unit));
-    //         });
-    //     });
-    //
-    //     setTimeout(() => {
-    //         this.setState({
-    //             masking: false
-    //         });
-    //     }, 600);
-    //}
-
-    // listPosts(searchText) {
-    //     this.setState({
-    //         postLoading: true
-    //     }, () => {
-    //         listPosts(searchText).then(posts => {
-    //             this.setState({
-    //                 posts,
-    //                 postLoading: false
-    //             });
-    //         }).catch(err => {
-    //             console.error('Error listing posts', err);
-    //
-    //             this.setState({
-    //                 posts: [],
-    //                 postLoading: false
-    //             });
-    //         });
-    //     });
-    // }
-    //
-    // handleWeatherQuery(city, unit) {
-    //     this.getWeather(city, unit);
-    // }
-    //
-    // notifyUnitChange(unit) {
-    //     if (this.props.units !== unit) {
-    //         this.props.onUnitChange(unit);
-    //     }
-    // }
-    //
-    // handleCreatePost(mood, text) {
-    //     createPost(mood, text).then(() => {
-    //         this.listPosts(this.props.searchText);
-    //     }).catch(err => {
-    //         console.error('Error creating posts', err);
-    //     });
-    // }
-    //
-    // handleCreateVote(id, mood) {
-    //     createVote(id, mood).then(() => {
-    //         this.listPosts(this.props.searchText);
-    //     }).catch(err => {
-    //         console.error('Error creating vote', err);
-    //     });
-    // }
+    edit(){
+      var FoodDetail={
+           name:this.props.name,
+           category:this.props.category,
+           quantity:this.props.quantity,
+           unit:this.props.unit,
+           isSetDeadline:this.props.isSetDeadline,
+           deadline:this.props.deadline,
+           isAlarm:this.props.isAlarm,
+           alarmDate:this.props.alarmDate,
+           alarmTime:this.props.alarmTime,
+           text:this.props.text
+       }
+        this.props.handleEdit(this.props.isRefrige, this.props.id, FoodDetail );
+    }
+    checkTime(){
+        if(this.props.alarmTime.format('mm') === moment().format('mm') ||this.props.deadline.format('mm')===moment().format('mm')){
+            this.props.timeOut(this.props.id,this.props.name);
+            if(this.props.deadline===moment()){
+                this.clearInterval(warn);
+            }
+        }
+      }
 }

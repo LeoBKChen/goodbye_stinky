@@ -17,6 +17,8 @@ import {
     Row,
     Col,
     Card,
+    CardImg,
+    CardImgOverlay,
     ButtonDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -55,7 +57,8 @@ export default class FoodInfo extends React.Component {
             inputUnitDanger: false
             // text: props.name
         };
-
+        console.log("info state");
+        console.log(this.state);
         this.handleFoodNameChange = this.handleFoodNameChange.bind(this);
 
         this.handleSetQuantity = this.handleSetQuantity.bind(this);
@@ -74,7 +77,7 @@ export default class FoodInfo extends React.Component {
         this.handleAlarmTimeChange = this.handleAlarmTimeChange.bind(this);
 
         this.handleInputNoteChange = this.handleInputNoteChange.bind(this);
-
+        this.handleFoodInfodelete = this.handleFoodInfodelete.bind(this);
         this.handleFoodInfoSubmit = this.handleFoodInfoSubmit.bind(this);
     }
 
@@ -85,14 +88,15 @@ export default class FoodInfo extends React.Component {
     static getInitFoodInfoState(props) {
         console.log("in initial");
         console.log(props);
+        var tryasdsda = moment(props.alarmTime);
         return {
             unit: props.unit,
             quantity: props.quantity,
             isSetDeadline: props.isSetDeadline,
-            deadline: props.deadline,
+            deadline: tryasdsda,
             isAlarm: props.isAlarm,
-            alarmDate: props.alarmDate,
-            alarmTime: props.alarmTime,
+            alarmDate: tryasdsda,
+            alarmTime: tryasdsda,
             text: props.text
         };
     }
@@ -114,7 +118,9 @@ export default class FoodInfo extends React.Component {
 
         return (
           <div className='container'>
-              <Card>
+              <CardImg width="100%" src="images/FoodInfo-bg.png" alt="Card image cap" />
+              <CardImgOverlay>
+              <Card className="infoCard">
                   <Form>
                       {/* name */}
                       <FormGroup>
@@ -155,19 +161,19 @@ export default class FoodInfo extends React.Component {
                       {/* deadline */}
                       <FormGroup>
                           <Label className="name">有效期限：</Label>
-                          <InputGroup>
-                              <FormGroup>
+                              <FormGroup className="off">
                                   <Label check>
                                     <Input type="radio" name="radio1" defaultChecked onChange={this.handleSetDeadlineOff} />{' '}
                                     關
                                   </Label>
                               </FormGroup>
                               <FormGroup>
-                                  <Label>
+                                <InputGroup>
+                                  <Label check>
                                     <Input type="radio" name="radio1" onChange={this.handleSetDeadlineOn}  />{' '}
                                     開
                                   </Label>
-                                  <div>{this.state.isSetDeadline ?
+                                  <div className="on">{this.state.isSetDeadline ?
                                       <DatePicker
                                           dateFormat="YYYY/MM/DD"
                                           placeholderText="選擇有效期限"
@@ -188,16 +194,16 @@ export default class FoodInfo extends React.Component {
                                           disabled
                                       />
                                       }
+                                      &nbsp;
                                       <img src={getinfoIcon("月曆")}/>
                                   </div>
+                                </InputGroup>
                               </FormGroup>
-                          </InputGroup>
                       </FormGroup>
                       {/* setAlarm */}
                       <FormGroup>
                           <Label className="name">提醒：</Label>
-                          <InputGroup>
-                              <FormGroup>
+                              <FormGroup className="off">
                                   <Label check>
                                       <Input type="radio" name="radio2" defaultChecked onChange={this.handleSetAlarmOff}  />{' '}
                                       關
@@ -209,9 +215,9 @@ export default class FoodInfo extends React.Component {
                                     <Input type="radio" name="radio2" onChange={this.handleSetAlarmOn}  />{' '}
                                     開
                                   </Label>
-                                  <div>
-                                      <InputGroup>{this.state.isAlarm ?
-                                        <div>
+                                  <div>{this.state.isAlarm ?
+                                        <div  className="on">
+                                          <div className="日期">
                                             <DatePicker
                                                 dateFormat="YYYY/MM/DD"
                                                 placeholderText="選擇提醒日期"
@@ -223,7 +229,9 @@ export default class FoodInfo extends React.Component {
                                                 showYearDropdown
                                                 dateFormatCalendar="YYYY/MM"
                                             />
+                                            &nbsp;
                                             <img src={getinfoIcon("月曆")}/>
+                                            </div>
                                             <TimePicker
                                               showSecond={false}
                                               defaultValue={moment()}
@@ -231,10 +239,13 @@ export default class FoodInfo extends React.Component {
                                               onChange={this.handleAlarmTimeChange}
                                               format = 'h:mm a'
                                             />
+                                            &nbsp;
                                             <img src={getinfoIcon("時鐘")}/>
                                         </div>
                                       :
                                         <div>
+
+                                          <div className="日期">
                                             <DatePicker
                                               dateFormat="YYYY/MM/DD"
                                               placeholderText="選擇提醒日期"
@@ -242,7 +253,9 @@ export default class FoodInfo extends React.Component {
                                               onChange={this.handleAlarmDateChange}
                                               disabled
                                             />
+                                            &nbsp;
                                             <img src={getinfoIcon("月曆")}/>
+                                            </div>
                                             <TimePicker
                                               showSecond={false}
                                               selected={this.state.alarmDate}
@@ -250,14 +263,13 @@ export default class FoodInfo extends React.Component {
                                               // use24Hours
                                               disabled
                                             />
+                                            &nbsp;
                                             <img src={getinfoIcon("時鐘")}/>
                                         </div>
                                       }
-                                    </InputGroup>
                                   </div>
                               </InputGroup>
                           </FormGroup>
-                      </InputGroup>
                     </FormGroup>
                       {/* note */}
                       <FormGroup>
@@ -268,22 +280,27 @@ export default class FoodInfo extends React.Component {
                       </FormGroup>
                       {/* submit or delete*/}
                       <FormGroup check row>
-                        <Col sm={{ size: 10, offset: 9 }}>
-                          <div>{this.props.isEdit?
+
+                        <Col className='d-flex justify-content-around' sm={{ size: 10, offset: 1 }}>
+                          {this.props.isEdit?
                               <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
-                          </div>
-                          <Button onClick={this.handleFoodInfoSubmit} color="#841584" >完成</Button>
+
+                        {/* </Col>
+                        <Col sm={{ size: 10, offset: 9 }}> */}
+                          <Button onClick={this.handleFoodInfoSubmit} color="success" >完成</Button>
                         </Col>
+
                       </FormGroup>
                   </Form>
               </Card>
+            </CardImgOverlay>
           </div>
         );
     }
 
     handleFoodNameChange(e){
         const texts = e.target.value
-        console.log('i am ddsf');
+        // console.log('i am ddsf');
         this.setState({
           name: texts,
           inputFoodNameDanger: false
@@ -351,6 +368,7 @@ export default class FoodInfo extends React.Component {
         });
     }
     handleAlarmDateChange(date){
+      console.log();
         this.setState({
             alarmDate: date
         });
@@ -376,13 +394,11 @@ export default class FoodInfo extends React.Component {
             this.setState({inputFoodNameDanger: true});
             return;
         }
-        console.log('pass name');
 
         if(this.state.quantity<=0){
             this.setState({inputQuantityDanger: true});
             return;
         }
-        console.log('pass quantity');
         if(this.state.unit === 'na'){
           this.setState({
               inputUnitDanger: true,
@@ -390,24 +406,33 @@ export default class FoodInfo extends React.Component {
           });
           return;
         }
-        console.log('pass unit');
-        var FoodDetail={
+        // console.log("this.state =");
+        // console.log(this.state);
+        const FoodDetail={
+            id: this.props.id,
             name:this.state.name,
             category:this.props.category,
             quantity:this.state.quantity,
             unit:this.state.unit,
             isSetDeadline:this.state.isSetDeadline,
-            deadline:this.state.deadline,
+            deadline:this.state.deadline.format("MM-DD"),
             isAlarm:this.state.isAlarm,
-            alarmDate:this.state.alarmDate,
-            alarmTime:this.state.alarmTime,
+            alarmDate:this.state.alarmDate.format("MM-DD"),
+            alarmTime:this.state.alarmTime.format("hh:mm a"),
             text:this.state.text
         }
+
+        console.log("sending foodDetail");
+        console.log(FoodDetail);
+        console.log("alarm Time =");
+        console.log(this.state.alarmTime);
         if(!this.props.isEdit){
+            console.log("QQQQQ");
             this.props.onPost(this.props.isRefrige,FoodDetail);
         }
         else{
-            this.props.edit(this.props.isRefrige,this.props.id,FoodDetail)
+            console.log("TTTTTT");
+            this.props.editfunc(this.props.isRefrige,FoodDetail);
         }
         // for(var i=0;i<FoodDetail.length;i++){
         //     console.log(i+'  '+FoodDetail[i]);
@@ -415,6 +440,6 @@ export default class FoodInfo extends React.Component {
     }
     handleFoodInfodelete(){
       // 可以加alert
-        this.props.delFoodItem(this.props.id);
+        this.props.delFoodItem(this.props.id,this.props.isRefrige);
     }
 }

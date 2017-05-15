@@ -1,9 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
+import {
+    Alert,
+    Form,
+    FormGroup,
+    FormText,
+    Label,
+    Legend,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    Button,
+    Row,
+    Col,
+    Card,
+    CardBlock,
+    ButtonDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
+} from 'reactstrap';
 // import './TimeOut.css';
-
-export default class FoodInfo extends React.Component {
+var t;
+export default class Timeout extends React.Component {
     static propTypes = {
         id: PropTypes.number,
         name: PropTypes.string,
@@ -16,26 +37,41 @@ export default class FoodInfo extends React.Component {
         super(props);
 
         this.state = {
-
-            // text: props.name
+            change: false
         };
 
-        this.handleFoodInfoSubmit = this.handleFoodInfoSubmit.bind(this);
+        this.backToRef = this.backToRef.bind(this);
+        this.ToggleImage = this.ToggleImage.bind(this);
+        t = setInterval(this.ToggleImage,300);
     }
 
     render() {
-
         return (
-              <Card>
-                  <CardBlock>
-                    <img src="images/快過期拉_orange.png"></img>
-                    setInterval(() => {
-                        <img src="images/快過期拉_red.png"></img>
-                    }, 600);
-                  </CardBlock>
-              </Card>
+            <div >
+            { this.state.change   ?
+                <img src="images/快過期啦_orange.png" className="warnImg"></img>
+                :
+                <img src="images/快過期啦_red.png" className="warnImg"></img>
+            }
+                <div className='提醒字內容'>
+                    <div className="字">
+                        你的{this.props.name}快過期啦！
+                    </div>
+                    <div className="按鈕">
+                        <Button  onClick={this.backToRef}>我知道了！</Button>
+                    </div>
+                </div>
+            </div>
         );
     }
+    ToggleImage() {
+        this.setState((prevState, props) => ({
+            change: !prevState.change
+        }));
+    }
+    backToRef(){
 
-
-  }
+        clearInterval(t);
+        this.props.knewTimeUp();
+    }    
+}

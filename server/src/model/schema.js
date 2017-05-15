@@ -35,31 +35,31 @@ const schemaSql = `
         '公升'
     );
     CREATE TABLE Refrige (
-        id              serial PRIMARY KEY NOT NULL,
-        name            text NOT NULL,
-        category        category NOT NULL,
-        quantity        integer NOT NULL DEFAULT 1,
-        unit            unit NOT NULL,
-        isSetDeadline   boolean NOT NULL DEFAULT false,
-        deadline        date NOT NULL,
-        isAlarm         boolean NOT NULL DEFAULT false,       
-        alarmDate       date NOT NULL,
-        alarmTime       date NOT NULL,
-        text            text
+        id                  serial PRIMARY KEY NOT NULL,
+        name                text NOT NULL,
+        category            category NOT NULL,
+        quantity            integer NOT NULL DEFAULT 1,
+        unit                unit NOT NULL,
+        "isSetDeadline"     boolean NOT NULL DEFAULT false,
+        deadline            text NOT NULL,
+        "isAlarm"           boolean NOT NULL DEFAULT false,
+        "alarmDate"         text NOT NULL,
+        "alarmTime"         text NOT NULL,
+        text                text
     );
     CREATE TABLE Freezer (
-        id              serial PRIMARY KEY NOT NULL,
-        name            text NOT NULL,
-        category        category NOT NULL,
-        quantity        integer NOT NULL DEFAULT 1,
-        unit            unit NOT NULL,
-        isSetDeadline   boolean NOT NULL DEFAULT false,
-        deadline        date NOT NULL,
-        isAlarm         boolean NOT NULL DEFAULT false,       
-        alarmDate       date NOT NULL,
-        alarmTime       date NOT NULL,
-        text            text
-    );        
+        id                  serial PRIMARY KEY NOT NULL,
+        name                text NOT NULL,
+        category            category NOT NULL,
+        quantity            integer NOT NULL DEFAULT 1,
+        unit                unit NOT NULL,
+        "isSetDeadline"     boolean NOT NULL DEFAULT false,
+        deadline            text NOT NULL,
+        "isAlarm"           boolean NOT NULL DEFAULT false,
+        "alarmDate"         text NOT NULL,
+        "alarmTime"         text NOT NULL,
+        text                text
+    );
 
 
 
@@ -91,8 +91,8 @@ const schemaSql = `
     //     isAlarm   　　　　　boolean NOT NULL DEFAULT false,
     //     alarmDate       date NOT NULL,
     //     alarmTime       date NOT NULL,
-    //     memo    　　　　　　 text 
-    // ); 
+    //     memo    　　　　　　 text
+    // );
 
 
     // CREATE INDEX posts_idx_ts ON posts USING btree(ts);

@@ -14,7 +14,7 @@ export function listPosts(isRefrige) {
 
     if(isRefrige)
         url += '?isRefrige=true';
-    else 
+    else
         url += '?isRefrige=false';
 
     console.log(`Making GET request to: ${url}`);
@@ -31,7 +31,7 @@ export function createPost(isRefrige, foodDetail) {
     let url = `${postBaseUrl}/posts`;
     if(isRefrige)
         url += '?isRefrige=true';
-    else 
+    else
         url += '?isRefrige=false';
 
     console.log(`Making POST request to: ${url}`);
@@ -46,10 +46,10 @@ export function createPost(isRefrige, foodDetail) {
     });
 }
 export function updatePost(isRefrige, foodDetail) {
-    let url = `${postBaseUrl}/posts`;
+    let url = `${postBaseUrl}/update`;
     if(isRefrige)
         url += '?isRefrige=true';
-    else 
+    else
         url += '?isRefrige=false';
 
     console.log(`Making POST request to: ${url}`);
@@ -67,7 +67,7 @@ export function deletePost(isRefrige, id) {
     let url = `${postBaseUrl}/posts/${id}`;
     if(isRefrige)
         url += '?isRefrige=true';
-    else 
+    else
         url += '?isRefrige=false';
 
 
@@ -78,7 +78,7 @@ export function deletePost(isRefrige, id) {
             throw new Error(`Unexpected response code: ${res.status}`);
 
         return res.data;
-    });    
+    });
 }
 /*
 export function changePost(id, mood) {
