@@ -17,6 +17,8 @@ import {
     Row,
     Col,
     Card,
+    CardImg,
+    CardImgOverlay,
     ButtonDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -75,7 +77,7 @@ export default class FoodInfo extends React.Component {
         this.handleAlarmTimeChange = this.handleAlarmTimeChange.bind(this);
 
         this.handleInputNoteChange = this.handleInputNoteChange.bind(this);
-
+        this.handleFoodInfodelete = this.handleFoodInfodelete.bind(this);
         this.handleFoodInfoSubmit = this.handleFoodInfoSubmit.bind(this);
     }
 
@@ -116,6 +118,8 @@ export default class FoodInfo extends React.Component {
 
         return (
           <div className='container'>
+              <CardImg width="100%" src="images/FoodInfo-bg.png" alt="Card image cap" />
+              <CardImgOverlay>
               <Card className="infoCard">
                   <Form>
                       {/* name */}
@@ -278,7 +282,7 @@ export default class FoodInfo extends React.Component {
                       <FormGroup check row>
 
                         <Col className='d-flex justify-content-around' sm={{ size: 10, offset: 1 }}>
-                          {!this.props.isEdit?
+                          {this.props.isEdit?
                               <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
 
                         {/* </Col>
@@ -289,6 +293,7 @@ export default class FoodInfo extends React.Component {
                       </FormGroup>
                   </Form>
               </Card>
+            </CardImgOverlay>
           </div>
         );
     }
@@ -433,6 +438,6 @@ export default class FoodInfo extends React.Component {
     }
     handleFoodInfodelete(){
       // 可以加alert
-        this.props.delFoodItem(this.props.id);
+        this.props.delFoodItem(this.props.id,this.props.isRefrige);
     }
 }

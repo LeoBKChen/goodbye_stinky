@@ -57,6 +57,7 @@ export default class Main extends React.Component {
         this.handleFinishEdit = this.handleFinishEdit.bind(this);
 
         this.FreezerTimeOut = this.FreezerTimeOut.bind(this);
+        this.deleteFoodItem = this.deleteFoodItem.bind(this);
 
     }
     componentDidMount() {
@@ -193,9 +194,13 @@ export default class Main extends React.Component {
             isSetting:true
         })
     }
-    deleteFoodItem(id){
-        deletePost(id).then(() => {
+    deleteFoodItem(id,isRefrige){
+        deletePost(isRefrige, id).then(() => {
               listPosts(isRefrige);
+              this.setState({
+                  isEdit:false,
+                  isSetting:false
+              });
           }).catch(err => {
               console.error('Error delete posts', err);
           });

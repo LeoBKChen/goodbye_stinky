@@ -37,40 +37,39 @@ export default class FreezerList extends React.Component {
         const {posts} = this.props;
 
         let children = (
-          <div className="container-fluid child">
             <div className="inline">
-              <Card className="內部">
-                <div>
-                  <CardBlock>
+                <Card className="內部">
                     <div>
-                      <i className="fa fa-question-circle fa-3x"></i>
+                        <CardBlock>
+                            <div>
+                                <i className="fa fa-question-circle fa-3x"></i>
+                            </div>
+                        </CardBlock>
+                        <CardTitle className="fontSize">快新增吧</CardTitle>
                     </div>
-                  </CardBlock>
-                      <CardTitle className="fontSize">快新增吧</CardTitle>
-                </div>
-              </Card>
+                </Card>
             </div>
-          </div>
         );
         console.log("yquedhwedwed");
         console.log(this.props.freezerPosts);
         if (this.props.freezerPosts.length) {
 
             children = this.props.freezerPosts.map(p => (
+                <div className="inline" key={p.id}>
+                    <Card  action className="內部">
+                        <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
+                    </Card>
+                </div>
 
-              <Card key={p.id} action className="內部">
-                  <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
-              </Card>
-                // <ListGroupItem key={p.id} action>
-                //     <PostItem {...p} onVote={this.handleVote} />
-                // </ListGroupItem>
             ));
         }
 
         return (
             <div className='freezerlist'>
+              <div className="container-fluid child">
                 <div className="inline">{children}</div>
             </div>
+          </div>
         );
     }
 

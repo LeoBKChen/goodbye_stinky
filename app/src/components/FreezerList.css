@@ -1,5 +1,7 @@
 .inline {
   display: inline-block;
+  float: left;
+  margin-left: 0.4rem;
 }
 
 .child {

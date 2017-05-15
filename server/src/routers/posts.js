@@ -39,7 +39,7 @@ router.post('/posts', function(req, res, next) {
         err.status = 400;
         throw err;
     }
-    postModel.create(isRefrige, name, category, quantity, unit, "isSetDeadline", deadline, isAlarm, alarmDate,
+    postModel.create(isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate,
         alarmTime, text).then(post => {
         res.json(post);
     }).catch(next);
@@ -80,9 +80,11 @@ router.post('/update', function(req, res, next) {
 router.get('/posts/:id', function(req, res, next) {
     var isRefrige = req.query.isRefrige;
 
-    const id = req.params;
+    var id = parseInt(req.params.id);
+    // console.log(typeof(id));
+    // console.log(req.params);
     if(!id){
-        const err = new Error('ID are required');
+        const err = new Error('ID is required');
         err.status = 400;
         throw err;
     }

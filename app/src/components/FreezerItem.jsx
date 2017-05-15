@@ -17,6 +17,7 @@ export default class FreezerItem extends React.Component {
     static propTypes = {
         id: PropTypes.number,
         isRefrige: PropTypes.bool,
+        category: PropTypes.string,
         name: PropTypes.string,
         unit: PropTypes.string,
         quantity: PropTypes.number,
@@ -49,9 +50,11 @@ export default class FreezerItem extends React.Component {
     render() {
 
         return (
-          <div>
+          <div >
               <CardBlock onClick={this.edit}>
-                  <img src={getfoodIcon(this.props.name)}></img>
+                <div>
+                  <img src={(getfoodIcon(this.props.name)!="none")?getfoodIcon(this.props.name):getfoodIcon(this.props.category)}></img>
+                </div>
               </CardBlock>
               <CardTitle  className="fontSize" >{this.props.name}</CardTitle>
           </div>

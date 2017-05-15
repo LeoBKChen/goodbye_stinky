@@ -36,26 +36,26 @@ export default class RefrigeList extends React.Component {
         const {posts} = this.props;
 
         let children = (
-          <div className="container-fluid childRef">
-            <div className="inlineRef">
-              <Card className="內部Ref">
-                <div>
-                  <CardBlock>
-                    <div>
-                      <i className="fa fa-question-circle fa-3x"></i>
-                    </div>
-                  </CardBlock>
-                      <CardTitle className="fontSizeRef">快新增吧</CardTitle>
-                </div>
+          <div className="inline">
+              <Card className="內部">
+                  <div>
+                      <CardBlock>
+                          <div>
+                              <i className="fa fa-question-circle fa-3x"></i>
+                          </div>
+                      </CardBlock>
+                      <CardTitle className="fontSize">快新增吧</CardTitle>
+                  </div>
               </Card>
-            </div>
           </div>
         );
         if (this.props.refrigePosts.length) {
             children = this.props.refrigePosts.map(p => (
-              <Card key={p.id} action onClick={this.handleEdit} className="內部Ref">
-                  <RefrigeItem  {...p}  isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
-              </Card>
+              <div className="inline">
+                  <Card key={p.id} action onClick={this.handleEdit} className="內部Ref">
+                      <RefrigeItem  {...p}  isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
+                  </Card>
+            </div>
             ));
         }
 

@@ -28,7 +28,7 @@ function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadli
     else
         var where = 'Freezer';
 
-    console.log(isSetDeadline);
+    // console.log(isSetDeadline);
     // console.log(alarmDate);
     // console.log(alarmTime);
     const sql = `
@@ -46,6 +46,7 @@ function update(isRefrige, id, name, category, quantity, unit, isSetDeadline, de
         var where = 'Freezer';
 
     // console.log(isSetDeadline+"    QQ");
+    // console.log(id);
     const sql = `
         UPDATE  ${where}
         SET name = $3, category = $4, quantity = $5, unit = $6,

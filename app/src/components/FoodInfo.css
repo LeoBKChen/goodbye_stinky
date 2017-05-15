@@ -1,4 +1,5 @@
 .container {
+
   display: flex;
   justify-content: center;
   webkit-justify-content: center;
@@ -11,6 +12,7 @@
 
 .infoCard {
   width: 580px;
+
 }
 
 Form {
