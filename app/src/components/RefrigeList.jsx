@@ -53,8 +53,8 @@ export default class RefrigeList extends React.Component {
            </div>
         );
         if (this.props.refrigePosts.length) {
-            console.log("show ref items");
-            console.log(this.props.refrigePosts);
+            // console.log("show ref items");
+            // console.log(this.props.refrigePosts);
             children = this.props.refrigePosts.map(p => (
               <div className="inline"  key={p.id}>
                   <Card action className="內部Ref" style={{backgroundColor:`${this.cardColor(p.category)}`}}>

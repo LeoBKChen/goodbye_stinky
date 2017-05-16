@@ -55,8 +55,8 @@ export default class FreezerList extends React.Component {
         );
 
         if (this.props.freezerPosts.length) {
-            console.log("in freezer list");
-            console.log(this.props.freezerPosts);
+            // console.log("in freezer list");
+            // console.log(this.props.freezerPosts);
             children = this.props.freezerPosts.map(p => (
                 <div className="inline" key={p.id}>
                     <Card  action className="內部" style={{backgroundColor:`${this.cardColor(p.category)}`}}>

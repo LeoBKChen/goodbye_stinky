@@ -52,9 +52,9 @@ export default class FreezerItem extends React.Component {
 
         return (
           <div onClick={this.edit}>
-              <CardBlock >
-                <div>
-                  <img src={(getfoodIcon(this.props.name)!="none")?getfoodIcon(this.props.name):getfoodIcon(this.props.category)}></img>
+              <CardBlock id="foodImgCard">
+                <div >
+                  <img className="foodimg" src={(getfoodIcon(this.props.name)!="none")?getfoodIcon(this.props.name):getfoodIcon(this.props.category)}></img>
                 </div>
               </CardBlock>
               <CardTitle  className="fontSize" >{this.props.name}</CardTitle>
@@ -86,18 +86,18 @@ export default class FreezerItem extends React.Component {
 
         if(this.state.isAlarm){
 
-            console.log("checking");
-            console.log(this.state.isAlarm);
-            console.log(this.state.isSetDeadline);
-            console.log(this.props.alarmTime + this.props.name);
-            console.log(this.props.deadline);
-            console.log(moment().format("hh:mm a"));
+            // console.log("checking");
+            // console.log(this.state.isAlarm);
+            // console.log(this.state.isSetDeadline);
+            // console.log(this.props.alarmTime + this.props.name);
+            // console.log(this.props.deadline);
+            // console.log(moment().format("hh:mm a"));
 
             if((this.props.alarmDate === moment().format("MM-DD") &&
                 this.props.alarmTime===moment().format("hh:mm a")))
               {
                   clearInterval(warn);
-                  console.log("dingding fre alarm");
+                //   console.log("dingding fre alarm");
                   var FoodDetail={
                        id:this.props.id,
                        name:this.props.name,
@@ -122,7 +122,7 @@ export default class FreezerItem extends React.Component {
         else if(this.state.isSetDeadline){
             if((this.props.deadline===moment().format("MM-DD") && moment().format("hh:mm a") === "04:20 am")){
             clearInterval(warn);
-            console.log("dingding fre dead");
+            // console.log("dingding fre dead");
             var FoodDetail={
                  id:this.props.id,
                  name:this.props.name,

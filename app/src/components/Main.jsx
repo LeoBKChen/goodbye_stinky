@@ -239,23 +239,23 @@ export default class Main extends React.Component {
     }
     deleteFoodItem(id,isRefrige){
         deletePost(isRefrige, id).then(() => {
-            console.log('delete');
-        //   listPosts(isRefrige).then(posts =>{
-        //       console.log("inlist");
-        //       if(!isRefrige){
-        //           this.setState({
-        //               freezerPosts: posts,
-        //               isSetting: false
-        //           });
-        //       }
-        //       else{
-        //           console.log('刪文');
-        //           this.setState({
-        //               refrigePosts: posts,
-        //               isSetting: false
-        //           });
-        //       }
-        //     });
+            // console.log('delete');
+          listPosts(isRefrige).then(posts =>{
+            //   console.log("inlist");
+              if(!isRefrige){
+                  this.setState({
+                      freezerPosts: posts,
+                      isSetting: false
+                  });
+              }
+              else{
+                //   console.log('刪文');
+                  this.setState({
+                      refrigePosts: posts,
+                      isSetting: false
+                  });
+              }
+            });
           }).catch(err => {
               console.error('Error delete posts', err);
           });
@@ -273,6 +273,7 @@ export default class Main extends React.Component {
             isSetting: false
         });
       });
+    //   console.log('finish delete');
     }
 
     freezerTimeOut(FoodDetail){
@@ -312,8 +313,8 @@ export default class Main extends React.Component {
     }
 
     knewTimeUp(isRefrige,FoodDetail){
-        console.log("timeOut FoodDetail");
-        console.log(FoodDetail);
+        // console.log("timeOut FoodDetail");
+        // console.log(FoodDetail);
         updatePost(isRefrige, FoodDetail).then( p =>{
             listPosts(isRefrige).then(posts =>{
                 if(!isRefrige){

@@ -28,6 +28,7 @@
 
 .main .footer {
     text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    padding-top: 3rem;
+    color: rgba(20, 20, 20, 0.7);
+    padding-top: 2rem;
+    padding-bottom: 1rem;
 }

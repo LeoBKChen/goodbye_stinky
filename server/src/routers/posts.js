@@ -14,7 +14,8 @@ router.use(accessController); // Allows cross-origin HTTP requests
 router.get('/posts', function(req, res, next) {
     // const {searchText, start} = req.query;
     var isRefrige = req.query.isRefrige;
-    postModel.list(isRefrige = false).then(posts => {
+    // console.log(isRefrige);
+    postModel.list(isRefrige).then(posts => {
         res.json(posts);
     }).catch(next);
 });
@@ -89,9 +90,8 @@ router.get('/posts/:id', function(req, res, next) {
         throw err;
     }
 
-    postModel.remove(isRefrige, id).then(posts => {
-        res.json(posts);
-    }).catch(next);
+    postModel.remove(isRefrige, id).then(
+    ).catch(next);
 });
 
 // Vote
