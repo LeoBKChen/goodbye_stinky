@@ -77,7 +77,7 @@ export default class Main extends React.Component {
     render() {
         const {name,id,isRefrige,freezerPosts,refrigePosts}= this.state;
         return (
-            <div className="bg main">
+            <div id="mainBg" className="bg main">
               <div className="inside">
                 {this.state.isTimeOut
                     ?

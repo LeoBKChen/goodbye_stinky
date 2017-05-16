@@ -93,9 +93,9 @@ export default class Freezer extends React.Component {
                                 <img id='meatTooltip'   src={getfoodIcon("肉類")}      className='meat'     onClick={this.handleTooltipToggleMeat}/>
                                 <img id='seafoodTooltip' src={getfoodIcon("海鮮")}      className='seafood'  onClick={this.handleTooltipToggleSea}/>
                                 <img id='fruitTooltip'   src={getfoodIcon("水果")}      className='fruit'    onClick={this.handleTooltipToggleFruit}/>
-                                <img id='eggMilkTooltip' src={getfoodIcon("蛋/乳製品")} className='milkegg'  onClick={this.handleTooltipToggleEgg}/>
-                                <img id='sauceTooltip'   src={getfoodIcon("調味料")}    className='sauce'    onClick={this.handleTooltipToggleSau}/>
                                 <img id='熟食Tooltip'   src={getfoodIcon("熟食")}  className='cooked' onClick={() => this.handleCreate("熟食","熟食")}/>
+                                <img id='sauceTooltip'   src={getfoodIcon("調味料")}    className='sauce'    onClick={this.handleTooltipToggleSau}/>
+                                <img id='eggMilkTooltip' src={getfoodIcon("蛋/乳製品")} className='milkegg'  onClick={this.handleTooltipToggleEgg}/>
                                 <div className='d-flex flex-column' >
                                     <Tooltip placement='top right' isOpen={this.state.tooltipOpen2} autohide={false} target='vegTooltip' toggle={this.handleTooltipToggleVeg}>
                                         <img className='veg' src={getfoodIcon("高麗菜")} onClick={() => this.handleCreate("蔬菜","高麗菜")} />&nbsp;
@@ -134,7 +134,7 @@ export default class Freezer extends React.Component {
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='left bottom' isOpen={this.state.tooltipOpen6} autohide={false} target='eggMilkTooltip'  toggle={this.handleTooltipToggleEgg}>
+                                    <Tooltip placement='bottom' isOpen={this.state.tooltipOpen6} autohide={false} target='eggMilkTooltip'  toggle={this.handleTooltipToggleEgg}>
                                         <img className='milkegg' src={getfoodIcon("蛋")}   onClick={() => this.handleCreate("蛋/乳製品","蛋")} />&nbsp;
                                         <img className='milkegg' src={getfoodIcon("牛奶")} onClick={() => this.handleCreate("蛋/乳製品","牛奶")}   />&nbsp;
                                         <img className='milkegg' src={getfoodIcon("起司")} onClick={() => this.handleCreate("蛋/乳製品","起司")} />

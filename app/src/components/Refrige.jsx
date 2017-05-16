@@ -86,13 +86,13 @@ export default class Refrige extends React.Component {
                                 <img id='meatTooltip'   src={getfoodIcon("肉類")}      className='meat'     onClick={this.handleTooltipToggleMeat}/>&nbsp;
                                 <img id='seafoodTooltip' src={getfoodIcon("海鮮")}      className='seafood'  onClick={this.handleTooltipToggleSea}/>
                                 <img id='fruitTooltip'   src={getfoodIcon("水果")}      className='fruit'    onClick={this.handleTooltipToggleFruit}/>&nbsp;
-                                <img id='eggMilkTooltip' src={getfoodIcon("蛋/乳製品")} className='milkegg'  onClick={this.handleTooltipToggleEgg}/>&nbsp;
+                                <img id='熟食Tooltip'   src={getfoodIcon("熟食")}  className='cooked' onClick={() => this.handleCreate("熟食","熟食")}/>&nbsp;
                                 <img id='sauceTooltip'   src={getfoodIcon("調味料")}    className='sauce'    onClick={this.handleTooltipToggleSau}/>
-                                <img id='熟食Tooltip'   src={getfoodIcon("熟食")}  className='cooked' onClick={() => this.handleCreate("熟食","熟食")}/>
+                                <img id='eggMilkTooltip' src={getfoodIcon("蛋/乳製品")} className='milkegg'  onClick={this.handleTooltipToggleEgg}/>
 
 
                                 <div className='d-flex flex-column' >
-                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen2} autohide={false} target='vegTooltip' toggle={this.handleTooltipToggleVeg}>
+                                    <Tooltip placement='top right' isOpen={this.state.tooltipOpen2} autohide={false} target='vegTooltip' toggle={this.handleTooltipToggleVeg}>
                                         <img className='veg' src={getfoodIcon("高麗菜")} onClick={() => this.handleCreate("蔬菜","高麗菜")} />&nbsp;
                                         <img className='veg' src={getfoodIcon("紅蘿蔔")} onClick={() => this.handleCreate("蔬菜","紅蘿蔔")} />&nbsp;
                                         <img className='veg' src={getfoodIcon("花椰菜")} onClick={() => this.handleCreate("蔬菜","花椰菜")} />
@@ -113,7 +113,7 @@ export default class Refrige extends React.Component {
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen4} autohide={false} target='seafoodTooltip' toggle={this.handleTooltipToggleSea}>
+                                    <Tooltip placement='top left' isOpen={this.state.tooltipOpen4} autohide={false} target='seafoodTooltip' toggle={this.handleTooltipToggleSea}>
                                         <img className='seafood' src={getfoodIcon("螃蟹")} onClick={() => this.handleCreate("海鮮","螃蟹")} />&nbsp;
                                         <img className='seafood' src={getfoodIcon("龍蝦")} onClick={() => this.handleCreate("海鮮","龍蝦")}   />&nbsp;
                                         <img className='seafood' src={getfoodIcon("蝦子")} onClick={() => this.handleCreate("海鮮","蝦子")} />
@@ -123,7 +123,7 @@ export default class Refrige extends React.Component {
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen5} autohide={false} target='fruitTooltip' toggle={this.handleTooltipToggleFruit}>
+                                    <Tooltip placement='left' isOpen={this.state.tooltipOpen5} autohide={false} target='fruitTooltip' toggle={this.handleTooltipToggleFruit}>
                                         <img className='fruit' src={getfoodIcon("草莓")} onClick={() => this.handleCreate("水果","草莓")} />&nbsp;
                                         <img className='fruit' src={getfoodIcon("橘子")} onClick={() => this.handleCreate("水果","橘子")}/>&nbsp;
                                         <img className='fruit' src={getfoodIcon("蘋果")} onClick={() => this.handleCreate("水果","蘋果")}/>
@@ -133,14 +133,14 @@ export default class Refrige extends React.Component {
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen6} autohide={false} target='eggMilkTooltip' toggle={this.handleTooltipToggleEgg}>
+                                    <Tooltip placement='bottom' isOpen={this.state.tooltipOpen6} autohide={false} target='eggMilkTooltip' toggle={this.handleTooltipToggleEgg}>
                                         <img className='milkegg' src={getfoodIcon("蛋")}   onClick={() => this.handleCreate("蛋/乳製品","蛋")} />&nbsp;
                                         <img className='milkegg' src={getfoodIcon("牛奶")} onClick={() => this.handleCreate("蛋/乳製品","牛奶")}   />&nbsp;
                                         <img className='milkegg' src={getfoodIcon("起司")} onClick={() => this.handleCreate("蛋/乳製品","起司")} />
                                     </Tooltip>
                                 </div>
                                 <div className='d-flex flex-column'>
-                                    <Tooltip placement='top' isOpen={this.state.tooltipOpen7} autohide={false} target='sauceTooltip' toggle={this.handleTooltipToggleSau}>
+                                    <Tooltip placement='right' isOpen={this.state.tooltipOpen7} autohide={false} target='sauceTooltip' toggle={this.handleTooltipToggleSau}>
                                         <img className='sauce' src={getfoodIcon("番茄醬")} onClick={() => this.handleCreate("調味料","番茄醬")} />&nbsp;
                                         <img className='sauce' src={getfoodIcon("果醬")}   onClick={() => this.handleCreate("調味料","果醬")}   />&nbsp;
                                         <img className='sauce' src={getfoodIcon("辣椒醬")} onClick={() => this.handleCreate("調味料","辣椒醬")} />

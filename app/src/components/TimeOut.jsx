@@ -43,6 +43,7 @@ export default class Timeout extends React.Component {
         this.backToRef = this.backToRef.bind(this);
         this.ToggleImage = this.ToggleImage.bind(this);
         t = setInterval(this.ToggleImage,300);
+
     }
 
     render() {
