@@ -57,8 +57,8 @@ export default class FoodInfo extends React.Component {
             inputUnitDanger: false
             // text: props.name
         };
-        console.log("info state");
-        console.log(this.state);
+        // console.log("info state");
+        // console.log(this.state);
         this.handleFoodNameChange = this.handleFoodNameChange.bind(this);
 
         this.handleSetQuantity = this.handleSetQuantity.bind(this);
@@ -86,17 +86,15 @@ export default class FoodInfo extends React.Component {
 
     }
     static getInitFoodInfoState(props) {
-        console.log("in initial");
-        console.log(props);
-        var tryasdsda = moment(props.alarmTime);
+        
         return {
             unit: props.unit,
             quantity: props.quantity,
             isSetDeadline: props.isSetDeadline,
-            deadline: tryasdsda,
+            deadline: moment(props.deadline),
             isAlarm: props.isAlarm,
-            alarmDate: tryasdsda,
-            alarmTime: tryasdsda,
+            alarmDate: moment(props.alarmDate),
+            alarmTime: moment(props.alarmTime),
             text: props.text
         };
     }
@@ -369,7 +367,7 @@ export default class FoodInfo extends React.Component {
     }
 
     handleSetAlarmOn(e){
-        console.log('AlarmOn');
+        // console.log('AlarmOn');
         this.setState({
             isAlarm: true
         });
@@ -381,15 +379,15 @@ export default class FoodInfo extends React.Component {
         });
     }
     handleAlarmDateChange(date){
-      console.log();
+    //   console.log();
         this.setState({
             alarmDate: date
         });
     }
     handleAlarmTimeChange(time) {
 
-        console.log(time.hours());
-        console.log(time.minutes());
+        // console.log(time.hours());
+        // console.log(time.minutes());
 
         this.setState({
             alarmTime: time
@@ -427,10 +425,10 @@ export default class FoodInfo extends React.Component {
             quantity:this.state.quantity,
             unit:this.state.unit,
             isSetDeadline:this.state.isSetDeadline,
-            deadline:this.state.deadline.format("MM-DD"),
+            deadline:this.state.deadline,
             isAlarm:this.state.isAlarm,
-            alarmDate:this.state.alarmDate.format("MM-DD"),
-            alarmTime:this.state.alarmTime.format("hh:mm a"),
+            alarmDate:this.state.alarmDate,
+            alarmTime:this.state.alarmTime,
             text:this.state.text
         }
 
