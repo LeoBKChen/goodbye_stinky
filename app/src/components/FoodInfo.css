@@ -1,8 +1,8 @@
 .container {
-
   display: flex;
   justify-content: center;
   webkit-justify-content: center;
+  transition: all 0.1s;
 }
 
 .name {
@@ -13,21 +13,25 @@
 .infoCard {
     width: 580px;
     background-image: url("images/FoodInfo-bg2.png");
-    background-size: cover;
+    background-size: 500px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
-
 
 .infoForm {
   margin: 30px;
 }
 
-img {
+.foodinfoImg {
   width: 30px;
   height: 30px;
 }
-.submitBtn{
-    margin-left: auto;
+
+Img{
+    width: 30px;
+    height: 30px;    
 }
+
 .off {
   width: 100%;
 }
@@ -35,16 +39,18 @@ img {
 .on {
   width: 100%;
 }
-.deadline{
-    margin-left: 15px;
+
+.deadline {
+  margin-left: 15px;
 }
-.alarm{
-    margin-left:15px;
+
+.alarm {
+  margin-left: 15px;
 }
 
 @media (max-width: 650px) {
     .infoCard {
         width: 100%;
-        background-size: 300px;
+        background-size: 100%;
     }
 }

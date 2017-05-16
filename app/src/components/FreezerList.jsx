@@ -38,17 +38,19 @@ export default class FreezerList extends React.Component {
         const {posts} = this.props;
 
         let children = (
-            <div className="inline">
-                <Card className="內部">
-                    <div>
-                        <CardBlock>
-                            <div>
-                                <i className="fa fa-question-circle fa-3x"></i>
-                            </div>
-                        </CardBlock>
-                        <CardTitle className="fontSize">快新增吧</CardTitle>
-                    </div>
-                </Card>
+            <div className="container-fluid child">
+                <div className="inline">
+                    <Card className="內部">
+                        <div>
+                            <CardBlock>
+                                <div>
+                                    <i className="fa fa-question-circle fa-3x"></i>
+                                </div>
+                            </CardBlock>
+                            <CardTitle className="fontSize">快新增吧</CardTitle>
+                        </div>
+                    </Card>
+                </div>
             </div>
         );
 
@@ -57,7 +59,7 @@ export default class FreezerList extends React.Component {
             console.log(this.props.freezerPosts);
             children = this.props.freezerPosts.map(p => (
                 <div className="inline" key={p.id}>
-                    <Card  action className="內部">
+                    <Card  action className="內部" style={{backgroundColor:`${this.cardColor(p.category)}`}}>
                         <FreezerItem  {...p} isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
                     </Card>
                 </div>
@@ -65,11 +67,9 @@ export default class FreezerList extends React.Component {
         }
 
         return (
-            <div className='freezerlist'>
-              <div className="container-fluid child">
+            <div className="container-fluid child">
                 <div className="inline">{children}</div>
             </div>
-          </div>
         );
     }
 
@@ -78,5 +78,26 @@ export default class FreezerList extends React.Component {
     }
     timeOut(FoodDetail){
         this.props.timeOut(FoodDetail);
+    }
+    cardColor(category){
+        switch (category) {
+          case '蔬菜':
+            return "#ffa";
+          case '肉類':
+            return "#FFBB77";
+          case '海鮮':
+            return "#abcfff";
+          case '水果':
+            return "#A6FFA6";
+          case '蛋/乳製品':
+            return "#aaf"
+          case '調味料':
+            return "#ffb3c9";
+          case '熟食':
+            return "#dab8fc";
+
+          default:
+            return "#fff";
+        }
     }
 }

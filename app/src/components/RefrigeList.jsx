@@ -37,25 +37,27 @@ export default class RefrigeList extends React.Component {
         const {posts} = this.props;
 
         let children = (
-          <div className="inline">
-              <Card className="內部">
-                  <div>
-                      <CardBlock>
-                          <div>
-                              <i className="fa fa-question-circle fa-3x"></i>
-                          </div>
-                      </CardBlock>
-                      <CardTitle className="fontSize">快新增吧</CardTitle>
-                  </div>
-              </Card>
-          </div>
+            <div className="container-fluid child">
+              <div className="inline">
+                  <Card className="內部">
+                      <div>
+                          <CardBlock>
+                              <div>
+                                  <i className="fa fa-question-circle fa-3x"></i>
+                              </div>
+                          </CardBlock>
+                          <CardTitle className="fontSize">快新增吧</CardTitle>
+                      </div>
+                  </Card>
+              </div>
+           </div>
         );
         if (this.props.refrigePosts.length) {
             console.log("show ref items");
             console.log(this.props.refrigePosts);
             children = this.props.refrigePosts.map(p => (
               <div className="inline"  key={p.id}>
-                  <Card action className="內部Ref">
+                  <Card action className="內部Ref" style={{backgroundColor:`${this.cardColor(p.category)}`}}>
                       <RefrigeItem  {...p}  isRefrige={this.props.isRefrige} handleEdit={this.handleEdit} timeOut={this.timeOut}/>
                   </Card>
             </div>
@@ -63,10 +65,8 @@ export default class RefrigeList extends React.Component {
         }
 
         return (
-            <div className='refrigelist'>
-                <div className="container-fluid child">
-                    <div  className="inlineRef">{children}</div>
-                </div>
+            <div className="container-fluid child">
+                <div  className="inlineRef">{children}</div>
             </div>
         );
     }
@@ -77,4 +77,27 @@ export default class RefrigeList extends React.Component {
     timeOut(FoodDetail){
         this.props.timeOut(FoodDetail);
     }
+
+    cardColor(category){
+        switch (category) {
+          case '蔬菜':
+            return "#ffa";
+          case '肉類':
+            return "#FFBB77";
+          case '海鮮':
+            return "#abcfff";
+          case '水果':
+            return "#A6FFA6";
+          case '蛋/乳製品':
+            return "#aaf"
+          case '調味料':
+            return "#ffb3c9";
+          case '熟食':
+            return "#dab8fc";
+
+          default:
+            return "#fff";
+        }
+    }
+
 }

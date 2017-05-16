@@ -22,7 +22,7 @@ import {
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
-// import './TimeOut.css';
+import './TimeOut.css';
 var t;
 export default class Timeout extends React.Component {
     static propTypes = {
@@ -47,19 +47,17 @@ export default class Timeout extends React.Component {
 
     render() {
         return (
-            <div >
+            <div className="timeOutMain">
             { this.state.change   ?
                 <img src="images/快過期啦_orange.png" className="warnImg"></img>
                 :
                 <img src="images/快過期啦_red.png" className="warnImg"></img>
             }
-                <div className='提醒字內容'>
-                    <div className="字">
-                        你的{this.props.name}快過期啦！
-                    </div>
-                    <div className="按鈕">
-                        <Button  onClick={this.backToRef}>我知道了！</Button>
-                    </div>
+                <div className="notification">
+                    <Card style={{border:'none', borderRadius:'0rem' }} className="字 提醒字內容">你的{this.props.name}快過期啦！</Card>
+                </div>
+                <div className="按鈕">
+                    <Button  color="primary" onClick={this.backToRef}>我知道了！</Button>
                 </div>
             </div>
         );

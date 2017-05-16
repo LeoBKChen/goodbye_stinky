@@ -1,5 +1,20 @@
 .main {
     height: 100%;
+    background-color: #000;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bg {
+    height: 100%;
+    background-image: url("images/bg2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.inside {
+    background:rgba(255,255,255,0.6);
 }
 
 .main .refrige-bg {
@@ -9,45 +24,10 @@
     background-attachment: fixed;
     background-size: 600px,2000px;
     background-repeat: no-repeat;
-    /*margin: 3rem auto;*/
 }
 
 .main .footer {
     text-align: center;
     color: rgba(255, 255, 255, 0.7);
-    padding: 6rem 2rem 2rem 2rem;
+    padding-top: 3rem;
 }
-/*.main {
-    height: 100%;
-}
-
-.main .footer {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    padding: 6rem 2rem 2rem 2rem;
-}
-
-.main .search {
-    position: relative;
-    width: 100%;
-}
-
-.main .search input {
-    padding-right: 1.5rem;
-}
-
-.main .search i {
-    position: absolute;
-    top: 0.25rem;
-    right: 0.5rem;
-}
-
-.main .search i:hover {
-    color: #5bc0de;
-}
-
-@media (min-width: 576px) {
-    .main .search {
-        width: 10rem;
-    }
-}*/

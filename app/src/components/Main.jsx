@@ -77,7 +77,10 @@ export default class Main extends React.Component {
     render() {
         const {name,id,isRefrige,freezerPosts,refrigePosts}= this.state;
         return (
-            <div className='main'>{this.state.isTimeOut ?
+            <div className="bg main">
+              <div className="inside">
+                {this.state.isTimeOut
+                    ?
                 <div>
                     <TimeOut {...this.state} knewTimeUp={this.knewTimeUp} />
                 </div>
@@ -87,7 +90,7 @@ export default class Main extends React.Component {
                            <FoodInfo {...this.state} editfunc={this.handleFinishEdit} onPost={this.handleCreateFoodItem} delFoodItem={this.deleteFoodItem}/>
                        </div>
                      :
-                       <div className='main'>
+                       <div >
                              <div className='refrige-bg'>
                                  <div className="d-flex justify-content-around">
                                    <Row>
@@ -109,6 +112,7 @@ export default class Main extends React.Component {
                    </div>
               }
             </div>
+        </div>
 
         );
     }
@@ -235,40 +239,40 @@ export default class Main extends React.Component {
     }
     deleteFoodItem(id,isRefrige){
         deletePost(isRefrige, id).then(() => {
-          listPosts(isRefrige).then(posts =>{
-              console.log("inlist");
-              if(!isRefrige){
-                  this.setState({
-                      freezerPosts: posts
-                  });
-              }
-              else{
-                  console.log('刪文');
-                  this.setState({
-                      refrigePosts: posts
-                  });
-              }
-            });
+            console.log('delete');
+        //   listPosts(isRefrige).then(posts =>{
+        //       console.log("inlist");
+        //       if(!isRefrige){
+        //           this.setState({
+        //               freezerPosts: posts,
+        //               isSetting: false
+        //           });
+        //       }
+        //       else{
+        //           console.log('刪文');
+        //           this.setState({
+        //               refrigePosts: posts,
+        //               isSetting: false
+        //           });
+        //       }
+        //     });
           }).catch(err => {
               console.error('Error delete posts', err);
           });
 
-        if(!isRefrige){
-          listPosts(true).then(p =>{
-            this.setState({
-                refrigePosts: p,
-                isSetting: false
-            });
-          });
-        }
-        else{
-          listPosts(false).then(p =>{
-            this.setState({
-                freezerPosts: p,
-                isSetting: false
-            });
-          });
-        }
+
+      listPosts(true).then(p =>{
+        this.setState({
+            refrigePosts: p,
+            isSetting: false
+        });
+      });
+      listPosts(false).then(p =>{
+        this.setState({
+            freezerPosts: p,
+            isSetting: false
+        });
+      });
     }
 
     freezerTimeOut(FoodDetail){

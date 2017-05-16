@@ -80,12 +80,12 @@ export default class Freezer extends React.Component {
         // <FreezerList onEdit={()=>{this.foodInfoEdit(id)}}/>
         return (
           <div className='freezer d-flex flex-column'>
-                <Card className="freezerSize">
+                <Card className="freezerSize" style={{backgroundColor: 'rgb(255, 240, 225)'}}>
                     <div>
-                        <h1 className='text-center'>Freezer</h1>
+                        <h1 className='text-center title'>Freezer</h1>
                         <FreezerList timeOut={this.timeOut} freezerPosts={this.props.freezerPosts} isRefrige={this.props.isRefrige} onEdit={this.foodInfoEdit}/>
                         <div className='第一'>
-                            <Button id='addItem' color="success" onClick={() => this.handleTooltipToggle}><i className='fa fa-plus' ></i></Button>
+                            <Button id='addItem' style={{backgroundColor: 'rgb(255, 222, 201)'}} onClick={() => this.handleTooltipToggle}><i className='fa fa-plus' ></i></Button>
                         </div>
                         <div className='第一' >
                             <Tooltip   placement='top' isOpen={this.state.tooltipOpen} autohide={false} target='addItem' toggle={this.handleTooltipToggle}>

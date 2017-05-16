@@ -1,21 +1,31 @@
 .freezer {
-    color: #fff;
+    color: rgb(55, 55, 55);
     text-align: center;
-    text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
     transition: all 0.3s;
     opacity: 1;
     justify-content: center;
+    font-family: '微軟正黑體';
+    margin: 3rem auto;
+    padding-top: 3rem;
 }
-@media (max-width: 650px) {
-    .freezerSize {
-        width: 15rem;
-        justify-content: center;
-    }
+
+.title {
+  font-family: 'Chewy', cursive;
+  margin-top: 1rem;
 }
 
 .freezerSize {
     width: 20rem;
     height: 30rem;
+}
+@media (max-width: 650px) {
+  .freezerSize {
+    margin-top: 1rem;
+      width: 100%;
+  }
+  #addItem {
+    margin-bottom: 1rem;
+  }
 }
 
 #addItem {
@@ -52,7 +62,7 @@
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #8df;
+    background-color: #abcfff;
     margin-bottom: 0.1rem;
 }
 
@@ -81,7 +91,7 @@
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #fcf;
+    background-color: #ffb3c9;
     margin-bottom: 0.1rem;
 }
 
@@ -91,6 +101,6 @@
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #faf;
+    background-color: #dab8fc;
     margin-bottom: 0.1rem;
 }

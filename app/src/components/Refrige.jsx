@@ -73,12 +73,12 @@ export default class Refrige extends React.Component {
 
         return (
             <div className='refrige d-flex flex-column'>
-                <Card className="refrigeSize">
+                <Card className="refrigeSize"  style={{backgroundColor: 'rgb(207, 230, 217)'}}>
                     <div>
-                        <h1 className='text-center' >Refrige</h1>
+                        <h1 className='text-center titleRef' >Refrige</h1>
                         <RefrigeList timeOut={this.timeOut} refrigePosts={this.props.refrigePosts} isRefrige={this.props.isRefrige} onEdit={this.foodInfoEdit}/>
                         <div className='第一'>
-                            <Button id='addItemRef' color="success" onClick={() => this.handleTooltipToggle}><i className='fa fa-plus' ></i></Button>
+                            <Button id='addItemRef' style={{backgroundColor: 'rgb(165, 220, 179)'}} onClick={() => this.handleTooltipToggle}><i className='fa fa-plus' ></i></Button>
                         </div>
                         <div className='第一' >
                             <Tooltip placement='top' isOpen={this.state.tooltipOpen} autohide={false} target='addItemRef' toggle={this.handleTooltipToggle}>

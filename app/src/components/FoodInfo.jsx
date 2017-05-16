@@ -203,7 +203,7 @@ export default class FoodInfo extends React.Component {
                                       />
                                       }
                                       &nbsp;
-                                      <img src={getinfoIcon("月曆")}/>
+                                      <img className="foodinfoImg" src={getinfoIcon("月曆")}/>
                                   </div>
                                 </InputGroup>
                               </FormGroup>
@@ -222,7 +222,7 @@ export default class FoodInfo extends React.Component {
                                       關
                                   </Label>
                               </FormGroup>
-                              <FormGroup >
+                              <FormGroup  className="col-xs-6 col-sm-10">
                                 <InputGroup>
                                   <Label check>
                                       { this.state.isAlarm
@@ -248,7 +248,7 @@ export default class FoodInfo extends React.Component {
                                                 dateFormatCalendar="YYYY/MM"
                                             />
                                             &nbsp;
-                                            <img src={getinfoIcon("月曆")}/>
+                                            <img className="foodinfoImg" src={getinfoIcon("月曆")}/>
                                             </div>
                                             <TimePicker
                                               showSecond={false}
@@ -258,7 +258,7 @@ export default class FoodInfo extends React.Component {
                                               format = 'h:mm a'
                                             />
                                             &nbsp;
-                                            <img src={getinfoIcon("時鐘")}/>
+                                            <img className="foodinfoImg" src={getinfoIcon("時鐘")}/>
                                         </div>
                                       :
                                         <div>
@@ -272,7 +272,7 @@ export default class FoodInfo extends React.Component {
                                               disabled
                                             />
                                             &nbsp;
-                                            <img src={getinfoIcon("月曆")}/>
+                                            <img className="foodinfoImg" src={getinfoIcon("月曆")}/>
                                             </div>
                                             <TimePicker
                                               showSecond={false}
@@ -282,7 +282,7 @@ export default class FoodInfo extends React.Component {
                                               disabled
                                             />
                                             &nbsp;
-                                            <img src={getinfoIcon("時鐘")}/>
+                                            <img className="foodinfoImg" src={getinfoIcon("時鐘")}/>
                                         </div>
                                       }
                                   </div>
@@ -301,7 +301,8 @@ export default class FoodInfo extends React.Component {
                         <Col className='d-flex justify-content-around' sm={{ size: 10, offset: 1 }}>
                           {this.props.isEdit?
                               <Button color="danger" onClick={this.handleFoodInfodelete} >刪除</Button>:''}
-                          <Button onClick={this.handleFoodInfoSubmit} color="success" >完成</Button>
+                          <Button onClick={this.handleFoodInfoSubmit}
+                                    style={{backgroundColor: 'rgb(49, 140, 200)', color: 'rgb(256,256,256)' }}>完成</Button>
                         </Col>
                       </FormGroup>
                   </Form>
