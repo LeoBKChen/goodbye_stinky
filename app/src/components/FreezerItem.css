@@ -1,18 +1,7 @@
-.weather-form {
 
-}
-
-.weather-form.form {
-    padding-bottom: 1rem;
-}
-
-.weather-form btn-form {
-    color: white;
-}
-
-.weather-form input, .weather-form button {
-    margin-top: 0.25rem;
-}
 .fontSize {
   font-size: 1rem;
+}
+#foodImgCard{
+    padding: 1rem 0rem;
 }

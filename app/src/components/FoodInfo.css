@@ -1,8 +1,8 @@
 .container {
-
   display: flex;
   justify-content: center;
   webkit-justify-content: center;
+  transition: all 0.1s;
 }
 
 .name {
@@ -11,21 +11,34 @@
 }
 
 .infoCard {
-  width: 580px;
-
+    width: 580px;
+    max-width: 100%;
+    height: auto;
+    background-image: url("images/FoodInfo-bg5.png");
+    background-size: 500px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    /*background-repeat: no-repeat;*/
+    background-size: cover;
+    background-attachment: scroll;
 }
 
-Form {
+.infoForm {
   margin: 30px;
 }
 
-img {
-  width: 30px;
-  height: 30px;
+.foodinfoImg {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
 }
-.submitBtn{
-    margin-left: auto;
+
+Img{
+    width:50px;
+    height: 50px;
+
 }
+
 .off {
   width: 100%;
 }
@@ -34,8 +47,17 @@ img {
   width: 100%;
 }
 
+.deadline {
+  margin-left: 15px;
+}
+
+.alarm {
+  margin-left: 15px;
+}
+
 @media (max-width: 650px) {
-    .日期 {
+    .infoCard {
         width: 100%;
+        background-size: 100%;
     }
 }

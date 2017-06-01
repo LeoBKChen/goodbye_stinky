@@ -1,13 +1,14 @@
 .inline {
   display: inline-block;
   float: left;
-  margin-left: 0.4rem;
+  margin-left: 0.5rem;
 }
 
 .child {
   width: 20rem;
   height: 22rem;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .內部 {

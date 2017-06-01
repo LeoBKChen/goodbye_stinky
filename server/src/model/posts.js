@@ -33,10 +33,10 @@ function create(isRefrige, name, category, quantity, unit, isSetDeadline, deadli
     // console.log(alarmTime);
     const sql = `
         INSERT INTO ${where} (name, category, quantity, unit, "isSetDeadline", deadline, "isAlarm", "alarmDate", "alarmTime", text)
-        VALUES($2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         RETURNING *
     `;
-    return db.one(sql, [isRefrige, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text]);
+    return db.one(sql, [name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text]);
 }
 
 function update(isRefrige, id, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text){
@@ -49,13 +49,13 @@ function update(isRefrige, id, name, category, quantity, unit, isSetDeadline, de
     // console.log(id);
     const sql = `
         UPDATE  ${where}
-        SET name = $3, category = $4, quantity = $5, unit = $6,
-        "isSetDeadline" = $7, deadline = $8, "isAlarm" = $9,
-        "alarmDate" = $10, "alarmTime" = $11, text = $12
-        WHERE id = $2
+        SET name = $2, category = $3, quantity = $4, unit = $5,
+        "isSetDeadline" = $6, deadline = $7, "isAlarm" = $8,
+        "alarmDate" = $9, "alarmTime" = $10, text = $11
+        WHERE id = $1
         RETURNING *
     `;
-    return db.one(sql, [isRefrige, id, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text]);
+    return db.one(sql, [id, name, category, quantity, unit, isSetDeadline, deadline, isAlarm, alarmDate, alarmTime, text]);
 }
 function remove(isRefrige, id){
     if(isRefrige==='true')
@@ -65,9 +65,9 @@ function remove(isRefrige, id){
 
     const sql = `
         DELETE FROM ${where}
-        WHERE id = $2
+        WHERE id = $1
     `;
-    return db.any(sql, [isRefrige, id]);
+    return db.any(sql, id);
 }
 
 module.exports = {

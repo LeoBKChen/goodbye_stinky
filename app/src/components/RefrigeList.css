@@ -1,5 +1,8 @@
 .inlineRef {
-  display: inline-block;
+    display: inline-block;
+    float: left;
+    margin-left: 0.5rem;
+    
 }
 
 .childRef {

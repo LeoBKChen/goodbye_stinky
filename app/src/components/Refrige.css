@@ -1,14 +1,32 @@
 .refrige{
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3), 0 0 1rem rgba(0, 0, 0, 0.7);
-    transition: all 0.3s;
-    opacity: 1;
-    justify-content: center;
+  color: rgb(55, 55, 55);
+  text-align: center;
+  transition: all 0.3s;
+  opacity: 1;
+  justify-content: center;
+  font-family: '微軟正黑體';
+  margin: 3rem auto;
+  padding-top: 3rem;
 }
+
+.titleRef {
+  font-family: 'Chewy', cursive;
+  margin-top: 1rem;
+}
+
 .refrigeSize {
   width: 20rem;
   height: 30rem;
+}
+
+@media (max-width: 650px) {
+  .refrigeSize {
+      margin-bottom: 1rem;
+      width: 100%;
+  }
+  #addItemRef {
+    margin-bottom: 1rem;
+  }
 }
 
 #addItemRef {
@@ -25,9 +43,9 @@
     width: 100%;
 }
 
-.蔬菜 {
-    width: 2.5rem;
-    height: 2.5rem;
+.veg {
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 80%;
@@ -35,9 +53,9 @@
     margin-bottom: 0.1rem;
 }
 
-.肉類{
-    width: 2.5rem;
-    height: 2.5rem;
+.meat{
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
@@ -45,19 +63,19 @@
     margin-bottom: 0.1rem;
 }
 
-.海鮮 {
-    width: 2.5rem;
-    height: 2.5rem;
+.seafood {
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #8df;
+    background-color: #abcfff;
     margin-bottom: 0.1rem;
 }
 
-.水果{
-    width: 2.5rem;
-    height: 2.5rem;
+.fruit{
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
@@ -65,31 +83,31 @@
     margin-bottom: 0.1rem;
 }
 
-.蛋奶{
-    width: 2.5rem;
-    height: 2.5rem;
+.milkegg{
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
     background-color: #aaf;
     margin-bottom: 0.1rem;
 }
-.調味料{
-    width: 2.5rem;
-    height: 2.5rem;
+.sauce{
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #fcf;
+    background-color: #ffb3c9;
     margin-bottom: 0.1rem;
 }
 
-.熟食{
-    width: 2.5rem;
-    height: 2.5rem;
+.cooked{
+    width: 3rem;
+    height: 3rem;
     border-style: solid;
     border-width: 0.05rem;
     border-radius: 99%;
-    background-color: #faf;
+    background-color: #dab8fc;
     margin-bottom: 0.1rem;
 }
